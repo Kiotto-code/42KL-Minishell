@@ -1,26 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_inputloop.c                                     :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/04 23:03:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/22 22:06:14 by etlaw            ###   ########.fr       */
+/*   Created: 2023/03/12 20:29:21 by etlaw             #+#    #+#             */
+/*   Updated: 2023/03/21 18:33:15 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "../includes/minishell.h"
 
-int	ms_inputloop(t_book *record)
+void	ms_env(t_list **lst)
 {
-	while (1)
+	t_list	*tmp;
+
+	tmp = *lst;
+	while (*lst)
 	{
-		record->input = readline("./minishell> ");
-		if (record->input == NULL)
-			exit (exit_status);
-		ms_token(record);
-		free(record->input);
+		if (((t_env *)(*lst)->content)->var != 0)
+			printf("%s\n", ((t_env *)(*lst)->content)->var);
+		*lst = (*lst)->next;
 	}
-	return (0);
+	*lst = tmp;
+	return ;
 }

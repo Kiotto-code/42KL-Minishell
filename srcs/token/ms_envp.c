@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_envp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:40:48 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/22 21:04:10 by yichan           ###   ########.fr       */
+/*   Updated: 2023/03/22 22:06:54 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ t_env	*newenvl(char *content)
 	if (!node)
 		return (0);
 	node->var = content;
-	// node->next = 0;
 	return (node);
 }
 
@@ -46,9 +45,7 @@ int	ft_arr2envl(t_list **lst, char **arr)
 	while (++i < arr_len)
 	{
 		ft_lstadd_back(lst, ft_lstnew(newenvl(arr[i])));
-		// (*lst)->content = (t_env *)((*lst)->content);
 	}
-	// printf ("%s \n", ((t_env *)(*lst)->content)->var);
 	return (0);
 }
 
@@ -63,14 +60,12 @@ int	name_expand(t_list **lst, char **arr)
 	while ((lst_itr))
 	{
 		env = lst_itr->content;
-		// env->value = ft_strchr(env->var, '=');
 		env->value = get_env_val(env->var);
 		env->key = ft_substr(env->var, 0, env->value - env->var);
 		(lst_itr) = (lst_itr)->next;
 		// printf("%s", env->key);
-		printf("%s\n", env->value);
+		// printf("%s\n", env->value);
 	}
-	// printf ("%s \n", ((t_env *)(*lst)->content)->var);
 	return (0);
 }
 
@@ -78,16 +73,9 @@ int	name_expand(t_list **lst, char **arr)
 
 void	record_init(t_book *record, char **envp)
 {
-	// record->env_arr = ft_duparr(envp);
 	record->env = 0;
 	record->token = 0;
 	record->anchor = NEUTRAL;
 	ft_arr2envl(&(record->env), envp);
 	name_expand(&(record->env), envp);
-	// record->mininput = open(path, _CREAT | 
-	// printf("%d\n", ft_lstsize(record->env));
-	// printf("%d\n", ft_arrind(envp));
-	
-	// printf("%s\n", record->env->var);
-	// printf("%s\n", record->env->expand);
 }
