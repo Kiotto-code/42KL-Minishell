@@ -14,7 +14,10 @@ NAME	=	minishell
 CC      =   gcc
 RM      =   rm -rf
 CFLAGS  =   -Wall -Werror -Wextra -g
+CFLAGS	+=	-I/usr/local/opt/readline/include
 CSAN  =  -fsanitize=address -g
+READLINE	=	-lreadline
+READLINE	+=	-L/usr/local/opt/readline/lib
 INCLUDES    = ./includes
 SRC_PATH    = ./srcs/**
 OBJ_PATH    = ./obj
