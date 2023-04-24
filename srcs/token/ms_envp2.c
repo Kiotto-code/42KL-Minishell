@@ -1,31 +1,45 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ms_inputloop.c                                     :+:      :+:    :+:   */
+/*   ms_envp2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/04 23:03:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/25 02:04:43 by yichan           ###   ########.fr       */
+/*   Created: 2023/04/08 19:02:29 by yichan            #+#    #+#             */
+/*   Updated: 2023/04/08 20:59:41 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ms_inputloop(t_book *record)
+t_env	*ft_envllast(t_env *lst)
 {
-	while (1)
+	if (!lst)
+		return (lst);
+	while (lst->next)
+		lst = lst->next;
+	return (lst);
+}
+
+void	ms_envladd_back(t_env **lst, t_env *new)
+{
+	if (*lst)
 	{
-		record->input = readline(BEGIN(1,31)"./minishell>$ "CLOSE);
-		if (record->input == NULL)
-			exit(exit_status) ;
-		ms_token(record);
-		ms_lexer(record);
-		// printf("strqwe :%s\n", ((t_token *)(record->token->content))->entity);
-		free(record->input);
-		record->input = NULL;
-		ms_tokenlclear(&(record->token), free);
-		// liberator
+		new->prev = ft_envllast(*lst);
+		ft_envllast(*lst)->next = new;
+		// (*lst)->next = new;
 	}
-	return (0);
+	else
+		*lst = new;
+}
+
+t_env	*newenvl(char *content)
+{
+	t_env	*node;
+
+	node = ft_calloc(sizeof(t_env));
+	if (!node)
+		return (0);
+	node->var = content;
+	return (node);
 }

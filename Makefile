@@ -6,7 +6,7 @@
 #    By: yichan <yichan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/05 18:29:34 by yichan            #+#    #+#              #
-#    Updated: 2023/03/08 20:43:09 by yichan           ###   ########.fr        #
+#    Updated: 2023/04/24 22:42:51 by yichan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -16,8 +16,8 @@ RM      =   rm -rf
 CFLAGS  =   -Wall -Werror -Wextra -g
 CFLAGS	+=	-I/usr/local/opt/readline/include
 CSAN  =  -fsanitize=address -g
-READLINE	=	-lreadline
-READLINE	+=	-L/usr/local/opt/readline/lib
+READLINE	= -lreadline
+READLINE	+= -lreadline -lncurses -L/usr/local/opt/readline/lib
 INCLUDES    = ./includes
 SRC_PATH    = ./srcs/**
 OBJ_PATH    = ./obj
@@ -36,7 +36,7 @@ all				:	$(NAME)
 
 $(NAME)			:	$(OBJS)
 					make -C libft
-					$(CC) $(CFLAGS) $(CSAN) $^ -lreadline -lncurses -lft -L$(LIBFT_PATH) -o $@
+					$(CC) $(CFLAGS) $(CSAN) $^ $(READLINE) -I$(INCLUDES) -lft -L$(LIBFT_PATH) -o $@
 
 # $(NAME)			:	$(OBJS)
 # 					make -C libft
