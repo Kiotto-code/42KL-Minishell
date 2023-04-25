@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:19:09 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/25 02:10:52 by yichan           ###   ########.fr       */
+/*   Updated: 2023/04/25 21:33:21 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,21 @@
 t_token	*ms_newtoken(char *av, int start, int end)
 {
 	t_token	*new;
+	char *temp;
+	char *env = strdup("USER");
+	char *user = strdup("yichan");
 
 	new = ft_calloc(sizeof(t_token));
 	// if (end <= start)
 	// 	return (NULL);
 	if (!new)
 		return (0);
-	new->entity = ft_substr(av, start, end - start);
-	if (!new->entity)
-		return (0);
-	// ft_replace(new->entity, "$USER", "yichan");
-	printf("newtoken: %s\n", new->entity);
+	temp = ft_substr(av, start, end - start);
+	printf("new->entity: %s\n", temp);
+	ft_replace(temp, env, user);
+	// printf("newtoken: %s\n", temp);
+	exit(0);
+	new->entity = temp;
 	new->type = 0;
 	new->next = NULL;
 	new->prev = NULL;

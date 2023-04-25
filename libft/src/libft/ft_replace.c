@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:50:01 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/25 00:19:40 by yichan           ###   ########.fr       */
+/*   Updated: 2023/04/25 22:29:13 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,38 @@ char *ft_strstr(const char *haystack, const char *needle)
 	return (NULL);
 }
 
+void	ft_replace(char *str, char *old, char *new)
+{
+	char	*initial;
+	char	*itr;
+	int		i;
+
+	initial = ft_strdup(str);
+	free(str);
+	itr = ft_calloc(sizeof(char) * (ft_strlen(initial) \
+		+ ft_strlen(new) - ft_strlen(old) +1));
+	i = -1;
+	while (initial[++i])
+	{
+		if (ft_strstr(initial, old))
+		{
+			// ft_strcpy(itr , new);
+			// itr += ft_strlen(new);
+			// i += ft_strlen(old);
+			// continue ;
+			str = ft_strjoin(itr, new);
+			i ++;
+			break ;
+		}
+		itr[i] = initial[i];
+	}
+	// *itr = '\0';
+	printf("str: %s\n", str);
+	str = ft_strjoinf(str, initial+i+ft_strlen(old));
+	free(initial);
+	printf("str: %s\n", str);
+}
+
 // void	ft_replace(char **str, char *orig, char *rep)
 // {
 // 	char	*res;
@@ -48,29 +80,26 @@ char *ft_strstr(const char *haystack, const char *needle)
 // 		ft_strlcpy(res, ft_strstr(res, orig)
 // 			+ ft_strlen(orig), ft_strlen(res) + 1);
 // 	}
+// 	free(str);
 // 	*str = res;
-// 	printf("%s\n", *str);
 // }
 
-void	ft_replace(char *str, char *old, char *new)
-{
-	int		old_len;
-	int		new_len;
-	char	*pos;
+// void	ft_replace(char *str, char *old, char *new)
+// {
+// 	int		old_len;
+// 	int		new_len;
+// 	char	*pos;
 
-	old_len = ft_strlen(old);
-	new_len = ft_strlen(new);
-	pos = str;
-	while ((pos = ft_strstr(pos, old)) != NULL)
-	{
-		ft_memmove(pos + new_len, pos + old_len, ft_strlen(pos + old_len) + 1);
-		ft_memcpy(pos, new, new_len);
-		pos += new_len;
-	}
-	// strcpy(str, pos);
-
-	// pos = 0;
-}
+// 	old_len = ft_strlen(old);
+// 	new_len = ft_strlen(new);
+// 	pos = str;
+// 	while ((pos = ft_strstr(pos, old)) != NULL)
+// 	{
+// 		ft_memmove(pos + new_len, pos + old_len, ft_strlen(pos + old_len) + 1);
+// 		ft_memcpy(pos, new, new_len);
+// 		pos += new_len;
+// 	}
+// }
 
 
 // void ft_replace(char **str, char *orig, char *rep)
@@ -116,6 +145,7 @@ void	ft_replace(char *str, char *old, char *new)
 //     int		new_len;
 //     char	*pos;
 
+// 	printf("str: %s|old: %s|new: %s\n", str, old, new);
 // 	old_len = ft_strlen(old);
 // 	new_len = ft_strlen(new);
 // 	pos = str;

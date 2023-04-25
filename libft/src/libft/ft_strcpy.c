@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 22:29:20 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/24 22:32:40 by yichan           ###   ########.fr       */
+/*   Updated: 2023/04/25 21:54:45 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ size_t	ft_strcpy(char *dst, const char *src)
 	i = 0;
 	while (src[i])
 	{
-		dst[i] = src[i];
+		dst[i]= src[i];
 		i++;
 	}
 	while (src[i])

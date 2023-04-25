@@ -6,16 +6,16 @@
 #    By: yichan <yichan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/05 18:29:34 by yichan            #+#    #+#              #
-#    Updated: 2023/04/24 22:42:51 by yichan           ###   ########.fr        #
+#    Updated: 2023/04/25 17:53:42 by yichan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME	=	minishell
 CC      =   gcc
 RM      =   rm -rf
-CFLAGS  =   -Wall -Werror -Wextra -g
+CFLAGS  =   -Wall -Werror -Wextra
 CFLAGS	+=	-I/usr/local/opt/readline/include
-CSAN  =  -fsanitize=address -g
+CSAN  =  -fsanitize=address -g3
 READLINE	= -lreadline
 READLINE	+= -lreadline -lncurses -L/usr/local/opt/readline/lib
 INCLUDES    = ./includes
@@ -43,8 +43,8 @@ $(NAME)			:	$(OBJS)
 # 					$(CC) $(CFLAGS) $^ -lreadline -lncurses -L$(LIBFT_PATH) -lft -o $@
 
 
-$(OBJ_PATH)/%.o	:	$(SRC_PATH)/%.c* ./includes/*.h | $(OBJ_PATH) 
-					$(CC) $(CFLAGS) -c -I$(INCLUDES) $< -o $@
+$(OBJ_PATH)/%.o	:	$(SRC_PATH)/%.c* ./includes/*.h ./Makefile | $(OBJ_PATH) 
+					$(CC) $(CFLAGS) $(CSAN) -c -I$(INCLUDES) $< -o $@
 
 # $(OBJ_PATH)/%.o	:	$(SRC_PATH)/%.c* ./includes/*.h ./Makefile | $(OBJ_PATH) 
 # 					$(CC) $(CFLAGS) -c -I$(INCLUDES) $< -o $@
