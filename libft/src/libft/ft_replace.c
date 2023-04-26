@@ -6,65 +6,88 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:50:01 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/25 22:29:13 by yichan           ###   ########.fr       */
+/*   Updated: 2023/04/27 04:30:17 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char *ft_strstr(const char *haystack, const char *needle)
+int	ft_strcomprise(const char *s1, const char *s2)
 {
-	size_t	i;
-	size_t	j;
+	size_t	it;
 
-	j = 0;
-	if (!needle[0])
-		return ((char *)haystack);
-	while (haystack[j])
-	{
-		i = 0;
-		while (needle[i] == haystack[i + j])
-		{
-			if (!needle[i +1])
-				return ((char *)haystack + j);
-			i++;
-		}
-		j++;
-	}
-	return (NULL);
+	it = 0;
+	while (s1[it] && (s1[it] == s2[it] && s2[it]))
+		it++;
+	if (s2[it] == '\0')
+		return (0);
+	return ((unsigned char)s1[it] - (unsigned char)s2[it]);
 }
+
+
+// char *ft_strstr(const char *haystack, const char *needle)
+// {
+// 	size_t	i;
+// 	size_t	j;
+
+// 	j = 0;
+// 	if (!needle[0])
+// 		return ((char *)haystack);
+// 	while (haystack[j])
+// 	{
+// 		i = 0;
+// 		while (needle[i] == haystack[i + j])
+// 		{
+// 			if (!needle[i +1])
+// 				return ((char *)haystack + j);
+// 			i++;
+// 		}
+// 		j++;
+// 	}
+// 	return (NULL);
+// }
 
 void	ft_replace(char *str, char *old, char *new)
 {
 	char	*initial;
 	char	*itr;
 	int		i;
+	char	*res;
 
+	res = 0;
 	initial = ft_strdup(str);
-	free(str);
-	itr = ft_calloc(sizeof(char) * (ft_strlen(initial) \
+	itr = (char *)ft_calloc(sizeof(char) * (ft_strlen(initial) \
 		+ ft_strlen(new) - ft_strlen(old) +1));
+	if (!itr)
+		return ;
 	i = -1;
 	while (initial[++i])
 	{
-		if (ft_strstr(initial, old))
+		if (!ft_strcomprise(initial + i, old))
 		{
 			// ft_strcpy(itr , new);
 			// itr += ft_strlen(new);
 			// i += ft_strlen(old);
 			// continue ;
-			str = ft_strjoin(itr, new);
-			i ++;
+			printf("itr : %s\n", itr);
+			printf("new: %s\n", new);
+			res = ft_strjoin(itr, new);
+			printf("str after join: %s\n", str);
+			// i ++;
 			break ;
 		}
+		printf("checking: \n");
 		itr[i] = initial[i];
 	}
 	// *itr = '\0';
 	printf("str: %s\n", str);
-	str = ft_strjoinf(str, initial+i+ft_strlen(old));
+	res = ft_strjoinf(res, initial+i+ft_strlen(old));
 	free(initial);
-	printf("str: %s\n", str);
+	free(itr);
+	printf("res: %s\n", res);
+	// return (str);
 }
+
 
 // void	ft_replace(char **str, char *orig, char *rep)
 // {

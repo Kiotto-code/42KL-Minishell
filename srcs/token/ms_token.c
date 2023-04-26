@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:19:09 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/25 21:33:21 by yichan           ###   ########.fr       */
+/*   Updated: 2023/04/27 04:06:52 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,8 @@ t_token	*ms_newtoken(char *av, int start, int end)
 {
 	t_token	*new;
 	char *temp;
-	char *env = strdup("USER");
-	char *user = strdup("yichan");
+	char *env = ft_strdup("$USER");
+	char *user = ft_strdup("yichan");
 
 	new = ft_calloc(sizeof(t_token));
 	// if (end <= start)
@@ -35,6 +35,7 @@ t_token	*ms_newtoken(char *av, int start, int end)
 	temp = ft_substr(av, start, end - start);
 	printf("new->entity: %s\n", temp);
 	ft_replace(temp, env, user);
+	// ms_expander
 	// printf("newtoken: %s\n", temp);
 	exit(0);
 	new->entity = temp;
@@ -169,7 +170,16 @@ void	ms_quotesplit(t_book *record)
 void	ms_token(t_book *record)
 {
 	// t_list	*itr;
+	char *trim;
 
+	trim = ft_strtrim(record->input, " ");
+	free(record->input);
+	if (*trim == '\0')
+	{
+		free(trim);
+		exit(0) ;
+	}
+	record->input = trim;
 	ms_quotesplit(record);
 	// ms_expander(record);
 	// printf("sdad");
