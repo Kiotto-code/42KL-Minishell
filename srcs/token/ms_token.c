@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:19:09 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/27 04:06:52 by yichan           ###   ########.fr       */
+/*   Updated: 2023/04/28 03:56:10 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,10 @@ t_token	*ms_newtoken(char *av, int start, int end)
 		return (0);
 	temp = ft_substr(av, start, end - start);
 	printf("new->entity: %s\n", temp);
-	ft_replace(temp, env, user);
+	temp = ft_replace(temp, env, user);
+	printf("newtoken: %s\n", temp);
+	
 	// ms_expander
-	// printf("newtoken: %s\n", temp);
 	exit(0);
 	new->entity = temp;
 	new->type = 0;

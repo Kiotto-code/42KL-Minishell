@@ -6,11 +6,12 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:50:01 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/27 04:30:17 by yichan           ###   ########.fr       */
+/*   Updated: 2023/04/28 03:55:43 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <string.h>
 
 int	ft_strcomprise(const char *s1, const char *s2)
 {
@@ -47,19 +48,19 @@ int	ft_strcomprise(const char *s1, const char *s2)
 // 	return (NULL);
 // }
 
-void	ft_replace(char *str, char *old, char *new)
+char	*ft_replace(char *str, char *old, char *new)
 {
 	char	*initial;
 	char	*itr;
 	int		i;
 	char	*res;
-
+	
 	res = 0;
 	initial = ft_strdup(str);
 	itr = (char *)ft_calloc(sizeof(char) * (ft_strlen(initial) \
 		+ ft_strlen(new) - ft_strlen(old) +1));
 	if (!itr)
-		return ;
+		return (NULL);
 	i = -1;
 	while (initial[++i])
 	{
@@ -76,15 +77,16 @@ void	ft_replace(char *str, char *old, char *new)
 			// i ++;
 			break ;
 		}
-		printf("checking: \n");
 		itr[i] = initial[i];
 	}
 	// *itr = '\0';
-	printf("str: %s\n", str);
 	res = ft_strjoinf(res, initial+i+ft_strlen(old));
+	printf("str: %s\n", str);
+	free(str);
 	free(initial);
 	free(itr);
-	printf("res: %s\n", res);
+	return(res);
+	// printf("res: %s\n", res);
 	// return (str);
 }
 

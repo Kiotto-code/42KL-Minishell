@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 11:42:47 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/25 22:24:47 by yichan           ###   ########.fr       */
+/*   Updated: 2023/04/28 03:54:15 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,8 @@ int		ft_arrind(char **arr);
 char	**ft_duparr(char **env);
 int		ft_arr2lst(t_list **lst, char **arr, \
 			void (*add_back)(t_list **lst, t_list *new));
-void	ft_replace(char *str, char *orig, char *rep);
+char	*ft_replace(char *str, char *old, char *new);
 size_t	ft_strcpy(char *dst, const char *src);
+char	*ft_transf(char *old, char *new);
 
 #endif
