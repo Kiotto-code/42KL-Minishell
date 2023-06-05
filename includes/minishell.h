@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/22 22:13:17 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/05/24 20:18:26 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,14 +26,16 @@
 # define DQUOTE		2
 # define DOLLAR		3
 # define NEUTRAL	0
-
-int exit_status;
+# define EXPORT		1
+# define CD			2
 
 typedef struct s_env
 {
 	char			*var;
 	char			*key;
 	char			*value;
+	struct s_env	*next;
+	struct s_env	*prev;
 }	t_env;
 
 typedef struct s_token
@@ -61,6 +63,8 @@ int		ms_inputloop(t_book *record);
 void	record_init(t_book *record, char **envp);
 // ms_lexer.c
 int		ms_lexer(t_book *record, t_token *token);
+
+char	*var_strjoin(char const *val, char const *key);
 
 
 #endif
