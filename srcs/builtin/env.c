@@ -6,23 +6,19 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 20:29:21 by etlaw             #+#    #+#             */
-/*   Updated: 2023/03/21 18:33:15 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/06/08 19:07:59 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-void	ms_env(t_list **lst)
+// env function
+int	ms_env(t_env *env)
 {
-	t_list	*tmp;
-
-	tmp = *lst;
-	while (*lst)
+	while (env)
 	{
-		if (((t_env *)(*lst)->content)->var != 0)
-			printf("%s\n", ((t_env *)(*lst)->content)->var);
-		*lst = (*lst)->next;
+		printf("%s/n", env->var);
+		env = env->next;
 	}
-	*lst = tmp;
-	return ;
+	return (0);
 }

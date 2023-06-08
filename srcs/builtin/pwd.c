@@ -6,25 +6,28 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 18:23:46 by etlaw             #+#    #+#             */
-/*   Updated: 2023/04/06 18:35:15 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/06/08 19:07:51 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	ms_pwd(t_list **env)
+// pwd function
+int	ms_pwd(t_env *env, char **tkn)
 {
-	t_list	*tmp;
-
-	tmp = *env;
-	while (*env)
+	if (tkn[1])
 	{
-		if (ft_strcmp(((t_env *)(*env)->content)->key, "PWD") == 0)
-		{
-			printf("%s/n", ((t_env *)(*env)->content)->value);
-			break ;
-		}
-		*env = (*env)->next;
+		ft_putstr_fd("pwd: too many arguments", 2);
+		return (1);
 	}
-	*env = tmp;
+	while (env)
+	{
+		if (ft_strcmp(env->key, "PWD") == 0)
+		{
+			printf("%s/n", env->value);
+			return (0);
+		}
+		env = env->next;
+	}
+	return (0);
 }

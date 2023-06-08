@@ -6,13 +6,14 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:53:04 by etlaw             #+#    #+#             */
-/*   Updated: 2023/05/25 17:55:38 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/06/08 18:40:34 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
 // counts the length of the double array
+
 int	len_2arr(char **arr)
 {
 	int	i;
@@ -22,7 +23,6 @@ int	len_2arr(char **arr)
 		i++;
 	return (i);
 }
-
 
 // counts the total length of the each string of linked list
 // with aditional space for demiliter
@@ -106,13 +106,13 @@ void	sort_env(char **env)
 
 // prints out the export env
 
-void	print_export_env(t_env *env)
+void	print_export_env(t_env **env)
 {
 	int		i;
 	char	**res_env;
 	char	*str_env;
 
-	str_env = env_to_str(env);
+	str_env = env_to_str(*env);
 	res_env = ft_split(str_env, '\n');
 	free(str_env);
 	sort_env(res_env);

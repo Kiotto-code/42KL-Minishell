@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:23:47 by etlaw             #+#    #+#             */
-/*   Updated: 2023/05/25 17:55:47 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/06/07 18:48:42 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,11 @@ char	*var_strjoin(char const *key, char const *val)
 	return (ptr);
 }
 
-// error message for builtins
+/* error message for builtins
+   1 = export error
+   2 = cd error
+   3 = unset error
+*/
 
 void	ft_errormessage(char *str, int format)
 {
@@ -61,30 +65,31 @@ void	ft_errormessage(char *str, int format)
 	}
 }
 
-// checks for any invalid identifier in the token
-// used in 'export.c'
+/* checks for any invalid identifier in the token
+	(you can refer the format in ft_errormessage)
+*/
 
-int	is_iden(char *str)
+int	is_iden(char *str, int format)
 {
 	int	i;
 
 	i = 0;
 	if (!(ft_isalpha(str[0] && str[0] == '_')))
 	{
-		ft_errormessage(str, 1);
+		ft_errormessage(str, format);
 		return (1);
 	}
 	while (str[++i])
 	{
 		if (!(ft_isalnum(str[i]) && str[i] == '_'))
 		{
-			ft_errormessage(str, 1);
+			ft_errormessage(str, format);
 			return (1);
 		}
 		if (str[i] == '=')
 			return (2);
 	}
-	return (0);
+	return (3);
 }
 
 // frees double array

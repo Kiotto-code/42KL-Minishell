@@ -6,12 +6,13 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:48:06 by etlaw             #+#    #+#             */
-/*   Updated: 2023/03/23 22:56:07 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/06/08 19:08:46 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
+// strcmp instead of strncmp
 int	ft_strcmp(const char *s1, const char *s2)
 {
 	size_t	i;
@@ -19,12 +20,13 @@ int	ft_strcmp(const char *s1, const char *s2)
 	i = 0;
 	while (s1[i] && s2[i] && s1[i] == s2[i])
 	{
-		i ++;
+		i++;
 	}
 	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }
 
-void	ms_echo(char **av)
+// echo function
+int	ms_echo(char **av)
 {
 	int	i;
 	int	dash_n;
@@ -48,5 +50,5 @@ void	ms_echo(char **av)
 	}
 	if (dash_n == 0)
 		write(1, "\n", 1);
-	return ;
+	return (0);
 }
