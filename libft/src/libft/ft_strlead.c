@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strrchr.c                                       :+:      :+:    :+:   */
+/*   ft_strlead.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/07/05 16:03:35 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/28 18:57:14 by yichan           ###   ########.fr       */
+/*   Created: 2023/04/28 18:58:05 by yichan            #+#    #+#             */
+/*   Updated: 2023/04/29 18:29:58 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-//Check if the character c (converted to an unsigned char) occurs anywhere in the string s.
-
-char	*ft_strrchr(const char *s, int c)
+int	ft_strlead(const char *s1, const char *s2)
 {
-	int	len;
+	size_t	it;
 
-	len = ft_strlen(s);
-	while (len >= 0)
-	{
-		if (*(s + len) == (unsigned char)c)
-			return ((char *)(s + len));
-		len --;
-	}
-	return (NULL);
+	it = 0;
+	while (s1[it] && (s1[it] == s2[it] && s2[it]))
+		it++;
+	if (s2[it] == '\0')
+		return (1);
+	return (0);
 }

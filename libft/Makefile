@@ -18,18 +18,19 @@ OBJ_PATH	= ./obj
 # SRCS	= ${shell find ./src/libft/ -name "*.c"}
 # OBJS	= $(addprefix $(OBJ_PATH)/,$(patsubst %.c,%.o,$(notdir $(SRCS))))
 
-# SRCS	= $(foreach x, $(SRC_PATH), $(wildcard $(addprefix $(x)/*/*,.c*)))
-# OBJS	= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRCS)))))
+SRCS	= $(foreach x, $(SRC_PATH), $(wildcard $(addprefix $(x)/*/*,.c*)))
+OBJS	= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRCS)))))
 
-SRCS	= $(wildcard $(SRC_PATH)/*/*.c)
-OBJS	= $(addprefix $(OBJ_PATH)/,$(patsubst %.c,%.o,$(notdir $(SRCS))))
+# SRCS	= $(wildcard $(SRC_PATH)/*.c)
+# OBJS	= $(addprefix $(OBJ_PATH)/,$(patsubst %.c,%.o,$(notdir $(SRCS))))
+# OBJS   = $(patsubst $(SRC_PATH)/*/%.c, $(OBJ_PATH)/%.o, $(SRCS))
 
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
-			$(AR) $(ARFLAGS) $(NAME) $(OBJS)
+			$(AR) $(ARFLAGS) $@ $^
 
-$(OBJ_PATH)/%.o:	$(SRC_PATH)/*/%.c* ./includes/*.h | $(OBJ_PATH)
+$(OBJ_PATH)/%.o:	$(SRC_PATH)/*/%.c* ./includes/*.h ./Makefile | $(OBJ_PATH)
 					$(CC) $(CFLAGS) -c -I$(INCLUDES) $< -o $@
 
 $(OBJ_PATH):

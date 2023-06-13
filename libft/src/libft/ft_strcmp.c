@@ -6,11 +6,13 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/22 21:31:47 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/27 04:30:10 by yichan           ###   ########.fr       */
+/*   Updated: 2023/04/28 18:57:30 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+//Check if the s2 is the same as s1.
 
 int	ft_strcmp(const char *s1, const char *s2)
 {

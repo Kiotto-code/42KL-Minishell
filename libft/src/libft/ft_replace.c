@@ -6,24 +6,23 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:50:01 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/28 03:55:43 by yichan           ###   ########.fr       */
+/*   Updated: 2023/04/28 19:01:28 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <string.h>
 
-int	ft_strcomprise(const char *s1, const char *s2)
-{
-	size_t	it;
+// int	ft_strlead(const char *s1, const char *s2)
+// {
+// 	size_t	it;
 
-	it = 0;
-	while (s1[it] && (s1[it] == s2[it] && s2[it]))
-		it++;
-	if (s2[it] == '\0')
-		return (0);
-	return ((unsigned char)s1[it] - (unsigned char)s2[it]);
-}
+// 	it = 0;
+// 	while (s1[it] && (s1[it] == s2[it] && s2[it]))
+// 		it++;
+// 	if (s2[it] == '\0')
+// 		return (0);
+// 	return ((unsigned char)s1[it] - (unsigned char)s2[it]);
+// }
 
 
 // char *ft_strstr(const char *haystack, const char *needle)
@@ -64,7 +63,7 @@ char	*ft_replace(char *str, char *old, char *new)
 	i = -1;
 	while (initial[++i])
 	{
-		if (!ft_strcomprise(initial + i, old))
+		if (ft_strlead(initial + i, old))
 		{
 			// ft_strcpy(itr , new);
 			// itr += ft_strlen(new);

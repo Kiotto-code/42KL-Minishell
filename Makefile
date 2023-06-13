@@ -6,28 +6,32 @@
 #    By: yichan <yichan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/05 18:29:34 by yichan            #+#    #+#              #
-#    Updated: 2023/04/25 17:53:42 by yichan           ###   ########.fr        #
+#    Updated: 2023/06/13 18:34:03 by yichan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME	=	minishell
-CC      =   gcc
-RM      =   rm -rf
-CFLAGS  =   -Wall -Werror -Wextra
-CFLAGS	+=	-I/usr/local/opt/readline/include
-CSAN  =  -fsanitize=address -g3
-READLINE	= -lreadline
-READLINE	+= -lreadline -lncurses -L/usr/local/opt/readline/lib
-INCLUDES    = ./includes
-SRC_PATH    = ./srcs/**
-OBJ_PATH    = ./obj
-LIBFT_PATH	= ./libft
+NAME		=	minishell
+CC      	=   gcc
+RM      	=   rm -rf
+CFLAGS  	=   -Wall -Werror -Wextra -g
+CFLAGS		+=	-I/usr/local/opt/readline/include
+CSAN  		= 	-fsanitize=address -static-libsan -g
+READLINE	=	-lreadline
+READLINE	+=	 -lncurses -L/usr/local/opt/readline/lib
+INCLUDES    =	./includes
+SRC_PATH    =	./srcs/**
+OBJ_PATH    =	./obj
+LIBFT_PATH	=	./libft
 
-SRCS	= $(wildcard srcs/*/*.c)
+# SRCS	= $(wildcard srcs/*/*.c)
+SRCS	= $(wildcard $(SRC_PATH)/*.c)
+# SRCS	= $(shell find srcs/ -name "*.c")
 # SRCS    = $(wildcard ./srcs/*/*.c)
 # OBJS    = ${SRCS:./srcs/%.c=${OBJ_PATH}/%.o}
 # SRCS	= ${shell find ./src/libft/ -name "*.c"}
-OBJS	= $(addprefix $(OBJ_PATH)/,$(patsubst %.c,%.o,$(notdir $(SRCS))))
+# OBJS	= $(addprefix $(OBJ_PATH)/,$(patsubst %.c,%.o,$(notdir $(SRCS))))
+OBJS	= $(patsubst %.c,$(OBJ_PATH)/%.o,$(notdir $(SRCS)))
+# OBJS	= $(patsubst $(SRC_PATH)/%.c, $(OBJ_PATH)/%.o, $(SRCS))
 # SRCS	= $(foreach x, $(SRC_PATH), $(wildcard $(addprefix $(x)/*/*,.c*)))
 # OBJS	= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRCS)))))
 
@@ -44,7 +48,7 @@ $(NAME)			:	$(OBJS)
 
 
 $(OBJ_PATH)/%.o	:	$(SRC_PATH)/%.c* ./includes/*.h ./Makefile | $(OBJ_PATH) 
-					$(CC) $(CFLAGS) $(CSAN) -c -I$(INCLUDES) $< -o $@
+					$(CC) $(CFLAGS) -c -I$(INCLUDES) $< -o $@
 
 # $(OBJ_PATH)/%.o	:	$(SRC_PATH)/%.c* ./includes/*.h ./Makefile | $(OBJ_PATH) 
 # 					$(CC) $(CFLAGS) -c -I$(INCLUDES) $< -o $@
@@ -66,5 +70,7 @@ fclean			:	clean
 
 re				:   fclean all
 
+valgrind		:	all
+					valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./minishell
 
-.PHONY			:	all clean fclean re
+.PHONY			:	all clean fclean re valgrind
