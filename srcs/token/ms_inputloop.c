@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:03:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/27 00:40:59 by yichan           ###   ########.fr       */
+/*   Updated: 2023/06/29 00:23:52 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,16 +16,38 @@ int	ms_inputloop(t_book *record)
 {
 	while (1)
 	{
-		record->input = readline(BEGIN(1,31)"./minishell>$ "CLOSE);
+		// printf("Loop\n");
+		sigs_interactive_shell();
+		record->input = readline("minishell>$ ");
+		// if (*record->input == '\n')
+			// sigs_interactive_shell();
+			// sigs_non_interactive_shell();
 		if (record->input == NULL)
-			exit(exit_status) ;
-		ms_token(record);
-		ms_lexer(record);
-		// printf("strqwe :%s\n", ((t_token *)(record->token->content))->entity);
+			exit(g_exit_status);
+		if (*record->input)
+			add_history(record->input);
+		// if (*record->input)
+		// 	add_history(record->input);
+		// printf(RED"pass\n"DEFAULT);
+		if (validator(record->input) == 0)
+		{
+			ms_token(record);
+			// ms_lexer(record);
+			// if (record->cmds)
+			// 	ms_cmds(record);//parser?
+			ms_cmds(record);//parser?
+		}
 		free(record->input);
 		record->input = NULL;
-		ms_tokenlclear(&(record->token), free);
-		// liberator
+		sigs_non_interactive_shell();
+		if (record->cmds)
+			execute_cmds(record, record->cmds);
+		// execute_cmds(record, record->cmds);
+		// printf("strqwe :%s\n", ((t_token *)(record->token->content))->entity);
+		free(record->input);
+		record->input = 0;
+		cleaner(record);
 	}
+	cleaner(record);
 	return (0);
 }

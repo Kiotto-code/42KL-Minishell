@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 12:40:38 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/26 22:55:03 by yichan           ###   ########.fr       */
+/*   Updated: 2023/05/24 22:25:39 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,35 @@ void	*ft_calloc(size_t count)
 
 	if (count >= SIZE_MAX)
 		return (NULL);
-	ptr = (void *)malloc(count);
+	if (count == 0)
+		count = 1;
+	ptr = malloc(count);
 	if (!ptr)
 		return (NULL);
 	ft_bzero (ptr, count);
 	return (ptr);
 }
+
+// void	*ft_calloc(size_t count, size_t size)
+// {
+// 	void *ptr;
+
+// 	ptr = malloc(count * size);
+// 	if (ptr == NULL)
+// 		return (ptr);
+// 	ft_bzero(ptr, size * count);
+// 	return (ptr);
+// }
+
+// void*ft_calloc(size_t count, size_t size)
+// {
+// 	void	*ptr;
+
+// 	if (count >= INT_MAX || size >= INT_MAX)
+// 		return (NULL);
+// 	ptr = (void*)malloc(count * size);
+// 	if (!ptr)
+// 		return (NULL);
+// 	ft_bzero(ptr, count);
+// 	return (ptr);
+// }

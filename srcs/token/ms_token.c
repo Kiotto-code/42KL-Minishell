@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:19:09 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/29 20:12:20 by yichan           ###   ########.fr       */
+/*   Updated: 2023/06/26 17:53:04 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,15 @@
 t_token	*ms_newtoken(char *av, int start, int end)
 {
 	t_token	*new;
-	char *temp;
-	char *env = ft_strdup("$USER");
-	char *user = ft_strdup("yichan");
 
 	new = ft_calloc(sizeof(t_token));
 	// if (end <= start)
 	// 	return (NULL);
 	if (!new)
 		return (0);
-	temp = ft_substr(av, start, end - start);
-	printf("new->entity: %s\n", temp);
-	temp = ft_replace(temp, env, user);
-	printf("newtoken: %s\n", temp);
-	
-	// ms_expander
-	exit(0);
-	new->entity = temp;
+	new->entity = ft_substr(av, start, end - start);
+	// printf("newtoken: %s\n", new->entity);
 	new->type = 0;
-	new->next = NULL;
-	new->prev = NULL;
 	return (new);
 }
 
@@ -50,15 +39,15 @@ int check_dredirection(t_book *record, char *av, int *i)
 {
 	// if (ft_strchr(">", av[*i]) && ft_strchr(">", av[*i +1]))
 	// {
-	// 	ft_lstadd_back(&record->token,
-	// 		ft_lstnew(ms_newtoken(av, *i, (*i +2))));
+	// 	ms_tokenladd_back(&record->token,
+	// 		(ms_newtoken(av, *i, (*i +2))));
 	// 	*i += 2;
 	// 	return (1);
 	// }
 	// if (ft_strchr("<", av[*i]) && ft_strchr("<", av[*i +1]))
 	// {
-	// 	ft_lstadd_back(&record->token,
-	// 		ft_lstnew(ms_newtoken(av, *i, (*i +2))));
+	// 	ms_tokenladd_back(&record->token,
+	// 		(ms_newtoken(av, *i, (*i +2))));
 	// 	*i += 2;
 	// 	return (1);
 	// }
@@ -67,27 +56,13 @@ int check_dredirection(t_book *record, char *av, int *i)
 		return (0);
 	else
 	{
-		ms_tokenladd_back(&record->token,
+		ms_tokenladd_back(&record->args,
 			(ms_newtoken(av, *i, (*i +2))));
 		*i += 2;
 		return (1);
 	}
 }
 
-// t_token	*ms_newtoken(char *av, int start, int end)
-// {
-// 	t_token	*new;
-
-// 	new = ft_calloc(sizeof(t_token));
-// 	// if (end <= start)
-// 	// 	return (NULL);
-// 	if (!new)
-// 		return (0);
-// 	new->entity = ft_substr(av, start, end - start);
-// 	// printf("newtoken: %s\n", new->entity);
-// 	new->type = 0;
-// 	return (new);
-// }
 
 void	ms_tokenrec(char *av, int start, int end, t_book *record)
 {
@@ -99,16 +74,14 @@ void	ms_tokenrec(char *av, int start, int end, t_book *record)
 		while (!ft_strchr("|?<>", av[i]) && i < end)
 			i++;
 		if (i <= end && i != start)
-			ms_tokenladd_back(&record->token,
+			ms_tokenladd_back(&record->args,
 				(ms_newtoken(av, start, i)));
 		while (ft_strchr("|?<>", av[i]))
 		{
 			if (check_dredirection(record, av, &i))
 				continue ;
-			// if (ft_strchr(">", av[i]))
-			// if (ft_strchr("<", av[i]))
-			ms_tokenladd_back(&record->token,
-				ms_newtoken(av, i, (i +1)));
+			ms_tokenladd_back(&record->args,
+				(ms_newtoken(av, i, (i +1))));
 			i++;
 		}
 		start = i;
@@ -143,7 +116,7 @@ void	ms_quotesplit(t_book *record)
 	char			*av;
 
 	start = 0;
-	av = ft_strjoin(record->input, " ");
+	av = ft_strjoin(record->input, " ");//remove sapce
 	end = start;
 	while (av[end])
 	{
@@ -170,24 +143,11 @@ void	ms_quotesplit(t_book *record)
  */
 void	ms_token(t_book *record)
 {
-	// t_list	*itr;
-	char *trim;
-
-	trim = ft_strtrim(record->input, " ");
-	free(record->input);
-	if (*trim == '\0')
-	{
-		free(trim);
-		exit(0) ;
-	}
-	record->input = trim;
 	ms_quotesplit(record);
-	// ms_expander(record);
-	// printf("sdad");
-	// itr = (t_list *)(record->token);
-	// while (itr)
-	// {
-	// 	printf("str: %s| \n", ((t_token *)itr->content)->entity);
-	// 	itr = itr->next;
-	// }
+	set_redirect(record->args);
+	if (record->args == NULL)
+	{
+		free(record->input);
+		record->input = NULL;
+	}
 }

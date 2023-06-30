@@ -6,13 +6,25 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:11:18 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/11 00:56:25 by yichan           ###   ########.fr       */
+/*   Updated: 2023/06/16 19:31:13 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include "minishell.h"
+#include "minishell.h"
 
-// int	ms_parse(t_book *record)
+// void	 (t_book *mini, t_env *env)
 // {
-	
+// 	(void)env;
+// 	mini->input = readline(BEGIN(49, 32)"[minishell ]$ "CLOSE);
+// 	if (!mini->input)
+// 		exit(g_exit_status);
+// 	if (*mini->input)
+// 		add_history (mini->input);
+// 	if (validator(mini->input) == 0)
+// 	{
+// 		mini->args = arguments_processing(mini);
+// 		mini->cmds = commands_processing(mini);
+// 	}
+// 	free(mini->input);
+// 	mini->input = NULL;
 // }

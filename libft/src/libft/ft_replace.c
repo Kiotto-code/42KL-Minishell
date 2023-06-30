@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:50:01 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/28 19:01:28 by yichan           ###   ########.fr       */
+/*   Updated: 2023/05/26 17:37:49 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,47 +47,36 @@
 // 	return (NULL);
 // }
 
-char	*ft_replace(char *str, char *old, char *new)
-{
-	char	*initial;
-	char	*itr;
-	int		i;
-	char	*res;
-	
-	res = 0;
-	initial = ft_strdup(str);
-	itr = (char *)ft_calloc(sizeof(char) * (ft_strlen(initial) \
-		+ ft_strlen(new) - ft_strlen(old) +1));
-	if (!itr)
-		return (NULL);
-	i = -1;
-	while (initial[++i])
-	{
-		if (ft_strlead(initial + i, old))
-		{
-			// ft_strcpy(itr , new);
-			// itr += ft_strlen(new);
-			// i += ft_strlen(old);
-			// continue ;
-			printf("itr : %s\n", itr);
-			printf("new: %s\n", new);
-			res = ft_strjoin(itr, new);
-			printf("str after join: %s\n", str);
-			// i ++;
-			break ;
-		}
-		itr[i] = initial[i];
-	}
-	// *itr = '\0';
-	res = ft_strjoinf(res, initial+i+ft_strlen(old));
-	printf("str: %s\n", str);
-	free(str);
-	free(initial);
-	free(itr);
-	return(res);
-	// printf("res: %s\n", res);
-	// return (str);
-}
+// char	*ft_replace(char *str, char *old, char *new)
+// {
+// 	char	*initial;
+// 	char	*itr;
+// 	int		i;
+// 	char	*res;
+
+// 	res = 0;
+// 	initial = ft_strdup(str);
+// 	itr = (char *)ft_calloc(sizeof(char) * (ft_strlen(initial) \
+// 		+ ft_strlen(new) - ft_strlen(old) +1));
+// 	if (!itr)
+// 		return (NULL);
+// 	i = -1;
+// 	while (initial[++i])
+// 	{
+// 		if (ft_strlead(initial + i, old))
+// 		{
+// 			printf("itr : %s\n", itr);
+// 			printf("new: %s\n", new);
+// 			res = ft_strjoin(itr, new);
+// 			printf("str after join: %s\n", str);
+// 			break ;
+// 		}
+// 		itr[i] = initial[i];
+// 	}
+// 	res = ft_strjoinf(res, initial + i + ft_strlen(old));
+// 	printf("str: %s\n", str);
+// 	return (free(str), free(initial), free(itr), res);
+// }
 
 
 // void	ft_replace(char **str, char *orig, char *rep)
@@ -189,3 +178,66 @@ char	*ft_replace(char *str, char *old, char *new)
 //     printf("%s\n", str);
 //     return 0;
 // }
+
+
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   replace.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/05/24 22:30:55 by yichan            #+#    #+#             */
+/*   Updated: 2023/05/25 16:13:27 by yichan           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "libft.h"
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+
+// char	*ft_strjoin(char const *s1, char const *s2)
+// {
+// 	size_t	len;
+// 	char	*s;
+
+// 	if (!s1 || !s2)
+// 		return (NULL);
+// 	len = ft_strlen(s1) + ft_strlen(s2);
+// 	s = (char*)malloc(sizeof(char) * (len + 1));
+// 	if (s == NULL)
+// 		return (NULL);
+// 	ft_strcpy(s, (char*)s1);
+// 	ft_strcpy(s+ft_strlen(s), (char*)s2);
+// 	return (s);
+// }
+
+
+ void   ft_replace(char **s, const char *old, const char *new)
+ {
+    int i;
+    char    *str;
+    char    *temp;
+    char    *first;
+    char    *third;
+
+    i = 0;
+    str = *s;
+    while (strcmp(str+i, old))
+        i++;
+    first = ft_substr(str, 0, i);
+    third = ft_substr(str, ft_strlen(old)+i, ft_strlen(str) - i - ft_strlen(old));
+    temp = ft_strjoin(first, new);
+    free(str);
+    str = ft_strjoin(temp, third);
+ }
+
+
+//  int main()
+//  {
+//     char *str = strdup("hello world whatever");
+//     repalce(str);
+//     printf("%s\n", str);
+//  }

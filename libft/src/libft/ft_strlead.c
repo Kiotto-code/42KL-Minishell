@@ -6,11 +6,13 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 18:58:05 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/29 18:29:58 by yichan           ###   ########.fr       */
+/*   Updated: 2023/05/24 22:29:42 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+
+// check if s2 is head of string s1;
 
 int	ft_strlead(const char *s1, const char *s2)
 {

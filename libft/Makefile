@@ -2,9 +2,10 @@ NAME	= libft.a
 CC		= gcc
 AR		= ar
 CFLAGS	= -Wall -Werror -Wextra
-CFLAGS	+= -fsanitize=address -g3
+CFLAGS	+= #-fsanitize=address -g3
 ARFLAGS	= rcs
 RM		= rm -rf
+DEBUG	= $(ARGS)
 
 INCLUDES	= ./includes
 SRC_PATH	= ./src
@@ -21,17 +22,13 @@ OBJ_PATH	= ./obj
 SRCS	= $(foreach x, $(SRC_PATH), $(wildcard $(addprefix $(x)/*/*,.c*)))
 OBJS	= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRCS)))))
 
-# SRCS	= $(wildcard $(SRC_PATH)/*.c)
-# OBJS	= $(addprefix $(OBJ_PATH)/,$(patsubst %.c,%.o,$(notdir $(SRCS))))
-# OBJS   = $(patsubst $(SRC_PATH)/*/%.c, $(OBJ_PATH)/%.o, $(SRCS))
-
 all:		$(NAME)
 
 $(NAME):	$(OBJS)
 			$(AR) $(ARFLAGS) $@ $^
 
-$(OBJ_PATH)/%.o:	$(SRC_PATH)/*/%.c* ./includes/*.h ./Makefile | $(OBJ_PATH)
-					$(CC) $(CFLAGS) -c -I$(INCLUDES) $< -o $@
+$(OBJ_PATH)/%.o:	$(SRC_PATH)/*/%.c* ./Makefile | $(OBJ_PATH)
+					$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
 
 $(OBJ_PATH):
 				mkdir -p $(OBJ_PATH)
@@ -44,4 +41,11 @@ fclean:		clean
 
 re:			fclean all
 
-.PHONY:		all clean fclean re
+debug:		$(OBJS)
+			$(CC) $(CFLAGS) $(CSAN) test.c $^ -I$(INCLUDES) -o ./a.out
+# gcc -fsanitize=address -g3 ./libft.a $(ARGS)
+# make $(NAME) $(ARGS)
+
+# debug:		make $(NAME) main.c
+
+.PHONY:		all clean fclean re debug

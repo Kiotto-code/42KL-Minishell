@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:40:48 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/25 01:52:00 by yichan           ###   ########.fr       */
+/*   Updated: 2023/06/27 22:02:24 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_arr2envl(t_env **lst, char **arr)
 	if (!lst || !arr)
 		return (0);
 	i = -1;
-	arr_len = ft_arrind(arr);
+	arr_len = ft_arrind(arr);//claculate arr len
 	while (++i < arr_len)
 	{
 		ms_envladd_back(lst, (newenvl(arr[i])));
@@ -51,7 +51,7 @@ int	ft_arr2envl(t_env **lst, char **arr)
 	return (0);
 }
 
-int	name_expand(t_env **lst, char **arr)
+int	env_rec(t_env **lst, char **arr)
 {
 	t_env	*lst_itr;
 	// t_env	*env;
@@ -71,12 +71,22 @@ int	name_expand(t_env **lst, char **arr)
 	// printf ("%s \n", (*lst)->value);
 	return (0);
 }
-
+/**
+ * @brief open t_book as a main struct of organizing different variables and required llist ptr
+ * 			Initialize 0 value for convenient use.
+ * 			ft_arr2envl to apart them into key:value pair got convenient use
+ * @param record 
+ * @param envp 
+ */
 void	record_init(t_book *record, char **envp)
 {
 	record->env = 0;
-	record->token = 0;
+	// record->token = 0;
+	record->cmds = 0;
+	record->args = 0;
+	record->env_arr = 0;
+	record->input = 0;
 	record->anchor = NEUTRAL;
 	ft_arr2envl(&(record->env), envp);
-	name_expand(&(record->env), envp);
+	env_rec(&(record->env), envp);
 }

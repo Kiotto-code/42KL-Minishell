@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 11:42:47 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/28 18:58:40 by yichan           ###   ########.fr       */
+/*   Updated: 2023/05/25 17:40:15 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,12 +90,13 @@ void	ft_error(char *str, int stat);
 int		ft_strcmp(const char *s1, const char *s2);
 char	*get_next_line(int fd);
 char	*ft_strend(char *str, int n);
-char	*ft_strjoinf(char *s1, char *s2);
+char	*ft_strjoinf(char *s1, char const*s2);
+char	*ft_strjoin_con(char const *s1, char *connector, char const *s2);
 int		ft_arrind(char **arr);
 char	**ft_duparr(char **env);
 int		ft_arr2lst(t_list **lst, char **arr, \
 			void (*add_back)(t_list **lst, t_list *new));
-char	*ft_replace(char *str, char *old, char *new);
+void   ft_replace(char **s, const char *old, const char *new);
 size_t	ft_strcpy(char *dst, const char *src);
 char	*ft_transf(char *old, char *new);
 int		ft_strlead(const char *s1, const char *s2);

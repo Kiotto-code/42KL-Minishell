@@ -6,7 +6,7 @@
 #    By: yichan <yichan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/05 18:29:34 by yichan            #+#    #+#              #
-#    Updated: 2023/06/13 18:34:03 by yichan           ###   ########.fr        #
+#    Updated: 2023/06/21 15:13:09 by yichan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC      	=   gcc
 RM      	=   rm -rf
 CFLAGS  	=   -Wall -Werror -Wextra -g
 CFLAGS		+=	-I/usr/local/opt/readline/include
-CSAN  		= 	-fsanitize=address -static-libsan -g
+CSAN  		= 	-fsanitize=address -g3
 READLINE	=	-lreadline
 READLINE	+=	 -lncurses -L/usr/local/opt/readline/lib
 INCLUDES    =	./includes
@@ -70,7 +70,7 @@ fclean			:	clean
 
 re				:   fclean all
 
-valgrind		:	all
+valgrind		:
 					valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --verbose --log-file=valgrind-out.txt ./minishell
 
 .PHONY			:	all clean fclean re valgrind

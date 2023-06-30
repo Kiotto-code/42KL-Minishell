@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:16:14 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/09 21:10:21 by yichan           ###   ########.fr       */
+/*   Updated: 2023/06/27 21:27:39 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,8 @@ int	main(int ac, char **av, char **env)
 
 	(void) ac;
 	(void) av;
-	exit_status = 0;
+	g_exit_status = 0;
+	// rl_outstream = stderr;
 	// t_token	token;
 
 	// (void)av;
@@ -32,10 +33,11 @@ int	main(int ac, char **av, char **env)
 		return (EXIT_FAILURE);
 	}
 	record_init(&record, env);
+	shlvl_up(&record);
 	ms_inputloop(&record);
 	// ms_lexer(&record);
 	// record.input = readline("./minishell> ");
-	system("leaks -q minishell");
+	// system("leaks -q minishell");
 	return (0);
 }
 
