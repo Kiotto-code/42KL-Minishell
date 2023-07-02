@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/29 18:52:55 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/02 23:29:31 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # include <readline/readline.h>
 # include "../libft/includes/libft.h"
 # include <unistd.h>
+# include <curses.h>
+# include <term.h>
 
 # define DEFAULT	"\033[0m"
 # define CYAN		"\033[0;36m"
@@ -100,6 +102,7 @@ typedef struct s_book
 	// t_token	*token;
 	t_token	*args;
 	t_cmdl	*cmds;
+	struct termios	termios_current;
 }	t_book;
 
 typedef struct s_redir
@@ -154,7 +157,10 @@ void	set_redirect(t_token *args);
 
 //-----signals
 // sig_interactive.c
-void	sigs_interactive_shell(void);
+void	sigs_interactive_shell(struct termios	*termios_current);
+void	reset_termios(struct termios	*termios_current);
+void	sig_interrupt_here(int sig);
+
 // sig_non_interactive.c
 void	sigs_non_interactive_shell(void);
 
@@ -204,7 +210,7 @@ void	no_such_message(char *message);
 void	error_msg(char *message);
 
 void	sig_non_interactive_quit(int sig);
-void	sig_ign(void);
+void	sig_ignore(void);
 void	sig_interrupt(int sig);
 
 #endif

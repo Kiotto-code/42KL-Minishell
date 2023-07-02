@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:29:38 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/08 22:31:02 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/01 13:04:43 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,6 +87,7 @@ void	cmds_destroy(t_cmdl **lst)
 	while (*lst)
 	{
 		tmp = (*lst)->next;
+		// kill((pid_t)tmp->pid, 0);
 		cmds_lstdelone(*lst);
 		*lst = tmp;
 	}

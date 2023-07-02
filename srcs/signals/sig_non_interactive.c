@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:58:54 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/29 18:54:31 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/02 00:30:17 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,23 +17,26 @@ void	sig_non_interactive_quit(int sig)
 	char	*nbr;
 
 	ft_putstr_fd("Quit: \n", STDERR_FILENO);
-	printf("Quit: \n");
+	// fflush(0);
+	// printf("Quit: \n");
 	nbr = ft_itoa(sig);
 	ft_putendl_fd(nbr, STDERR_FILENO);
 	free(nbr);
-	nbr = NULL;
+	// nbr = NULL;
 	g_exit_status = 131;
+	// execve();
 	// exit(g_exit_status);
 }
 
 void	sig_non_interactive_ctrl_c(int sig)
 {
 	(void)sig;
-	// ft_putstr_fd("\n", 2);
-	// rl_replace_line("", 0);
+	ft_putstr_fd("\n", 2);
+
+	// rl_replace_line("\n", 0);
 	// rl_on_new_line();
-	// rl_clear_history();
 	// rl_redisplay();
+	// rl_clear_history();
 	// printf("hereout\n");
 	g_exit_status = 130;
 	// exit(130);

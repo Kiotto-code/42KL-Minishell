@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:23:00 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/28 16:04:24 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/01 15:26:15 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void expnd_cmd_symbol_check(char *input)
 	{
 		if (ft_strchr("<|>", input[i]))
 		{
-			printf(BEGIN(49, 32)"./minishell>$ "CLOSE);
+			printf("./minishell>$ ");
 			printf(" %c: No such file or directory", input[i]);
 		}
 	}

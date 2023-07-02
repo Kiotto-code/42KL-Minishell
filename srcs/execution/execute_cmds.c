@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:54:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/30 15:48:15 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/02 19:31:12 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,9 @@ void	executing(t_book *record, t_cmdl *cmds)
 	int		err;
 	char	**env_arr;
 
+	reset_termios(&record->termios_current);
 	if (builtin_checker(cmds->command[0]))
 	{
-		// builtin_executing(record, cmds);
-		// printf("checiiiiiiiing\n");
 		if (cmds->fork)
 			exit (g_exit_status);
 		return ;
@@ -61,7 +60,6 @@ void	executing(t_book *record, t_cmdl *cmds)
 	{
 		env_arr = env_to_array(record->env);
 		file = path_processing(record, cmds->command[0]);
-		// printf(RED"file content: %s"DEFAULT, file);
 		signal(SIGQUIT, sig_non_interactive_quit);
 		if (!file)
 		{
@@ -71,7 +69,6 @@ void	executing(t_book *record, t_cmdl *cmds)
 			{
 				if (cmds->command[0] != NULL)
 					printf("%s: command not found\n", cmds->command[0]);
-				// system("leaks -q minishell");
 				exit(0);
 			}
 		}
@@ -80,7 +77,6 @@ void	executing(t_book *record, t_cmdl *cmds)
 		err = errno;
 		if (cmds->command[0])
 			no_such_message(cmds->command[0]);
-		// no_such_message(cmds->command[0]);
 		free(file);
 		array_liberator(env_arr);
 		if (err == 13)
@@ -94,8 +90,10 @@ void	execute_child_process(t_book *record, t_cmdl *cmds, t_cmdl *begin)
 {
 	fd_opening(cmds);
 	// printf("checking heredoc execute 1 \n");
-	if (heredoc_checking(cmds))
-		heredoc_processing(cmds);
+	// if (heredoc_checking(cmds))
+	// 	heredoc_processing(cmds);
+	// if (heredoc_checking(cmds))
+	// 	continue ;
 	if (execute_dup2(cmds))
 		ft_putendl_fd("dup2 error", 2);
 	while (begin->next)
@@ -104,6 +102,7 @@ void	execute_child_process(t_book *record, t_cmdl *cmds, t_cmdl *begin)
 		close(begin->pipe_fd[1]);
 		begin = begin->next;
 	}
+	// (void)begin;
 	executing(record, cmds);
 }
 
@@ -122,6 +121,7 @@ void	wait_child_processes(t_cmdl *begin)
 	}
 	while (cmd)
 	{
+		// waitpid(-1, &status, 0);
 		waitpid(cmd->pid, &status, 0);
 		g_exit_status = WEXITSTATUS(status);
 		if (!g_exit_status && WIFSIGNALED(status))
@@ -135,14 +135,7 @@ void	execute_cmds(t_book *record, t_cmdl *cmds)
 	t_cmdl	*begin;
 
 	begin = cmds;
-	// printf("check ptr record %p\n", record);
-	// printf("check ptr cmds %p\n, sizeof cmds: %lu\n", cmds, sizeof(cmds));
-
-	// printf(RED"cmds->command 0: %s\n"DEFAULT, cmds->command[0]);
-	// printf(RED"cmds->command 1: %s\n"DEFAULT, cmds->command[1]);
-	if (builtin_checker(cmds->command[0]) 
-		&&!cmds->next
-		&& cmds->redir)
+	if (!cmds->next && builtin_checker(cmds->command[0]) && !cmds->redir)
 	{
 		executing(record, cmds);
 		return ;
@@ -151,22 +144,24 @@ void	execute_cmds(t_book *record, t_cmdl *cmds)
 		return ;
 	while (cmds)
 	{
+		if (heredoc_checking(cmds))
+			heredoc_processing(cmds);
+		if (g_exit_status == 1)
+			return ;
+		cmds = cmds->next;
+	}
+	cmds = begin;
+	while (cmds)
+	{
 		cmds->pid = fork();
 		cmds->fork = 1;
 		if (cmds->pid < 0) //unsuccessful fork
 			error_msg("bash: fork: Resource temporarily unavailable");
 		else if (cmds->pid == 0)
-		{
-			// sigs_non_interactive_shell();
-			// printf("1fork: \n");
-			// signal(SIGQUIT, &sig_non_interactive_quit);
-			// signal(SIGQUIT, SIG_IGN);
-			// signal(SIGQUIT, sig_non_interactive_quit);
-			signal(SIGINT, SIG_DFL);
 			execute_child_process(record, cmds, begin);
-		}
 		cmds = cmds->next;
 	}
-	// printf(RED"pass123\n");
 	wait_child_processes(begin);
+	if (g_exit_status == 131)
+		ft_putstr_fd("Quit: 3\n", STDERR_FILENO);
 }

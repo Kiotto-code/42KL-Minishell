@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:13:18 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/28 16:03:45 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/01 15:26:27 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	pipe_creation_error(t_cmdl *cmds)
 {
-	ft_putstr_fd(BEGIN(49, 32)"./minishell>$ "CLOSE, STDERR_FILENO);
+	ft_putstr_fd("./minishell>$ ", STDERR_FILENO);
 	ft_putendl_fd("fork: Resource temporarily unavailable", STDERR_FILENO);
 	g_exit_status = 128;
 	while (cmds->next)

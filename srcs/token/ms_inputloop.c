@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:03:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/29 00:23:52 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/02 17:52:48 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int	ms_inputloop(t_book *record)
 	while (1)
 	{
 		// printf("Loop\n");
-		sigs_interactive_shell();
+		sigs_interactive_shell(&record->termios_current);
+		g_exit_status = 0;
 		record->input = readline("minishell>$ ");
 		// if (*record->input == '\n')
 			// sigs_interactive_shell();
@@ -32,7 +33,7 @@ int	ms_inputloop(t_book *record)
 		if (validator(record->input) == 0)
 		{
 			ms_token(record);
-			// ms_lexer(record);
+			ms_lexer(record);
 			// if (record->cmds)
 			// 	ms_cmds(record);//parser?
 			ms_cmds(record);//parser?
