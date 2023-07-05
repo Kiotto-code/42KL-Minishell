@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/02 23:29:31 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/04 02:01:56 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -163,6 +163,9 @@ void	sig_interrupt_here(int sig);
 
 // sig_non_interactive.c
 void	sigs_non_interactive_shell(void);
+
+// tgetstr.c
+int cursor_plc(char *input);
 
 //-----token
 // ms_envp2.c

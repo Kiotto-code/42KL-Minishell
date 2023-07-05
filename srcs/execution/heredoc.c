@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:12:59 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/02 23:46:06 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/04 01:58:29 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	execute_heredoc(t_cmdl *cmd, char *stop)
 {
 	char	*input;
 	char	*buffer;
-	char 	*clear_sequence;
+	// char 	*clear_sequence;
 
 	buffer = malloc(sizeof(char *) * 1024);
 	while (1)
@@ -24,16 +24,17 @@ void	execute_heredoc(t_cmdl *cmd, char *stop)
 		input = readline("> ");
 		if (input == NULL)
 		{
-			// tgetent(buffer, "> ");
-			tgetent(buffer, input);
-			// clear_sequence = tgetstr("rmso", &buffer);
-			clear_sequence = tgetstr("rmso", NULL);
-			tputs(clear_sequence, 1, putchar);
+			// // tgetent(buffer, "> ");
+			// tgetent(buffer, input);
+			// // clear_sequence = tgetstr("rmso", &buffer);
+			// clear_sequence = tgetstr("rmso", NULL);
+			// tputs(clear_sequence, 1, putchar);
 			// if (input == NULL) 
 			// {
 			// 	printf(stderr, "Terminal does not support clear screen capability.\n");
 			// 	exit(1);
 			// }
+			cursor_plc(input);
 			break ;
 		}
 

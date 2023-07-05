@@ -6,12 +6,12 @@
 #    By: yichan <yichan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/05 18:29:34 by yichan            #+#    #+#              #
-#    Updated: 2023/06/30 18:43:34 by yichan           ###   ########.fr        #
+#    Updated: 2023/07/05 11:33:30 by yichan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	minishell
-CC      	=   gcc
+CC      	=   cc
 RM      	=   rm -rf
 CFLAGS  	=   -Wall -Werror -Wextra -g
 CFLAGS		+=	-I/usr/local/opt/readline/include
@@ -32,8 +32,10 @@ SRCS	= $(wildcard $(SRC_PATH)/*.c)
 # OBJS    = ${SRCS:./srcs/%.c=${OBJ_PATH}/%.o}
 # SRCS	= ${shell find ./src/libft/ -name "*.c"}
 # OBJS	= $(addprefix $(OBJ_PATH)/,$(patsubst %.c,%.o,$(notdir $(SRCS))))
+
 OBJS	= $(patsubst %.c,$(OBJ_PATH)/%.o,$(notdir $(SRCS)))
 # OBJS	= $(patsubst $(SRC_PATH)/%.c, $(OBJ_PATH)/%.o, $(SRCS))
+
 # SRCS	= $(foreach x, $(SRC_PATH), $(wildcard $(addprefix $(x)/*/*,.c*)))
 # OBJS	= $(addprefix $(OBJ_PATH)/, $(addsuffix .o, $(notdir $(basename $(SRCS)))))
 
