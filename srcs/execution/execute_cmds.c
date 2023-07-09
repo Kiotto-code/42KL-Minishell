@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:54:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/02 19:31:12 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/09 01:10:57 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -145,7 +145,7 @@ void	execute_cmds(t_book *record, t_cmdl *cmds)
 	while (cmds)
 	{
 		if (heredoc_checking(cmds))
-			heredoc_processing(cmds);
+			heredoc_processing(cmds, record->env);
 		if (g_exit_status == 1)
 			return ;
 		cmds = cmds->next;

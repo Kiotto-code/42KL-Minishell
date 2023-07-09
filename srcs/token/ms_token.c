@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:19:09 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/26 17:53:04 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/09 17:14:10 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_token	*ms_newtoken(char *av, int start, int end)
 		return (0);
 	new->entity = ft_substr(av, start, end - start);
 	// printf("newtoken: %s\n", new->entity);
-	new->type = 0;
+	// new->type = 0;
 	return (new);
 }
 

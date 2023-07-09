@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:23:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/04 01:49:09 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/09 00:38:54 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,9 @@ t_redir	*redirect_processing(t_token **args)
 		{
 			redir_lstadd_back(&rdr, redir_lstnew(tmp->next->entity, \
 			tmp->next->next->entity));
-			print_args(*args);
+			// print_args(*args);
 			args_lstdelnode(&tmp->next);
-			print_args(*args);
+			// print_args(*args);
 			args_lstdelnode(&tmp->next);
 		}
 		if (tmp->next && tmp->next->redirect != 1)

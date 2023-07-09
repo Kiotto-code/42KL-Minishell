@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 12:48:04 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/04 02:21:50 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/06 13:43:42 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@
 // 	// char* cm_cap = tgetstr("so", NULL);
 // 	// char* cm_cap = tgetstr("so", NULL);
 // 	// char* cm_cap = tgetstr("se", &term_buffer);
-// 	char* cm_cap = tgetstr("nd", &input);
+// 	char* cm_cap = tgetstr("cr", &input);
 // 	// char* cm_cap = tgetstr("cm", &input);
 // 	// char	*cm_cap = tgetstr("up", &input);
 // 	if (cm_cap == NULL) {
@@ -121,37 +121,72 @@
 // }
 
 
-int cursor_plc(char *input) {
-    // Buffer to hold the terminfo data]
-	(void)input;
-    // char term_buffer[2048];
-	char *term_buffer = malloc(sizeof(char) * 2048);
+// int cursor_plc(char *input) {
+//     // Buffer to hold the terminfo data]
+// 	(void)input;
+//     // char term_buffer[2048];
+// 	char *term_buffer = malloc(sizeof(char) * 2048);
 
-    // Retrieve the terminal information
-    if (tgetent(term_buffer, getenv("TERM")) != 1) {
-        printf("Failed to retrieve terminal information.\n");
+//     // Retrieve the terminal information
+//     if (tgetent(term_buffer, getenv("TERM")) != 1) {
+//         printf("Failed to retrieve terminal information.\n");
+//         return 1;
+//     }
+
+//     // Retrieve the capability string for "carriage return" (CR)
+//     char* cr_capability = tgetstr("cr", &term_buffer);
+
+//     // Retrieve the capability string for "cursor left" (CUB1)
+//     // char* cub_capability = tgetstr("cub1", &term_buffer);
+
+//     if (cr_capability != NULL && cub_capability != NULL) {
+//         // Move the cursor to the previous end of line using tputs
+//         if (tputs(cr_capability, 1, putchar) == ERR ||
+//             tputs(cub_capability, 1, putchar) == ERR) {
+//             printf("Failed to move the cursor.\n");
+//             return 1;
+//         }
+//         fflush(stdout);  // Flush output to ensure the cursor movement is visible
+//     } else {
+//         // The capabilities were not found
+//         printf("The necessary capabilities are not defined for this terminal.\n");
+//         return 1;
+//     }
+
+//     return 0;
+// }
+
+int cursor_plc(char *buffer)
+{
+    // char *buffer = malloc(sizeof(char) * 1024);
+    char *termtype = getenv("TERM");
+
+    // (void)input;
+    if (termtype == NULL) {
+        printf("TERM environment variable not set.\n");
         return 1;
     }
 
-    // Retrieve the capability string for "carriage return" (CR)
-    char* cr_capability = tgetstr("cr", &term_buffer);
-
-    // Retrieve the capability string for "cursor left" (CUB1)
-    char* cub_capability = tgetstr("cub1", &term_buffer);
-
-    if (cr_capability != NULL && cub_capability != NULL) {
-        // Move the cursor to the previous end of line using tputs
-        if (tputs(cr_capability, 1, putchar) == ERR ||
-            tputs(cub_capability, 1, putchar) == ERR) {
-            printf("Failed to move the cursor.\n");
-            return 1;
-        }
-        fflush(stdout);  // Flush output to ensure the cursor movement is visible
-    } else {
-        // The capabilities were not found
-        printf("The necessary capabilities are not defined for this terminal.\n");
+    int success = tgetent(buffer, termtype);
+    if (success < 0) {
+        printf("Could not access the termcap database.\n");
+        return 1;
+    } else if (success == 0) {
+        printf("Terminal type '%s' is not defined in the termcap database.\n", termtype);
         return 1;
     }
+
+    // Get the capability for moving the cursor
+    char *cursor_move = tgetstr("cr", &buffer);
+    if (cursor_move == NULL) {
+        printf("Terminal does not support cursor movement.\n");
+        return 1;
+    }
+
+    // Use tputs to move the cursor
+    // printf("Before cursor movement\n");
+    tputs(cursor_move, 1, putchar);  // Move the cursor to row 10, column 5
+    // printf("After cursor movement\n");
 
     return 0;
 }

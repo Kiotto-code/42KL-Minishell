@@ -6,18 +6,18 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:12:59 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/06 15:38:17 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/09 01:56:18 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execute_heredoc(t_cmdl *cmd, char *stop)
+void	execute_heredoc(t_cmdl *cmd, char *stop, t_env *env)
 {
 	char	*input;
 	char	*buffer;
+	// char	*dup;
 	// char 	*clear_sequence;
-
 	buffer = malloc(sizeof(char *) * 1024);
 	while (1)
 	{
@@ -40,6 +40,8 @@ void	execute_heredoc(t_cmdl *cmd, char *stop)
 
 		if (input == NULL || !ft_strncmp(input, stop, ft_strlen(stop) +1))
 			break ;
+		input = postparser(input, env);
+		ft_putendl_fd(input, cmd->out);
 		free(input);
 	}
 	close(cmd->out);
@@ -110,7 +112,7 @@ void	execute_heredoc(t_cmdl *cmd, char *stop)
 // 	}
 // }
 
-void	heredoc_processing(t_cmdl *cmd)
+void	heredoc_processing(t_cmdl *cmd, t_env *env)
 {
 	int		fd[2];
 	int		pid;
@@ -143,7 +145,7 @@ void	heredoc_processing(t_cmdl *cmd)
 			close(fd[0]);
 			cmd->out = fd[1];
 			
-			execute_heredoc(cmd, tmp->name);
+			execute_heredoc(cmd, tmp->name, env);
 			// printf("g_exit_status: %d \n", g_exit_status);
 		}
 		else if (pid>0)

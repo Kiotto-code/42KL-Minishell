@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/04 02:01:56 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/09 01:38:41 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ typedef struct s_env
 typedef struct s_token
 {
 	char	*entity;
-	int		type;
+	// int		type;
 	int		redirect; //
 	struct s_token	*prev;
 	struct s_token	*next;
@@ -117,7 +117,7 @@ typedef struct s_redir
 //execute_cmds.c
 void	execute_cmds(t_book *mini, t_cmdl *cmds);
 //here_doc.c
-void	heredoc_processing(t_cmdl *cmd);
+void	heredoc_processing(t_cmdl *cmd, t_env *env);
 int		heredoc_checking(t_cmdl *cmd);
 //path_processing.c
 char	*path_processing(t_book *mini, char *line);
@@ -128,7 +128,7 @@ int	builtin_checker(char *command);
 
 //----lexer
 // ms_lexer.c
-int		ms_lexer(t_book *record);
+// int		ms_lexer(t_book *record);
 
 //----parse
 //parser_utils.c

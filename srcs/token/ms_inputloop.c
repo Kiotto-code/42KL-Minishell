@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:03:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/02 17:52:48 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/09 01:38:53 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ms_inputloop(t_book *record)
 		if (validator(record->input) == 0)
 		{
 			ms_token(record);
-			ms_lexer(record);
+			// ms_lexer(record);
 			// if (record->cmds)
 			// 	ms_cmds(record);//parser?
 			ms_cmds(record);//parser?

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42kl.edu.my>        +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 12:18:54 by yichan            #+#    #+#             */
-/*   Updated: 2022/07/10 16:34:14 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/08 23:55:14 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,7 @@ int	ft_atoi(const char *str)
 
 	result = 0;
 	sign = 1;
-	while ((*str >= '\t' && *str <= '\r') || *str == ' ')
-		str ++;
+
 	if (*str == '+' || *str == '-')
 	{
 		if (*str++ == '-')
