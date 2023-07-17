@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:03:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/09 01:38:53 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/10 22:33:54 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int	ms_inputloop(t_book *record)
 	{
 		// printf("Loop\n");
 		sigs_interactive_shell(&record->termios_current);
-		g_exit_status = 0;
 		record->input = readline("minishell>$ ");
 		// if (*record->input == '\n')
 			// sigs_interactive_shell();
 			// sigs_non_interactive_shell();
+		// g_exit_status = 0;
 		if (record->input == NULL)
 			exit(g_exit_status);
 		if (*record->input)
@@ -36,6 +36,8 @@ int	ms_inputloop(t_book *record)
 			// ms_lexer(record);
 			// if (record->cmds)
 			// 	ms_cmds(record);//parser?
+			// record->
+			// printf("check: cmd: %s", record->cmds->)
 			ms_cmds(record);//parser?
 		}
 		free(record->input);

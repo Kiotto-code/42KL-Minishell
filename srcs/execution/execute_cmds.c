@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:54:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/09 01:10:57 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/14 21:44:04 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,23 +60,31 @@ void	executing(t_book *record, t_cmdl *cmds)
 	{
 		env_arr = env_to_array(record->env);
 		file = path_processing(record, cmds->command[0]);
+		// printf("check: path: %s\n", file);
+		// printf("check: command: %s\n", cmds->command[0]);
 		signal(SIGQUIT, sig_non_interactive_quit);
+		// printf("check: err: %d\n", errno);
 		if (!file)
 		{
-			if (access(cmds->command[0], F_OK) == 0)
+			// if (access(cmds->command[0], X_OK) == 0 )
+			if (access(file, X_OK) == 0 )
 				execve(cmds->command[0], cmds->command, env_arr);
 			else
 			{
 				if (cmds->command[0] != NULL)
-					printf("%s: command not found\n", cmds->command[0]);
-				exit(0);
+					printf("minishell: %s: command not found\n", cmds->command[0]);
+					// no_such_message(cmds->command[0]);
+				// free(file);
+				// system("leaks -q minishell");
+				g_exit_status = 127;
+				exit(g_exit_status);
 			}
 		}
 		else
 			execve(file, cmds->command, env_arr);
 		err = errno;
-		if (cmds->command[0])
-			no_such_message(cmds->command[0]);
+		// if (cmds->command[0])
+		// 	no_such_message(cmds->command[0]);
 		free(file);
 		array_liberator(env_arr);
 		if (err == 13)
@@ -140,12 +148,14 @@ void	execute_cmds(t_book *record, t_cmdl *cmds)
 		executing(record, cmds);
 		return ;
 	}
+	// pipe_creator(cmds);
 	if (pipe_creator(cmds))
 		return ;
+	g_exit_status = 0;
 	while (cmds)
 	{
 		if (heredoc_checking(cmds))
-			heredoc_processing(cmds, record->env);
+			heredoc_processing(record, cmds, record->env);
 		if (g_exit_status == 1)
 			return ;
 		cmds = cmds->next;

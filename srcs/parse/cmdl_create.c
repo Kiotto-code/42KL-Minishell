@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:01:54 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/20 15:04:17 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/10 22:31:19 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,12 +68,16 @@ t_cmdl	*cmds_lstnew(t_token *args)
 	element->redir = redirect_processing(&args);
 	quantity_lists = find_full_command(args);
 	element->command = write_cmd_to_array(args, quantity_lists);
+	// printf("check: comd: %s\n", element->command[0]);
+	// printf("check: comd: %s\n", element->command[1]);
 	element->in = 0;
 	element->out = 1;
 	element->fork = 0;
 	element->pipe_fd[0] = 0;
 	element->pipe_fd[1] = 0;
 	element->next = NULL;
+	// print_cmds(element);
+	// printf("next:\n");
 	return (element);
 }
 
@@ -82,7 +86,8 @@ void	cmds_lstadd_back(t_cmdl	**list, t_cmdl *new)
 	t_cmdl	*last;
 
 	if (!list || !new)
-		exit(EXIT_FAILURE);
+		// exit(EXIT_FAILURE);
+		;
 	if (*list)
 	{
 		last = *list;

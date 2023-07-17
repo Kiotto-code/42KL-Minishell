@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/09 01:38:41 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/14 21:43:46 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@
 
 # define SQUOTE		1
 # define DQUOTE		2
-# define DOLLAR		3
+# define DOLLAR		4
 # define NEUTRAL	0
 
 # define PIPE		4
@@ -79,6 +79,7 @@ typedef struct s_cmdl
 	int				out;
 	int				pipe_fd[2];
 	int				fork;
+	// int				here_num;
 	pid_t			pid;
 	struct s_redir	*redir;
 	struct s_cmdl	*next;
@@ -117,7 +118,7 @@ typedef struct s_redir
 //execute_cmds.c
 void	execute_cmds(t_book *mini, t_cmdl *cmds);
 //here_doc.c
-void	heredoc_processing(t_cmdl *cmd, t_env *env);
+void	heredoc_processing(t_book *record, t_cmdl *cmd, t_env *env);
 int		heredoc_checking(t_cmdl *cmd);
 //path_processing.c
 char	*path_processing(t_book *mini, char *line);
@@ -165,7 +166,8 @@ void	sig_interrupt_here(int sig);
 void	sigs_non_interactive_shell(void);
 
 // tgetstr.c
-int cursor_plc(char *input);
+// int cursor_plc(char *input);
+int cursor_plc(int i);
 
 //-----token
 // ms_envp2.c
@@ -179,6 +181,8 @@ t_token	*ft_tokenllast(t_token *lst);
 void	ms_token(t_book *record);
 int		ms_inputloop(t_book *record);
 void	record_init(t_book *record, char **envp);
+//ms_expand=env.c
+char    *expandenv(t_book *record, char **str);
 
 
 //----utils

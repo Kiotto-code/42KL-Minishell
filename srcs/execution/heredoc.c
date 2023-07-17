@@ -6,41 +6,44 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:12:59 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/09 01:56:18 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/14 21:43:30 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	execute_heredoc(t_cmdl *cmd, char *stop, t_env *env)
+void	execute_heredoc(t_book *record, t_cmdl *cmd, char *stop, t_env *env)
 {
 	char	*input;
 	char	*buffer;
+	static int	here_num;
 	// char	*dup;
 	// char 	*clear_sequence;
+	(void)env;
 	buffer = malloc(sizeof(char *) * 1024);
 	while (1)
 	{
 		input = readline("> ");
-		// if (input == NULL)
-		// {
-		// 	// // tgetent(buffer, "> ");
-		// 	// tgetent(buffer, input);
-		// 	// // clear_sequence = tgetstr("rmso", &buffer);
-		// 	// clear_sequence = tgetstr("rmso", NULL);
-		// 	// tputs(clear_sequence, 1, putchar);
-		// 	// if (input == NULL) 
-		// 	// {
-		// 	// 	printf(stderr, "Terminal does not support clear screen capability.\n");
-		// 	// 	exit(1);
-		// 	// }
-		// 	cursor_plc(input);
-		// 	break ;
-		// }
-
+		if (input == NULL)
+		{
+			// // tgetent(buffer, "> ");
+			// tgetent(buffer, input);
+			// // clear_sequence = tgetstr("rmso", &buffer);
+			// clear_sequence = tgetstr("rmso", NULL);
+			// tputs(clear_sequence, 1, putchar);
+			// if (input == NULL) 
+			// {
+			// 	printf(stderr, "Terminal does not support clear screen capability.\n");
+			// 	exit(1);
+			// }
+			++here_num;
+			cursor_plc(here_num);
+			break ;
+		}
+		here_num = 0;
 		if (input == NULL || !ft_strncmp(input, stop, ft_strlen(stop) +1))
 			break ;
-		input = postparser(input, env);
+		input = expandenv(record, &input);
 		ft_putendl_fd(input, cmd->out);
 		free(input);
 	}
@@ -112,7 +115,7 @@ void	execute_heredoc(t_cmdl *cmd, char *stop, t_env *env)
 // 	}
 // }
 
-void	heredoc_processing(t_cmdl *cmd, t_env *env)
+void	heredoc_processing(t_book *record, t_cmdl *cmd, t_env *env)
 {
 	int		fd[2];
 	int		pid;
@@ -145,7 +148,7 @@ void	heredoc_processing(t_cmdl *cmd, t_env *env)
 			close(fd[0]);
 			cmd->out = fd[1];
 			
-			execute_heredoc(cmd, tmp->name, env);
+			execute_heredoc(record, cmd, tmp->name, env);
 			// printf("g_exit_status: %d \n", g_exit_status);
 		}
 		else if (pid>0)

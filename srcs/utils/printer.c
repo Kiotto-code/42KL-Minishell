@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:30:25 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/01 15:25:44 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/10 22:53:10 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	print_redir(t_cmdl *cmds)
 		return ;
 	while (cmds)
 	{
-		tmp = (t_redir *) cmds->redir;
+		tmp =  cmds->redir;
 		if (tmp == NULL)
 			break ;
 		while (tmp)
@@ -104,5 +104,5 @@ void	no_such_message(char *message)
 	ft_putstr_fd("./minishell>$ ", STDERR_FILENO);
 	ft_putstr_fd(message, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putendl_fd(strerror(errno), STDERR_FILENO);
+	ft_putendl_fd(strerror(g_exit_status), STDERR_FILENO);
 }

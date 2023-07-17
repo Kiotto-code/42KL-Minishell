@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:23:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/09 00:38:54 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/10 11:46:17 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,13 @@ int	first_redirect(t_token **args, t_redir **rdr)
 	return (0);
 }
 
+/**
+ * @brief a marking where all redirect
+ * 	is 1 and the entity behind is file
+ * 
+ * @param args 
+ * @return t_redir* 
+ */
 t_redir	*redirect_processing(t_token **args)
 {
 	t_redir	*rdr;
@@ -91,4 +98,5 @@ t_redir	*redirect_processing(t_token **args)
 			tmp = tmp->next;
 	}
 	return (rdr);
+	// print_redir(cmds);
 }

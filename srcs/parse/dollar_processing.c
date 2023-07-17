@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:23:00 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/01 15:26:15 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/10 23:13:14 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ char	*key_handler(char *input, int begin, int end, t_env *env) //expander
 	char	*tmp_2;
 	char	*tmp_3;
 
+	printf("check: input %s\n", input);
 	key = ft_substr(input, begin + 1, end - begin - 1);
 	tmp_1 = ft_substr(input, 0, begin);
 	tmp_3 = ft_strdup(input + end);
@@ -76,6 +77,7 @@ char	*question_handle(char *input, int begin, int *it)
 	char	*nbr_val;
 	char	*tail;
 
+	printf("check: input:qhandler %s\n", input);
 	nbr_val = ft_itoa(g_exit_status);
 	tmp_1 = ft_substr(input, 0, begin);
 	tmp_2 = ft_strjoin(tmp_1, nbr_val);
@@ -85,8 +87,10 @@ char	*question_handle(char *input, int begin, int *it)
 	free(tmp_1);
 	free(tmp_2);
 	free(tail);
+	printf("check: input: %s\n", input );
 	free(input);
 	g_exit_status = 0;
+	printf("check: line_new: %s\n", line_new);
 	return (line_new);
 }
 
@@ -103,7 +107,7 @@ char	*is_dollar(char *input, int *it, t_env *env)
 	int		begin;
 
 	begin = *it;
-	if (ft_strchr("?", input[begin + 1]))
+	if (ft_strlead("?", &input[begin + 1]))
 	{
 		*it += 2;
 		return (question_handle(input, begin, it));

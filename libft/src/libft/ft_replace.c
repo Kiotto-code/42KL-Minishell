@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:50:01 by yichan            #+#    #+#             */
-/*   Updated: 2023/05/26 17:37:49 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/14 20:49:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -215,25 +215,51 @@
 // }
 
 
- void   ft_replace(char **s, const char *old, const char *new)
- {
-    int i;
-    char    *str;
-    char    *temp;
-    char    *first;
-    char    *third;
+//  void   ft_replace(char **s, const char *old, const char *new)
+//  {
+//     int i;
+//     char    *str;
+//     char    *temp;
+//     char    *first;
+//     char    *third;
 
-    i = 0;
-    str = *s;
-    while (strcmp(str+i, old))
-        i++;
-    first = ft_substr(str, 0, i);
-    third = ft_substr(str, ft_strlen(old)+i, ft_strlen(str) - i - ft_strlen(old));
-    temp = ft_strjoin(first, new);
-    free(str);
-    str = ft_strjoin(temp, third);
- }
+//     i = 0;
+//     str = *s;
+//     while (strcmp(str+i, old))
+//         i++;
+//     first = ft_substr(str, 0, i);
+//     third = ft_substr(str, ft_strlen(old)+i, ft_strlen(str) - i - ft_strlen(old));
+//     temp = ft_strjoin(first, new);
+//     free(str);
+//     str = ft_strjoin(temp, third);
+//  }
 
+
+void	ft_replace(char **s, char *old, char *new)
+{
+	int		i;
+	char	*str;
+	char	*temp;
+	char	*first;
+	char	*third;
+
+	i = 0;
+	str = *s;
+	while (str[i] && !ft_strlead(str + i, old))
+		i++;
+	printf("i value: %d\n", i);
+	first = ft_substr(str, 0, i);
+	printf("first: %s\n", first);
+	third = ft_substr(str, ft_strlen(old)+i, \
+		ft_strlen(str) - i - ft_strlen(old));
+	printf("third: %s\n", third);
+	temp = ft_strjoin(first, new);
+	printf("temp: %s\n", temp);
+	free(*s);
+	*s = ft_strjoin(temp, third);
+	free(temp);
+	free(third);
+}
 
 //  int main()
 //  {

@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:22:46 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/09 17:14:31 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/10 22:31:52 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,6 +71,7 @@ void	ms_cmds(t_book *record)
 		tmp = tmp->next;
 	}
 	cmds_lstadd_back(&record->cmds, cmds_lstnew(cmd_begin));
+	ft_putstr_fd("check\n", 2);
 	// printf("rraedefasdfsdfa%s\n", record->cmds->command[0]);
 	// printf("cmds: %s\n", record->cmds->command[1]);
 	clean_cmd_and_filename(record);

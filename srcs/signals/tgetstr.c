@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 12:48:04 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/06 13:43:42 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/09 23:19:18 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -156,37 +156,112 @@
 //     return 0;
 // }
 
-int cursor_plc(char *buffer)
-{
-    // char *buffer = malloc(sizeof(char) * 1024);
-    char *termtype = getenv("TERM");
+// int cursor_plc(char *buffer)
+// {
+//     // char *buffer = malloc(sizeof(char) * 1024);
+//     char *termtype = getenv("TERM");
 
-    // (void)input;
+//     // (void)input;
+//     if (termtype == NULL) {
+//         printf("TERM environment variable not set.\n");
+//         return 1;
+//     }
+
+//     int success = tgetent(buffer, termtype);
+//     if (success < 0) {
+//         printf("Could not access the termcap database.\n");
+//         return 1;
+//     } else if (success == 0) {
+//         printf("Terminal type '%s' is not defined in the termcap database.\n", termtype);
+//         return 1;
+//     }
+
+//     // Get the capability for moving the cursor
+//     char *cursor_move = tgetstr("cr", &buffer);
+//     if (cursor_move == NULL) {
+//         printf("Terminal does not support cursor movement.\n");
+//         return 1;
+//     }
+
+//     // Use tputs to move the cursor
+//     // printf("Before cursor movement\n");
+//     tputs(cursor_move, 1, putchar);  // Move the cursor to row 10, colum
+//     // printf("After cursor movement\n");
+
+//     return 0;
+// }
+
+// int cursor_plc(char *buffer)
+// {
+//     char *termtype = getenv("TERM");
+
+//     (void)buffer;
+//     if (termtype == NULL) {
+//         printf("TERM environment variable not set.\n");
+//         return 1;
+//     }
+
+//     int success = tgetent(NULL, termtype);
+//     if (success != 1) {
+//         printf("Failed to retrieve terminal capabilities.\n");
+//         return 1;
+//     }
+
+//     char *up = tgetstr("up", NULL);
+//     if (up == NULL) {
+//         printf("up capability not found.\n");
+//         return 1;
+//     }
+
+//     char *cr = tgetstr("ce", NULL);
+//     if (cr == NULL) {
+//         printf("cr capability not found.\n");
+//         return 1;
+//     }
+
+//     // Output the control sequence to move cursor up one line
+//     tputs(tgoto(up, 2, 1), 1, putchar);
+
+//     // Output the control sequence to move cursor to beginning of the line
+//     // tputs(cr, 1, putchar);
+
+//     // Print the text
+//     // printf("Hello, World!\n");
+
+//     return 0;
+// }
+
+
+int cursor_plc(int times)
+{
+    char *termtype = getenv("TERM");
+    
+    // (void) buffer;
     if (termtype == NULL) {
         printf("TERM environment variable not set.\n");
         return 1;
     }
 
-    int success = tgetent(buffer, termtype);
-    if (success < 0) {
-        printf("Could not access the termcap database.\n");
-        return 1;
-    } else if (success == 0) {
-        printf("Terminal type '%s' is not defined in the termcap database.\n", termtype);
+    int success = tgetent(NULL, termtype);
+    if (success != 1) {
+        printf("Failed to retrieve terminal capabilities.\n");
         return 1;
     }
 
-    // Get the capability for moving the cursor
-    char *cursor_move = tgetstr("cr", &buffer);
-    if (cursor_move == NULL) {
-        printf("Terminal does not support cursor movement.\n");
+    char *cm = tgetstr("up", NULL);
+    if (cm == NULL) {
+        printf("cm capability not found.\n");
         return 1;
     }
 
-    // Use tputs to move the cursor
-    // printf("Before cursor movement\n");
-    tputs(cursor_move, 1, putchar);  // Move the cursor to row 10, column 5
-    // printf("After cursor movement\n");
+    // int row = 0;  // Move cursor to row 5 (0-based index)
+    // int col = 3; // Move cursor to column 10 (0-based index)
+
+    // tputs(tgoto(cm, col, row), 1, putchar);
+
+    tputs(cm, 1, putchar);
+    while (times --)
+        printf(">");
 
     return 0;
 }
