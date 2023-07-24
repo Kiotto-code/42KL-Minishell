@@ -6,7 +6,7 @@
 #    By: yichan <yichan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/05 18:29:34 by yichan            #+#    #+#              #
-#    Updated: 2023/07/10 15:27:36 by yichan           ###   ########.fr        #
+#    Updated: 2023/07/24 11:34:57 by yichan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC      	=   cc
 RM      	=   rm -rf
 CFLAGS  	=   -Wall -Werror -Wextra -g
 CFLAGS		+=	-I/usr/local/opt/readline/include
-CSAN  		= 	-fsanitize=address -g3
+# CSAN  		= 	-fsanitize=address -g3
 READLINE	=	-lreadline
 READLINE	+=	-lncurses -L/usr/local/opt/readline/lib
 INCLUDES    =	./includes

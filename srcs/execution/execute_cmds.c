@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:54:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/14 21:44:04 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/24 13:36:42 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ void	executing(t_book *record, t_cmdl *cmds)
 	reset_termios(&record->termios_current);
 	if (builtin_checker(cmds->command[0]))
 	{
+		builtin_executing(record, cmds);
 		if (cmds->fork)
 			exit (g_exit_status);
 		return ;
@@ -60,22 +61,26 @@ void	executing(t_book *record, t_cmdl *cmds)
 	{
 		env_arr = env_to_array(record->env);
 		file = path_processing(record, cmds->command[0]);
-		// printf("check: path: %s\n", file);
+		// printf("check: pathqq: %s\n", file);
 		// printf("check: command: %s\n", cmds->command[0]);
 		signal(SIGQUIT, sig_non_interactive_quit);
 		// printf("check: err: %d\n", errno);
 		if (!file)
 		{
 			// if (access(cmds->command[0], X_OK) == 0 )
-			if (access(file, X_OK) == 0 )
+			// printf("check: path: %s\n", file);
+			if (access(file, F_OK | X_OK) == 0 )
 				execve(cmds->command[0], cmds->command, env_arr);
 			else
 			{
 				if (cmds->command[0] != NULL)
-					printf("minishell: %s: command not found\n", cmds->command[0]);
-					// no_such_message(cmds->command[0]);
-				// free(file);
-				// system("leaks -q minishell");
+				{
+					ft_putstr_fd("minishell: ", 2);
+					ft_putstr_fd(cmds->command[0], 2);
+					ft_putstr_fd(": command not found\n", 2);
+				}
+				else
+					execve(file, cmds->command, env_arr);
 				g_exit_status = 127;
 				exit(g_exit_status);
 			}
@@ -83,8 +88,8 @@ void	executing(t_book *record, t_cmdl *cmds)
 		else
 			execve(file, cmds->command, env_arr);
 		err = errno;
-		// if (cmds->command[0])
-		// 	no_such_message(cmds->command[0]);
+		if (cmds->command[0])
+			no_such_message(cmds->command[0]);
 		free(file);
 		array_liberator(env_arr);
 		if (err == 13)

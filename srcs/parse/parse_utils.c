@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:22:28 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/26 18:00:55 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/23 02:36:04 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,9 @@
 
 int	pass_whitespaces(char *input, int it)
 {
-	while (input[it] && (ft_strchr("\t", input[it]) || \
-			ft_strchr(" ", input[it])))
+	if (input[it] == '\0')
+		return (it);
+	while (input[it] && ft_strchr("\t ", input[it]))
 		it++;
 	return (it);
 }

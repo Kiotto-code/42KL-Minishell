@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:23:05 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/10 23:08:33 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/22 20:04:36 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,22 +37,35 @@ char	*is_slash(char *input, int *it)
  */
 char	* postparser(char *input, t_env *env) // "", '', \, $, ;, |, >, >>, <, ' *space* '
 {
-	int	it;
+	int		i;
+	int		j;
+	char	*ret;
 
-	it = 0;
+	i = 0;
+	j = 0;
+	(void)env;
+	ret = ft_calloc(sizeof(char) * (ft_strlen(input) +1));
 	printf("check: input post: %s\n", input);
-	while (input[it])
+	while (input[i])
 	{
-		if (input[it] == '\'')
-			input = is_quote(input, &it);
-		// if (input[it] == '\\')
-		// 	input = is_slash(input, &it);
-		if (input[it] == '\"')
-			input = is_db_quote(input, &it, env);
-		if (input[it] == '$')
-			input = is_dollar(input, &it, env);
-		it++;
+		if (input[i] && input[i] == '\'')
+		{
+			i++;
+			while (input[i] && input[i] != '\'' )
+				ret[j++] = input[i++];
+			i++;
+		}
+		else if (input[i] && input[i] == '\"')
+		{
+			i++;
+			while (input[i] && input[i] != '\"')
+				ret[j++] = input[i++];
+			i++;
+		}
+		else if (input[i] && !ft_strchr("\'\"", input[i]))
+			ret[j++] = input[i++];
 	}
-	printf("check: input post222: %s\n", input);
-	return (input);
+	printf("check: input post22as2: %s\n", ret);
+	free(input);
+	return (ret);
 }

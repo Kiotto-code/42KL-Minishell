@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:23:33 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/17 14:55:03 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/23 13:12:30 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,10 +40,12 @@ int	counting_pipes_or_delimeters(char *input, int it)
 	it = pass_whitespaces(input, it);
 	if (input[it] == '|')
 	{
-		if (input[it + 1] == '|')
+		// if (input[it + 1] == '|')
+		if (ft_strcmp("||", input + it) == 0)
 			return (print_msg(1, \
 				"syntax error near unexpected token `||'", 258));
-		return (print_msg(1, "syntax error near unexpected token `|'", 258));
+		else if (input[it + 1] == '\0')
+			return (print_msg(1, "syntax error near unexpected token `|'", 258));
 	}
 	// if (input[it] == ';')
 	// {
@@ -68,7 +70,7 @@ int	validator(char *input)
 	while (input[it])
 	{
 		if ((input[it] == '|' || input[it] == ';') && \
-				counting_pipes_or_delimeters(input, it + 1))
+				counting_pipes_or_delimeters(input, it))
 			return (1);
 		if (input[it] == '\'' && counting_quotes(input, &it, input[it]))
 			return (1);

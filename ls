@@ -1,0 +1,23 @@
+'yichan'
+=dasd
+>
+Makefile
+Makefile copy
+a.out
+asd
+at
+command[0],
+e
+file1
+includes
+input
+l
+libft
+ls
+minishell
+obj
+s
+sd
+srcs
+test
+we

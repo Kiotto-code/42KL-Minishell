@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:37:20 by yichan            #+#    #+#             */
-/*   Updated: 2023/04/24 22:08:45 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/19 00:50:29 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strjoin_con(char const *s1, char *connector, char const *s2)
 
 	if (!s1 || !connector || !s2)
 		return (NULL);
-	str = (char *) malloc(sizeof(char) * \
+	str = (char *) ft_calloc(sizeof(char) * \
 			(ft_strlen(s1) + ft_strlen(connector) + ft_strlen(s2) + 1));
 	if (!str)
 		return (NULL);

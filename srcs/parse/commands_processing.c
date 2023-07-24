@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:22:46 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/10 22:31:52 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/22 18:45:57 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,13 +34,15 @@ void	clean_cmd_and_filename(t_book *record)
 			while (cmd->command[it])
 			{
 				cmd->command[it] = postparser(cmd->command[it], record->env);
+				// cmd->command[it] = ft_strdup(cmd->command[it]);
 				it++;
 			}
 		}
 		while (rdr)
 		{
 			rdr->name = postparser(rdr->name, record->env);
-			// printf("type:%s name:%s\n ", rdr->type, rdr->name);
+			// rdr->name = ft_strdup(cmd->command[it]);
+			printf("type:%s name:%s\n", rdr->type, rdr->name);
 			rdr = rdr->next;
 		}
 		cmd = cmd->next;

@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:13:11 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/09 20:38:07 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/23 03:13:13 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,8 @@ char	*path_processing(t_book *mini, char *line)
 	while (paths[it])
 	{
 		path = ft_strjoin_con(paths[it], "/", line);
-		if (!access(path, F_OK | X_OK))
+		// printf("check: path%s\n", path);
+		if (access(path, F_OK | X_OK) == 0)
 		{
 			array_liberator(paths);
 			// printf("%s: command not found\n", line);

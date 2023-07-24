@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/14 21:43:46 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/24 13:50:35 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define SQUOTE		1
 # define DQUOTE		2
 # define DOLLAR		4
+# define QUOTE		8
 # define NEUTRAL	0
 
 # define PIPE		4
@@ -113,7 +114,6 @@ typedef struct s_redir
 	struct s_redir	*next;
 }				t_redir;
 
-
 //----execution
 //execute_cmds.c
 void	execute_cmds(t_book *mini, t_cmdl *cmds);
@@ -177,6 +177,7 @@ t_env	*ft_envllast(t_env *lst);
 // ms_token2.c
 void	ms_tokenladd_back(t_token **lst, t_token *new);
 t_token	*ft_tokenllast(t_token *lst);
+int		check_quote(int c);
 //ms_token.c
 void	ms_token(t_book *record);
 int		ms_inputloop(t_book *record);
@@ -190,7 +191,7 @@ char    *expandenv(t_book *record, char **str);
 void	args_lstdelnode(t_token **args);
 void	args_destroy(t_token **lst);
 //env_utils.c
-int	env_lstsize(t_env *env);
+int		env_lstsize(t_env *env);
 char	*check_envvar(t_env *env, char *key);
 void	chg_shlvl(t_env *env, char *key, char *value);
 //execute_utils.c
@@ -219,5 +220,54 @@ void	error_msg(char *message);
 void	sig_non_interactive_quit(int sig);
 void	sig_ignore(void);
 void	sig_interrupt(int sig);
+
+
+
+
+
+
+//builtin
+# define EXPORT		1
+# define CD			2
+
+// typedef struct s_env
+// {
+// 	char			*var;
+// 	char			*key;
+// 	char			*value;
+// 	struct s_env	*next;
+// 	struct s_env	*prev;
+// }	t_env;
+
+// typedef struct s_token
+// {
+// 	char			*entity;
+// 	int				type;
+// }	t_token;
+
+// typedef struct s_book
+// {
+// 	char	**env_arr;
+// 	char	*input;
+// 	int		anchor;
+// 	t_list	*env;
+// 	t_list	*token;
+// }	t_book;
+
+//----utils
+//ms_libft.c
+
+//----allocate
+//ms_initiate.c
+// void	ms_token(t_book *record);
+// int		ms_inputloop(t_book *record);
+// void	record_init(t_book *record, char **envp);
+// // ms_lexer.c
+// int		ms_lexer(t_book *record, t_token *token);
+
+char	*var_strjoin(char const *val, char const *key);
+void	ft_errormessage(char *str, int format);
+
+
 
 #endif
