@@ -6,43 +6,43 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:29:29 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/26 18:06:58 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 02:38:45 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_token	*args_lstnew(char *arg_str, t_book *mini)
-{
-	t_token	*element;
+// t_token	*args_lstnew(char *arg_str, t_book *mini)
+// {
+// 	t_token	*element;
 
-	(void)mini;
-	element = (t_token *)malloc(sizeof(t_token));
-	if (!element)
-		return (NULL);
-	element->entity = ft_strdup(arg_str);
-	element->redirect = 0;
-	element->next = NULL;
-	free(arg_str);
-	return (element);
-}
+// 	(void)mini;
+// 	element = (t_token *)malloc(sizeof(t_token));
+// 	if (!element)
+// 		return (NULL);
+// 	element->entity = ft_strdup(arg_str);
+// 	element->redirect = 0;
+// 	element->next = NULL;
+// 	free(arg_str);
+// 	return (element);
+// }
 
-void	args_lstadd_back(t_token	**list, t_token *new)
-{
-	t_token	*last;
+// void	args_lstadd_back(t_token	**list, t_token *new)
+// {
+// 	t_token	*last;
 
-	if (!list || !new)
-		exit(EXIT_FAILURE);
-	if (*list)
-	{
-		last = *list;
-		while (last->next)
-			last = last->next;
-		last->next = new;
-	}
-	else
-		*list = new;
-}
+// 	if (!list || !new)
+// 		exit(EXIT_FAILURE);
+// 	if (*list)
+// 	{
+// 		last = *list;
+// 		while (last->next)
+// 			last = last->next;
+// 		last->next = new;
+// 	}
+// 	else
+// 		*list = new;
+// }
 
 /**
  * @brief remove a node of within linklist and concat the \

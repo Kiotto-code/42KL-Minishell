@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:23:21 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/26 17:48:39 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 03:59:13 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	set_redirect(t_token *args)
 		{
 			args->redirect = 1;
 			args->next->redirect = 2;
-			// printf(RED"args->next->entity: %s\n"DEFAULT, args->next->entity);
 			args = args->next->next;
 		}
 		else if (args)

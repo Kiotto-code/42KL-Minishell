@@ -6,40 +6,40 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:29:45 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/10 09:43:06 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 09:47:13 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	envl_lstdelone(t_env *lst)
-{
-	if (!lst)
-		return ;
-	free(lst->var);
-	lst->var = NULL;
-	free(lst->key);
-	lst->key = NULL;
-	free(lst->value);
-	lst->value = NULL;
-	free(lst);
-	lst = NULL;
-}
+// void	envl_lstdelone(t_env *lst)
+// {
+// 	if (!lst)
+// 		return ;
+// 	free(lst->var);
+// 	lst->var = NULL;
+// 	free(lst->key);
+// 	lst->key = NULL;
+// 	free(lst->value);
+// 	lst->value = NULL;
+// 	free(lst);
+// 	lst = NULL;
+// }
 
-void	envl_destroy(t_env **lst)
-{
-	t_env	*tmp;
+// void	envl_destroy(t_env **lst)
+// {
+// 	t_env	*tmp;
 
-	if (!lst)
-		return ;
-	while (*lst)
-	{
-		tmp = (*lst)->next;
-		envl_lstdelone(*lst);
-		*lst = tmp;
-	}
-	*lst = NULL;
-}
+// 	if (!lst)
+// 		return ;
+// 	while (*lst)
+// 	{
+// 		tmp = (*lst)->next;
+// 		envl_lstdelone(*lst);
+// 		*lst = tmp;
+// 	}
+// 	*lst = NULL;
+// }
 
 int	env_lstsize(t_env *env)
 {
@@ -56,7 +56,6 @@ int	env_lstsize(t_env *env)
 	return (count);
 }
 
-
 /**
  * @brief if env->key == key, return the whole env_value string line
  * 
@@ -70,12 +69,10 @@ char	*check_envvar(t_env *env, char *key)
 		return (NULL);
 	while (env)
 	{
-		// printf(RED"%s \n"DEFAULT, env->value);
 		if (!ft_strcmp(env->key, key))
 			return (env->value);
 		env = env->next;
 	}
-	// return (NULL);
 	return ("");
 }
 

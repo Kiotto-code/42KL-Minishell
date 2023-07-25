@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:23:05 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/22 20:04:36 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 11:05:10 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,43 +29,70 @@ char	*is_slash(char *input, int *it)
 }
 
 /**
- * @brief Handle all the quote(removal) and do the expander(is_dollar/key_handler)
+ * @brief 	Handle all the quote(removal) and
+ * 			do the expander(is_dollar/key_handler)
  * 
  * @param input 
  * @param env 
  * @return char* 
  */
-char	* postparser(char *input, t_env *env) // "", '', \, $, ;, |, >, >>, <, ' *space* '
+// "", '', \, $, ;, |, >, >>, <, ' *space* '
+char	*postparser(char *input)
 {
 	int		i;
 	int		j;
 	char	*ret;
+	char	anchor;
 
 	i = 0;
 	j = 0;
-	(void)env;
 	ret = ft_calloc(sizeof(char) * (ft_strlen(input) +1));
-	printf("check: input post: %s\n", input);
 	while (input[i])
 	{
-		if (input[i] && input[i] == '\'')
+		if (input[i] && ft_strchr("\'\"", input[i]))
 		{
+			anchor = input[i];
 			i++;
-			while (input[i] && input[i] != '\'' )
-				ret[j++] = input[i++];
-			i++;
-		}
-		else if (input[i] && input[i] == '\"')
-		{
-			i++;
-			while (input[i] && input[i] != '\"')
+			while (input[i] && input[i] != anchor)
 				ret[j++] = input[i++];
 			i++;
 		}
 		else if (input[i] && !ft_strchr("\'\"", input[i]))
 			ret[j++] = input[i++];
 	}
-	printf("check: input post22as2: %s\n", ret);
 	free(input);
 	return (ret);
 }
+
+// char	*postparser(char *input)
+// {
+// 	int		i;
+// 	int		j;
+// 	char	*ret;
+
+// 	i = 0;
+// 	j = 0;
+// 	ret = ft_calloc(sizeof(char) * (ft_strlen(input) +1));
+// 	printf("check: input post: %s\n", input);
+// 	while (input[i])
+// 	{
+// 		if (input[i] && input[i] == '\'')
+// 		{
+// 			i++;
+// 			while (input[i] && input[i] != '\'' )
+// 				ret[j++] = input[i++];
+// 			i++;
+// 		}
+// 		else if (input[i] && input[i] == '\"')
+// 		{
+// 			i++;
+// 			while (input[i] && input[i] != '\"')
+// 				ret[j++] = input[i++];
+// 			i++;
+// 		}
+// 		else if (input[i] && !ft_strchr("\'\"", input[i]))
+// 			ret[j++] = input[i++];
+// 	}
+// 	free(input);
+// 	return (ret);
+// }

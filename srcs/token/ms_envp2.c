@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:02:29 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/05 19:10:18 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 09:51:29 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ void	ms_envladd_back(t_env **lst, t_env *new)
 	{
 		new->prev = ft_envllast(*lst);
 		ft_envllast(*lst)->next = new;
-		// (*lst)->next = new;
 	}
 	else
 		*lst = new;

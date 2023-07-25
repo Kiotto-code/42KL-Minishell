@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:22:46 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/22 18:45:57 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 11:08:01 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * 
  * @param record 
  */
-void	clean_cmd_and_filename(t_book *record)
+void	clean_quote(t_book *record)
 {
 	t_cmdl	*cmd;
 	t_redir	*rdr;
@@ -33,22 +33,20 @@ void	clean_cmd_and_filename(t_book *record)
 			it = 0;
 			while (cmd->command[it])
 			{
-				cmd->command[it] = postparser(cmd->command[it], record->env);
-				// cmd->command[it] = ft_strdup(cmd->command[it]);
+				cmd->command[it] = postparser(cmd->command[it]);
 				it++;
 			}
 		}
 		while (rdr)
 		{
-			rdr->name = postparser(rdr->name, record->env);
-			// rdr->name = ft_strdup(cmd->command[it]);
-			printf("type:%s name:%s\n", rdr->type, rdr->name);
+			rdr->name = postparser(rdr->name);
 			rdr = rdr->next;
 		}
 		cmd = cmd->next;
 	}
 }
 
+//parser
 void	ms_cmds(t_book *record)
 {
 	t_token	*tmp;
@@ -57,8 +55,6 @@ void	ms_cmds(t_book *record)
 	if (record->args == NULL)
 		return ;
 	tmp = record->args;
-	// printf("%s\n", tmp->entity);
-	// printf("check: args: %s\n", tmp->next->entity);
 	cmd_begin = tmp;
 	if ((ft_strcmp(tmp->entity, "|")) == 0)
 		tmp = tmp->next;
@@ -67,16 +63,12 @@ void	ms_cmds(t_book *record)
 		if ((ft_strcmp(tmp->entity, "|")) == 0)
 		{
 			cmds_lstadd_back(&record->cmds, cmds_lstnew(cmd_begin));
-			// printf(cmd_begin->)
 			cmd_begin = tmp->next;
 		}
 		tmp = tmp->next;
 	}
 	cmds_lstadd_back(&record->cmds, cmds_lstnew(cmd_begin));
-	ft_putstr_fd("check\n", 2);
-	// printf("rraedefasdfsdfa%s\n", record->cmds->command[0]);
-	// printf("cmds: %s\n", record->cmds->command[1]);
-	clean_cmd_and_filename(record);
+	clean_quote(record);
 }
 
 // t_cmdl	*(commands_processing)(t_book *record)
@@ -100,6 +92,6 @@ void	ms_cmds(t_book *record)
 // 		tmp = tmp->next;
 // 	}
 // 	cmds_lstadd_back(&record->cmds, cmds_lstnew(cmd_begin));
-// 	clean_cmd_and_filename(record);
+// 	clean_quote(record);
 // 	return (record->cmds);
 // }

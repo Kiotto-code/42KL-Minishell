@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/24 13:50:35 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 11:00:52 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,8 @@
 
 # define CLOSE		"\001\033[0m\002"
 # define BOLD		"\001\033[1m\002"
-# define BEGIN(x,y) "\001\033["#x";"#y"m\002"  // x: background change font, y: foreground change color
+// # define BEGIN(x,y) "\001\033["#x";"#y"m\002"
+// x: background change font, y: foreground change color
 
 # define SQUOTE		1
 # define DQUOTE		2
@@ -65,9 +66,8 @@ typedef struct s_env
 //argl
 typedef struct s_token
 {
-	char	*entity;
-	// int		type;
-	int		redirect; //
+	char			*entity;
+	int				redirect;
 	struct s_token	*prev;
 	struct s_token	*next;
 }	t_token;
@@ -80,30 +80,20 @@ typedef struct s_cmdl
 	int				out;
 	int				pipe_fd[2];
 	int				fork;
-	// int				here_num;
 	pid_t			pid;
 	struct s_redir	*redir;
 	struct s_cmdl	*next;
 }				t_cmdl;
 
-//argl
-// typedef struct s_argl
-// {
-// 	char			*arg_origin;
-// 	int				redirect;
-// 	struct s_argl	*next;
-// }				t_argl;
-
 //shell
 typedef struct s_book
 {
-	char	**env_arr;
-	char	*input;
-	int		anchor;
-	t_env	*env;
-	// t_token	*token;
-	t_token	*args;
-	t_cmdl	*cmds;
+	char			**env_arr;
+	char			*input;
+	int				anchor;
+	t_env			*env;
+	t_token			*args;
+	t_cmdl			*cmds;
 	struct termios	termios_current;
 }	t_book;
 
@@ -114,39 +104,44 @@ typedef struct s_redir
 	struct s_redir	*next;
 }				t_redir;
 
-//----execution
-//execute_cmds.c
+/**
+* EXECUTION:
+*/
+// execute_cmds.c
 void	execute_cmds(t_book *mini, t_cmdl *cmds);
+void	executing(t_book *record, t_cmdl *cmds);
+char	**env_to_array(t_env *env);
 //here_doc.c
 void	heredoc_processing(t_book *record, t_cmdl *cmd, t_env *env);
 int		heredoc_checking(t_cmdl *cmd);
+bool	pre_execv(t_book *record, t_cmdl *cmds);
 //path_processing.c
 char	*path_processing(t_book *mini, char *line);
 //pipex.c
-int	pipe_creator(t_cmdl *cmds);
+int		pipe_creator(t_cmdl *cmds);
 // builtin.c
-int	builtin_checker(char *command);
+int		builtin_checker(char *command);
+//execve.c
+void	path_execve(t_book *record, t_cmdl *cmds, char *file, char **env_arr);
 
-//----lexer
-// ms_lexer.c
-// int		ms_lexer(t_book *record);
-
-//----parse
+/**
+ * PARSE:
+ */
 //parser_utils.c
-int	pass_whitespaces(char *input, int it);
+int		pass_whitespaces(char *input, int it);
 void	fd_opening(t_cmdl *cmds);
 //redirect_processing.c
 t_redir	*redirect_processing(t_token **args);
 //validator.c
-int	validator(char *input);
-int	counting_redirect(char *input, int *it, char redirect);
+int		validator(char *input);
+int		counting_redirect(char *input, int *it, char redirect);
 //commands_processing.c
 void	ms_cmds(t_book *record);
 //cmdl_create.c
 void	cmds_lstadd_back(t_cmdl	**list, t_cmdl *new);
 t_cmdl	*cmds_lstnew(t_token *args);
 // postparser.c
-char	*postparser(char *input, t_env *env);
+char	*postparser(char *input);
 char	*is_slash(char *input, int *it);
 // quote_processing.c
 char	*is_quote(char *input, int *it);
@@ -156,20 +151,23 @@ char	*is_dollar(char *input, int *it, t_env *env);
 // set_redirect.c
 void	set_redirect(t_token *args);
 
-//-----signals
+/**
+ * SIGNALS:
+ */
 // sig_interactive.c
-void	sigs_interactive_shell(struct termios	*termios_current);
-void	reset_termios(struct termios	*termios_current);
+void	sigs_interactive_shell(struct termios *termios_current);
+void	reset_termios(struct termios *termios_current);
 void	sig_interrupt_here(int sig);
 
 // sig_non_interactive.c
 void	sigs_non_interactive_shell(void);
 
 // tgetstr.c
-// int cursor_plc(char *input);
-int cursor_plc(int i);
+int		cursor_plc(int i);
 
-//-----token
+/**
+ * TOKEN:
+ */
 // ms_envp2.c
 void	ms_envladd_back(t_env **lst, t_env *new);
 t_env	*newenvl(char *content);
@@ -182,11 +180,13 @@ int		check_quote(int c);
 void	ms_token(t_book *record);
 int		ms_inputloop(t_book *record);
 void	record_init(t_book *record, char **envp);
-//ms_expand=env.c
-char    *expandenv(t_book *record, char **str);
+//ms_expandenv.c
+char	*expandenv(t_book *record, char **str);
+char	*here_xpnd(t_book *record, char **str);
 
-
-//----utils
+/**
+ * UTILS:
+ */
 //argument_utils.c
 void	args_lstdelnode(t_token **args);
 void	args_destroy(t_token **lst);
@@ -195,7 +195,7 @@ int		env_lstsize(t_env *env);
 char	*check_envvar(t_env *env, char *key);
 void	chg_shlvl(t_env *env, char *key, char *value);
 //execute_utils.c
-int	execute_dup2(t_cmdl *cmds);
+int		execute_dup2(t_cmdl *cmds);
 // memory_processing.c
 void	array_liberator(char **array);
 void	cleaner(t_book *record);;
@@ -204,7 +204,6 @@ void	cmds_destroy(t_cmdl **lst);
 // shlvl_change.c
 void	shlvl_up(t_book *record);
 void	shlvl_down(t_book *record);
-
 
 /*
  * //only for printing; No particular usage
@@ -220,11 +219,6 @@ void	error_msg(char *message);
 void	sig_non_interactive_quit(int sig);
 void	sig_ignore(void);
 void	sig_interrupt(int sig);
-
-
-
-
-
 
 //builtin
 # define EXPORT		1
@@ -267,7 +261,5 @@ void	sig_interrupt(int sig);
 
 char	*var_strjoin(char const *val, char const *key);
 void	ft_errormessage(char *str, int format);
-
-
 
 #endif

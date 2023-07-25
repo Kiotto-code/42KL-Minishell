@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:34:24 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/23 02:24:44 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 11:05:17 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,10 @@ void	check_dollar(t_book *record, char **str, int i)
 			break ;
 	}
 	mainkey = ft_substr(*str, start, i - start);
-	printf("check: mainkey: |%s|\n", mainkey);
-	if (mainkey[1] ==  '?')
+	if (mainkey[1] == '?')
 		newval = ft_itoa(g_exit_status);
 	else
 		newval = ft_strdup(check_envvar(record->env, mainkey +1));
-	printf("check: newval: %s\n", newval);
 	ft_replace(str, mainkey, newval);
 }
 
@@ -55,7 +53,42 @@ char	*expandenv(t_book *record, char **str)
 		if (av[i] == '\"' && status != SQUOTE)
 			status ^= DQUOTE;
 		if (av[i] == '$' && status != SQUOTE)
-			check_dollar(record, str, i );
+			check_dollar(record, str, i);
 	}
 	return (*str);
 }
+
+char	*here_xpnd(t_book *record, char **str)
+{
+	char	*av;
+	int		i;
+
+	av = *str;
+	i = -1;
+	while (av[++i])
+	{
+		if (av[i] == '$')
+			check_dollar(record, str, i);
+	}
+	return (*str);
+}
+// char	*expandenv(t_book *record, char **str)
+// {
+// 	char	*av;
+// 	int		status;
+// 	int		i;
+
+// 	av = *str;
+// 	i = -1;
+// 	status = NEUTRAL;
+// 	while (av[++i])
+// 	{
+// 		if (av[i] == '\'' && status != DQUOTE)
+// 			status ^= SQUOTE;
+// 		if (av[i] == '\"' && status != SQUOTE)
+// 			status ^= DQUOTE;
+// 		if (av[i] == '$' && status != SQUOTE)
+// 			check_dollar(record, str, i );
+// 	}
+// 	return (*str);
+// }

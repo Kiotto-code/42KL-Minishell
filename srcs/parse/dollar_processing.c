@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:23:00 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/10 23:13:14 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 11:05:00 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,9 @@ int	key_checker(char c)
 	return (0);
 }
 
-void expnd_cmd_symbol_check(char *input)
+void	expnd_cmd_symbol_check(char *input)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	while (input[++i])
@@ -34,14 +34,14 @@ void expnd_cmd_symbol_check(char *input)
 	}
 }
 
-char	*key_handler(char *input, int begin, int end, t_env *env) //expander
+//expander && concatenate
+char	*key_handler(char *input, int begin, int end, t_env *env)
 {
 	char	*key;
 	char	*tmp_1;
 	char	*tmp_2;
 	char	*tmp_3;
 
-	printf("check: input %s\n", input);
 	key = ft_substr(input, begin + 1, end - begin - 1);
 	tmp_1 = ft_substr(input, 0, begin);
 	tmp_3 = ft_strdup(input + end);
@@ -56,7 +56,6 @@ char	*key_handler(char *input, int begin, int end, t_env *env) //expander
 	free(tmp_1);
 	free(tmp_2);
 	free(tmp_3);
-	// if (ft_strchr(input, "<|>"))
 	expnd_cmd_symbol_check(input);
 	return (input);
 }
@@ -77,7 +76,6 @@ char	*question_handle(char *input, int begin, int *it)
 	char	*nbr_val;
 	char	*tail;
 
-	printf("check: input:qhandler %s\n", input);
 	nbr_val = ft_itoa(g_exit_status);
 	tmp_1 = ft_substr(input, 0, begin);
 	tmp_2 = ft_strjoin(tmp_1, nbr_val);
@@ -87,10 +85,8 @@ char	*question_handle(char *input, int begin, int *it)
 	free(tmp_1);
 	free(tmp_2);
 	free(tail);
-	printf("check: input: %s\n", input );
 	free(input);
 	g_exit_status = 0;
-	printf("check: line_new: %s\n", line_new);
 	return (line_new);
 }
 

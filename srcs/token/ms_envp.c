@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:40:48 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/19 01:32:53 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 09:50:59 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,20 +41,17 @@ int	ft_arr2envl(t_env **lst, char **arr)
 	if (!lst || !arr)
 		return (0);
 	i = -1;
-	arr_len = ft_arrind(arr);//claculate arr len
+	arr_len = ft_arrind(arr);
 	while (++i < arr_len)
 	{
 		ms_envladd_back(lst, (newenvl(arr[i])));
-		// (*lst)->content = (t_env *)((*lst)->content);
 	}
-	// printf ("%s \n", ((t_env *)(*lst)->content)->var);
 	return (0);
 }
 
 int	env_rec(t_env **lst, char **arr)
 {
 	t_env	*lst_itr;
-	// t_env	*env;
 
 	if (!lst || !arr)
 		return (0);
@@ -64,15 +61,14 @@ int	env_rec(t_env **lst, char **arr)
 		lst_itr->value = get_env_val(lst_itr->var);
 		lst_itr->key = ft_substr(lst_itr->var, 0, \
 			ft_strlen(lst_itr->var) - ft_strlen(lst_itr->value) - 1);
-		// printf("%s\n", lst_itr->key);
-		// printf("%s\n", lst_itr->value);
 		(lst_itr) = (lst_itr)->next;
 	}
-	// printf ("%s \n", (*lst)->value);
 	return (0);
 }
+
 /**
- * @brief open t_book as a main struct of organizing different variables and required llist ptr
+ * @brief open t_book as a main struct of organizing
+ * 			different variables and required llist ptr
  * 			Initialize 0 value for convenient use.
  * 			ft_arr2envl to apart them into key:value pair got convenient use
  * @param record 
@@ -81,7 +77,6 @@ int	env_rec(t_env **lst, char **arr)
 void	record_init(t_book *record, char **envp)
 {
 	record->env = 0;
-	// record->token = 0;
 	record->cmds = 0;
 	record->args = 0;
 	record->env_arr = 0;

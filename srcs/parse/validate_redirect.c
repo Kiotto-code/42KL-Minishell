@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:23:28 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/23 13:12:35 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 04:13:44 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,6 @@ int	last_check(char *input, int *it)
 						"syntax error near unexpected token `newline'", 258));
 	if (input[*it] == '|')
 		return (print_msg(1, "syntax error near unexpected token `|'", 258));
-	// if (input[*it] == '>' && input[*--it] == '>')
-	// 	return (print_msg(1, "syntax error near unexpected token `>>'", 258));
 	if (input[*it] == '>')
 		return (print_msg(1, "syntax error near unexpected token `>'", 258));
 	if (input[*it] == '<')
@@ -71,6 +69,6 @@ int	counting_redirect(char *input, int *it, char redirect)
 		return (1);
 	if (redirect == '<' && read_redirect(input, it))
 		return (1);
-	(*it)--;			//incase ls >'1'
+	(*it)--;
 	return (0);
 }

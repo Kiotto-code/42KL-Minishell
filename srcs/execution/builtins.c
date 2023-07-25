@@ -6,29 +6,29 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:12:45 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/24 13:58:56 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 01:47:12 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	builtin_executing(t_book *mini, t_cmdl *cmds)
-{
-	if (!ft_strcmp(cmds->command[0], "cd"))
-		g_exit_status = ms_cd(&mini->env, cmds->command[1]);
-	else if (!ft_strcmp(cmds->command[0], "echo"))
-		g_exit_status = echo_executing(cmds->command);
-	else if (!ft_strcmp(cmds->command[0], "env"))
-		g_exit_status = env_executing(mini->env);
-	else if (!ft_strcmp(cmds->command[0], "exit"))
-		g_exit_status = exit_executing(mini, cmds->command);
-	else if (!ft_strcmp(cmds->command[0], "export"))
-		g_exit_status = export_executing(&mini->env, cmds->command);
-	else if (!ft_strcmp(cmds->command[0], "pwd"))
-		g_exit_status = pwd_executing();
-	else if (!ft_strcmp(cmds->command[0], "unset"))
-		g_exit_status = unset_executing(mini, cmds->command);
-}
+// void	builtin_executing(t_book *mini, t_cmdl *cmds)
+// {
+// 	if (!ft_strcmp(cmds->command[0], "cd"))
+// 		g_exit_status = ms_cd(&mini->env, cmds->command[1]);
+// 	else if (!ft_strcmp(cmds->command[0], "echo"))
+// 		g_exit_status = echo_executing(cmds->command);
+// 	else if (!ft_strcmp(cmds->command[0], "env"))
+// 		g_exit_status = env_executing(mini->env);
+// 	else if (!ft_strcmp(cmds->command[0], "exit"))
+// 		g_exit_status = exit_executing(mini, cmds->command);
+// 	else if (!ft_strcmp(cmds->command[0], "export"))
+// 		g_exit_status = export_executing(&mini->env, cmds->command);
+// 	else if (!ft_strcmp(cmds->command[0], "pwd"))
+// 		g_exit_status = pwd_executing();
+// 	else if (!ft_strcmp(cmds->command[0], "unset"))
+// 		g_exit_status = unset_executing(mini, cmds->command);
+// }
 
 int	builtin_checker(char *command)
 {

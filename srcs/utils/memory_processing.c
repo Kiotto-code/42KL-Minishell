@@ -6,24 +6,24 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:30:19 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/28 17:03:17 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 02:12:09 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	*allocator(size_t size)
-{
-	void	*ptr;
+// void	*allocator(size_t size)
+// {
+// 	void	*ptr;
 
-	ptr = malloc(size);
-	if (!ptr)
-	{
-		perror("Could not malloc");
-		exit(EXIT_FAILURE);
-	}
-	return (ptr);
-}
+// 	ptr = malloc(size);
+// 	if (!ptr)
+// 	{
+// 		perror("Could not malloc");
+// 		exit(EXIT_FAILURE);
+// 	}
+// 	return (ptr);
+// }
 
 // void	initializator(t_book *mini)
 // {

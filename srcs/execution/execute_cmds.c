@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:54:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/24 13:36:42 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 10:58:04 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,14 @@ char	**env_to_array(t_env *env)
  */
 void	executing(t_book *record, t_cmdl *cmds)
 {
+	char	**env_arr;
 	char	*file;
 	int		err;
-	char	**env_arr;
 
 	reset_termios(&record->termios_current);
 	if (builtin_checker(cmds->command[0]))
 	{
-		builtin_executing(record, cmds);
+		// builtin_executing(mini, cmds);
 		if (cmds->fork)
 			exit (g_exit_status);
 		return ;
@@ -61,32 +61,8 @@ void	executing(t_book *record, t_cmdl *cmds)
 	{
 		env_arr = env_to_array(record->env);
 		file = path_processing(record, cmds->command[0]);
-		// printf("check: pathqq: %s\n", file);
-		// printf("check: command: %s\n", cmds->command[0]);
 		signal(SIGQUIT, sig_non_interactive_quit);
-		// printf("check: err: %d\n", errno);
-		if (!file)
-		{
-			// if (access(cmds->command[0], X_OK) == 0 )
-			// printf("check: path: %s\n", file);
-			if (access(file, F_OK | X_OK) == 0 )
-				execve(cmds->command[0], cmds->command, env_arr);
-			else
-			{
-				if (cmds->command[0] != NULL)
-				{
-					ft_putstr_fd("minishell: ", 2);
-					ft_putstr_fd(cmds->command[0], 2);
-					ft_putstr_fd(": command not found\n", 2);
-				}
-				else
-					execve(file, cmds->command, env_arr);
-				g_exit_status = 127;
-				exit(g_exit_status);
-			}
-		}
-		else
-			execve(file, cmds->command, env_arr);
+		path_execve(record, cmds, file, env_arr);
 		err = errno;
 		if (cmds->command[0])
 			no_such_message(cmds->command[0]);
@@ -102,11 +78,6 @@ void	executing(t_book *record, t_cmdl *cmds)
 void	execute_child_process(t_book *record, t_cmdl *cmds, t_cmdl *begin)
 {
 	fd_opening(cmds);
-	// printf("checking heredoc execute 1 \n");
-	// if (heredoc_checking(cmds))
-	// 	heredoc_processing(cmds);
-	// if (heredoc_checking(cmds))
-	// 	continue ;
 	if (execute_dup2(cmds))
 		ft_putendl_fd("dup2 error", 2);
 	while (begin->next)
@@ -115,10 +86,16 @@ void	execute_child_process(t_book *record, t_cmdl *cmds, t_cmdl *begin)
 		close(begin->pipe_fd[1]);
 		begin = begin->next;
 	}
-	// (void)begin;
 	executing(record, cmds);
 }
 
+/**
+ * @brief 	WTERMSIG: Determine which signal caused the child process to exit
+ * 			WIFSIGNALED: is true of status , this macro returns the signal
+ * 						number of the signal that terminated the child process
+ * 
+ * @param begin 
+ */
 void	wait_child_processes(t_cmdl *begin)
 {
 	t_cmdl	*cmd;
@@ -134,7 +111,6 @@ void	wait_child_processes(t_cmdl *begin)
 	}
 	while (cmd)
 	{
-		// waitpid(-1, &status, 0);
 		waitpid(cmd->pid, &status, 0);
 		g_exit_status = WEXITSTATUS(status);
 		if (!g_exit_status && WIFSIGNALED(status))
@@ -148,29 +124,13 @@ void	execute_cmds(t_book *record, t_cmdl *cmds)
 	t_cmdl	*begin;
 
 	begin = cmds;
-	if (!cmds->next && builtin_checker(cmds->command[0]) && !cmds->redir)
-	{
-		executing(record, cmds);
+	if (pre_execv(record, cmds) == 1)
 		return ;
-	}
-	// pipe_creator(cmds);
-	if (pipe_creator(cmds))
-		return ;
-	g_exit_status = 0;
-	while (cmds)
-	{
-		if (heredoc_checking(cmds))
-			heredoc_processing(record, cmds, record->env);
-		if (g_exit_status == 1)
-			return ;
-		cmds = cmds->next;
-	}
-	cmds = begin;
 	while (cmds)
 	{
 		cmds->pid = fork();
 		cmds->fork = 1;
-		if (cmds->pid < 0) //unsuccessful fork
+		if (cmds->pid < 0)
 			error_msg("bash: fork: Resource temporarily unavailable");
 		else if (cmds->pid == 0)
 			execute_child_process(record, cmds, begin);

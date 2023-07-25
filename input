@@ -1,4 +1,0 @@
-check: path/usr/local/bin/cat
-check: path/usr/bin/cat
-check: path/bin/cat
-ls

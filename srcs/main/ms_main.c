@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:16:14 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/18 16:30:39 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 03:19:41 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,6 @@ int	main(int ac, char **av, char **env)
 	(void) ac;
 	(void) av;
 	g_exit_status = 0;
-	// rl_outstream = stderr;
-	// t_token	token;
-
-	// (void)av;
-	// int	i = 0;
-	// int len = ft_arrind(env);
-	// while (i < len)
-	// 	printf("%s\n", env[i++]);
 	if (ac != 1)
 	{
 		ft_putstr_fd("Minishell Initiate cannot have argument \n", 1);
@@ -35,9 +27,7 @@ int	main(int ac, char **av, char **env)
 	record_init(&record, env);
 	shlvl_up(&record);
 	ms_inputloop(&record);
-	// ms_lexer(&record);
-	// record.input = readline("./minishell> ");
-	system("leaks -q minishell");	
+	system("leaks -q minishell");
 	return (0);
 }
 

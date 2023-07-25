@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:48:06 by etlaw             #+#    #+#             */
-/*   Updated: 2023/06/08 19:08:46 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/25 01:47:22 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	ms_echo(char **av)
 
 	i = 0;
 	dash_n = 0;
-	if (ft_strlen(av) > 1)
+	if (ft_strlen(*av) > 1)
 	{
 		while (av[i])
 		{

@@ -6,26 +6,26 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:29:38 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/01 13:04:43 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 03:51:43 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	cmds_lstsize(t_cmdl *cmds)
-{
-	int	count;
+// int	cmds_lstsize(t_cmdl *cmds)
+// {
+// 	int	count;
 
-	if (!cmds)
-		return (0);
-	count = 0;
-	while (cmds)
-	{
-		cmds = cmds->next;
-		count++;
-	}
-	return (count);
-}
+// 	if (!cmds)
+// 		return (0);
+// 	count = 0;
+// 	while (cmds)
+// 	{
+// 		cmds = cmds->next;
+// 		count++;
+// 	}
+// 	return (count);
+// }
 
 void	redir_lstdelone(t_redir *lst)
 {
@@ -87,7 +87,6 @@ void	cmds_destroy(t_cmdl **lst)
 	while (*lst)
 	{
 		tmp = (*lst)->next;
-		// kill((pid_t)tmp->pid, 0);
 		cmds_lstdelone(*lst);
 		*lst = tmp;
 	}
