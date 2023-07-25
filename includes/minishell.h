@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 11:00:52 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 21:14:12 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,7 @@ typedef struct s_book
 	char			*input;
 	int				anchor;
 	t_env			*env;
+	t_env			*export;
 	t_token			*args;
 	t_cmdl			*cmds;
 	struct termios	termios_current;
@@ -121,6 +122,7 @@ char	*path_processing(t_book *mini, char *line);
 int		pipe_creator(t_cmdl *cmds);
 // builtin.c
 int		builtin_checker(char *command);
+void	builtin_executing(t_book *mini, t_cmdl *cmds);
 //execve.c
 void	path_execve(t_book *record, t_cmdl *cmds, char *file, char **env_arr);
 
@@ -219,6 +221,39 @@ void	error_msg(char *message);
 void	sig_non_interactive_quit(int sig);
 void	sig_ignore(void);
 void	sig_interrupt(int sig);
+
+// builtin_utils.c
+char	*var_strjoin(char const *key, char const *val);
+void	ft_errormessage(char *str, int format);
+void	free_2arr(char **arr);
+int		is_iden(char *str, int format);
+
+// echo.c
+int		ms_echo(char **av);
+
+// env.c
+int		ms_env(t_env *env);
+
+// export.c
+char	*get_env_name(char *str);
+void	change_value(t_env *env, char *tkn);
+int		update_lst(t_env **lst, char *tkn);
+int		ms_export(t_env **env, t_env **export, char **tkn);
+
+// print_export.c
+int		len_2arr(char **arr);
+int		str_env_len(t_env *lst);
+char	*env_to_str(t_env *env);
+void	sort_env(char **env);
+void	print_export_env(t_env **env);
+
+// pwd.c
+int		ms_pwd(t_env *env);
+// unset.c
+int		ms_unset(t_env **env, t_env **export, char **tkn);
+
+// cd.c
+int		ms_cd(t_env **env, char *path);
 
 //builtin
 # define EXPORT		1

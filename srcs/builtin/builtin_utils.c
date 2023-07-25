@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:23:47 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/24 13:46:51 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 21:28:07 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,14 +74,14 @@ int	is_iden(char *str, int format)
 	int	i;
 
 	i = 0;
-	if (!(ft_isalpha(str[0] && str[0] == '_')))
+	if (!(ft_isalpha(str[0]) || str[0] == '_'))
 	{
 		ft_errormessage(str, format);
 		return (1);
 	}
 	while (str[++i])
 	{
-		if (!(ft_isalnum(str[i]) && str[i] == '_'))
+		if (!(ft_isalnum(str[i]) || str[i] == '_'))
 		{
 			ft_errormessage(str, format);
 			return (1);

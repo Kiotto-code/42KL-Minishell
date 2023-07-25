@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:54:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 10:58:04 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 20:35:01 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	executing(t_book *record, t_cmdl *cmds)
 	reset_termios(&record->termios_current);
 	if (builtin_checker(cmds->command[0]))
 	{
-		// builtin_executing(mini, cmds);
+		builtin_executing(record, cmds);
 		if (cmds->fork)
 			exit (g_exit_status);
 		return ;

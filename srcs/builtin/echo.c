@@ -3,26 +3,38 @@
 /*                                                        :::      ::::::::   */
 /*   echo.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/20 21:48:06 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/25 01:47:22 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 21:11:27 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
-// strcmp instead of strncmp
-int	ft_strcmp(const char *s1, const char *s2)
+// checks for "-n" option 
+
+int	n_check(char *str)
 {
-	size_t	i;
+	int	i;
 
-	i = 0;
-	while (s1[i] && s2[i] && s1[i] == s2[i])
+	if (str[0] == '-')
 	{
-		i++;
+		if (str[1] == 'n')
+		{
+			i = 1;
+			while (str[i])
+			{
+				if (str[i] != 'n')
+					return (0);
+				i++;
+			}
+			return (1);
+		}
+		else
+			return (0);
 	}
-	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
+	return (0);
 }
 
 // echo function
@@ -31,17 +43,17 @@ int	ms_echo(char **av)
 	int	i;
 	int	dash_n;
 
-	i = 0;
+	i = 1;
 	dash_n = 0;
+	if (n_check(av[i]))
+	{
+		dash_n = 1;
+		i++;
+	}
 	if (ft_strlen(*av) > 1)
 	{
 		while (av[i])
 		{
-			if (ft_strcmp(av[i], "-n") == 0)
-			{
-				dash_n = 1;
-				i++;
-			}
 			ft_putstr_fd(av[i], 1);
 			if (av[i + 1] && av[i][0] != '\0')
 				write(1, " ", 1);

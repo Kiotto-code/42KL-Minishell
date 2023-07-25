@@ -6,11 +6,11 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:53:04 by etlaw             #+#    #+#             */
-/*   Updated: 2023/06/08 18:40:34 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/25 20:28:41 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 // counts the length of the double array
 
@@ -27,53 +27,53 @@ int	len_2arr(char **arr)
 // counts the total length of the each string of linked list
 // with aditional space for demiliter
 
-int	str_env_len(t_env *lst)
-{
-	int	len;
+// int	str_env_len(t_env *lst)
+// {
+// 	int	len;
 
-	len = 0;
-	while (lst)
-	{
-		if (lst->var != NULL)
-		{
-			len += ft_strlen(lst->var);
-			len++;
-		}
-		lst = lst->next;
-	}
-	return (len);
-}
+// 	len = 0;
+// 	while (lst)
+// 	{
+// 		if (lst->var != NULL)
+// 		{
+// 			len += ft_strlen(lst->var);
+// 			len++;
+// 		}
+// 		lst = lst->next;
+// 	}
+// 	return (len);
+// }
 
 //  converts env linked list into a single string
 // the string will be later be split into a double array with
 // the delimiter being '\n'
 
-char	*env_to_str(t_env *env)
-{
-	char	*res;
-	int		i;
-	int		j;
+// char	*env_to_str(t_env *env)
+// {
+// 	char	*res;
+// 	int		i;
+// 	int		j;
 
-	env = malloc(sizeof(char) * str_env_len(env) + 1);
-	if (!env)
-		return (NULL);
-	i = 0;
-	while (env)
-	{
-		j = 0;
-		while (env->var[j] != NULL)
-		{
-			res[i] = env->var[j];
-			i++;
-			j++;
-		}
-		if (env->next->next != NULL)
-			res[i++] = '\n';
-		env = env->next;
-	}
-	res[i] = '\0';
-	return (env);
-}
+// 	env = malloc(sizeof(char) * str_env_len(env) + 1);
+// 	if (!env)
+// 		return (NULL);
+// 	i = 0;
+// 	while (env)
+// 	{
+// 		j = 0;
+// 		while (env->var[j] != NULL)
+// 		{
+// 			res[i] = env->var[j];
+// 			i++;
+// 			j++;
+// 		}
+// 		if (env->next->next != NULL)
+// 			res[i++] = '\n';
+// 		env = env->next;
+// 	}
+// 	res[i] = '\0';
+// 	return (env);
+// }
 
 // sorts the env by ascii order
 
@@ -84,7 +84,7 @@ void	sort_env(char **env)
 	char	*tmp;
 	int		env_len;
 
-	env_len = arr_len(env);
+	env_len = ft_arrind(env);
 	sorted = 0;
 	while (env && sorted == 0)
 	{
@@ -110,11 +110,12 @@ void	print_export_env(t_env **env)
 {
 	int		i;
 	char	**res_env;
-	char	*str_env;
+	// char	*str_env;
 
-	str_env = env_to_str(*env);
-	res_env = ft_split(str_env, '\n');
-	free(str_env);
+	// str_env = env_to_str(*env);
+	// res_env = ft_split(str_env, '\n');
+	// free(str_env);
+	res_env = env_to_array(*env);
 	sort_env(res_env);
 	i = 0;
 	while (res_env[i])

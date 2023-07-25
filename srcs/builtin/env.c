@@ -6,18 +6,18 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/12 20:29:21 by etlaw             #+#    #+#             */
-/*   Updated: 2023/06/08 19:07:59 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/25 20:47:42 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 // env function
 int	ms_env(t_env *env)
 {
 	while (env)
 	{
-		printf("%s/n", env->var);
+		printf("%s\n", env->var);
 		env = env->next;
 	}
 	return (0);

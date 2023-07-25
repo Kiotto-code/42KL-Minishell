@@ -6,11 +6,11 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:03:30 by etlaw             #+#    #+#             */
-/*   Updated: 2023/06/08 18:40:21 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/25 20:20:36 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "minishell.h"
 
 // copies the name of the variable of the env
 
@@ -61,7 +61,7 @@ int	update_lst(t_env **lst, char *tkn)
 {
 	t_env	*tmp;
 	char	*var_name;
-	char	*env_name;
+	// char	*env_name;
 
 	tmp = *lst;
 	var_name = get_env_name(tkn);
