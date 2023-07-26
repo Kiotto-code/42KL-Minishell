@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:53:04 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/25 20:28:41 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/26 00:05:31 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,15 +14,15 @@
 
 // counts the length of the double array
 
-int	len_2arr(char **arr)
-{
-	int	i;
+// int	len_2arr(char **arr)
+// {
+// 	int	i;
 
-	i = 0;
-	while (arr[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (arr[i])
+// 		i++;
+// 	return (i);
+// }
 
 // counts the total length of the each string of linked list
 // with aditional space for demiliter

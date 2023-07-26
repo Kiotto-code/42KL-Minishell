@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/06 18:42:50 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/02 21:21:33 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 23:40:49 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,8 +135,8 @@
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
 {
-	char *copy;
-	char *ret;
+	char	*copy;
+	char	*ret;
 
 	if (start > ft_strlen(s))
 		return (ft_calloc(0 * 0));

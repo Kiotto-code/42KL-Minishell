@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:16:14 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 03:19:41 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/26 00:32:15 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av, char **env)
 
 	(void) ac;
 	(void) av;
-	g_exit_status = 0;
+	g_exit_status = 1;
 	if (ac != 1)
 	{
 		ft_putstr_fd("Minishell Initiate cannot have argument \n", 1);

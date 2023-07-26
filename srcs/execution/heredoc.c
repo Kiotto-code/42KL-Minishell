@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:12:59 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 10:43:17 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/26 01:15:15 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	execute_heredoc(t_book *record, t_cmdl *cmd, char *stop, t_env *env)
 {
 	char		*input;
 	char		*buffer;
-	static int	here_num;
 
 	(void)env;
 	buffer = malloc(sizeof(char *) * 1024);
@@ -25,11 +24,9 @@ void	execute_heredoc(t_book *record, t_cmdl *cmd, char *stop, t_env *env)
 		input = readline("> ");
 		if (input == NULL)
 		{
-			++here_num;
-			cursor_plc(here_num);
+			cursor_plc(1);
 			break ;
 		}
-		here_num = 0;
 		if (input == NULL || !ft_strncmp(input, stop, ft_strlen(stop) + 1))
 			break ;
 		expandenv(record, &input);

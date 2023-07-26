@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 21:14:12 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/26 01:14:52 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -241,7 +241,7 @@ int		update_lst(t_env **lst, char *tkn);
 int		ms_export(t_env **env, t_env **export, char **tkn);
 
 // print_export.c
-int		len_2arr(char **arr);
+// int		len_2arr(char **arr);
 int		str_env_len(t_env *lst);
 char	*env_to_str(t_env *env);
 void	sort_env(char **env);
@@ -254,6 +254,9 @@ int		ms_unset(t_env **env, t_env **export, char **tkn);
 
 // cd.c
 int		ms_cd(t_env **env, char *path);
+
+//exit.c
+int	ms_exit(t_book *mini, char **argv);
 
 //builtin
 # define EXPORT		1

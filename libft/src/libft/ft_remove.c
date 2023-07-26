@@ -6,11 +6,11 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/12 01:57:51 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/12 02:11:45 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/25 23:42:44 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# include"libft.h"
+#include "libft.h"
 
 static size_t	count_words(char const *s, char c)
 {
@@ -21,13 +21,13 @@ static size_t	count_words(char const *s, char c)
 	count = 0;
 	while (s[++i] != '\0')
 	{
-		if(s[i] == c)
+		if (s[i] == c)
 			count++;
 	}
 	return (count);
 }
 
-char *ft_remove(char *input, char c)
+char	*ft_remove(char *input, char c)
 {
 	int		i;
 	int		remain_size;

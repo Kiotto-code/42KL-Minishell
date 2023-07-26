@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 12:48:04 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 09:50:43 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/26 01:17:13 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,24 +19,16 @@ int	cursor_plc(int times)
 	char		*cm;
 
 	if (termtype == NULL)
-	{
-		printf("TERM environment variable not set.\n");
-		return (1);
-	}
+		return (printf("TERM environment variable not set.\n"), 1);
 	success = tgetent(NULL, termtype);
 	if (success != 1)
-	{
-		printf("Failed to retrieve terminal capabilities.\n");
-		return (1);
-	}
+		return (printf("Failed to retrieve terminal capabilities.\n"), 1);
 	cm = tgetstr("up", NULL);
 	if (cm == NULL)
-	{
-		printf("cm capability not found.\n");
-		return (1);
-	}
+		return (printf("cm capability not found.\n"), 1);
 	tputs(cm, 1, putchar);
-	while (times --)
-		printf(">");
+	// while (here_num --)
+	// 	printf("> ");
+	(void)times;
 	return (0);
 }

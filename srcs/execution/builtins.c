@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:12:45 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 21:17:25 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/25 23:52:13 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ void	builtin_executing(t_book *mini, t_cmdl *cmds)
 		g_exit_status = ms_unset(&mini->env, &mini->export, cmds->command);
 	else if (!ft_strcmp(cmds->command[0], "pwd"))
 		g_exit_status = ms_pwd(mini->env);
-	// else if (!ft_strcmp(cmds->command[0], "exit"))
-	// 	g_exit_status = exit_executing(mini, cmds->command);
+	else if (!ft_strcmp(cmds->command[0], "exit"))
+		g_exit_status = ms_exit(mini, cmds->command);
 }
 
 int	builtin_checker(char *command)
