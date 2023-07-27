@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   postparser.c                                       :+:      :+:    :+:   */
+/*   ms_quotetrim.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,21 +12,21 @@
 
 #include "minishell.h"
 
-char	*is_slash(char *input, int *it)
-{
-	char	*tmp_1;
-	char	*tmp_2;
+// char	*is_slash(char *input, int *it)
+// {
+// 	char	*tmp_1;
+// 	char	*tmp_2;
 
-	tmp_1 = ft_substr(input, 0, *it);
-	tmp_2 = ft_strdup(input + *it + 1);
-	free(input);
-	input = NULL;
-	input = ft_strjoin(tmp_1, tmp_2);
-	free(tmp_1);
-	free(tmp_2);
-	(*it)++;
-	return (input);
-}
+// 	tmp_1 = ft_substr(input, 0, *it);
+// 	tmp_2 = ft_strdup(input + *it + 1);
+// 	free(input);
+// 	input = NULL;
+// 	input = ft_strjoin(tmp_1, tmp_2);
+// 	free(tmp_1);
+// 	free(tmp_2);
+// 	(*it)++;
+// 	return (input);
+// }
 
 /**
  * @brief 	Handle all the quote(removal) and
@@ -37,7 +37,7 @@ char	*is_slash(char *input, int *it)
  * @return char* 
  */
 // "", '', \, $, ;, |, >, >>, <, ' *space* '
-char	*postparser(char *input)
+char	*ms_quotetrim(char *input)
 {
 	int		i;
 	int		j;
@@ -64,7 +64,7 @@ char	*postparser(char *input)
 	return (ret);
 }
 
-// char	*postparser(char *input)
+// char	*ms_quotetrim(char *input)
 // {
 // 	int		i;
 // 	int		j;

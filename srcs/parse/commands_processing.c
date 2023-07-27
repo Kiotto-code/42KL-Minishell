@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:22:46 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 11:08:01 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/27 12:45:16 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
  * 
  * @param record 
  */
-void	clean_quote(t_book *record)
+void	quote_handler(t_book *record)
 {
 	t_cmdl	*cmd;
 	t_redir	*rdr;
@@ -33,13 +33,13 @@ void	clean_quote(t_book *record)
 			it = 0;
 			while (cmd->command[it])
 			{
-				cmd->command[it] = postparser(cmd->command[it]);
+				cmd->command[it] = ms_quotetrim(cmd->command[it]);
 				it++;
 			}
 		}
 		while (rdr)
 		{
-			rdr->name = postparser(rdr->name);
+			rdr->name = ms_quotetrim(rdr->name);
 			rdr = rdr->next;
 		}
 		cmd = cmd->next;
@@ -68,7 +68,7 @@ void	ms_cmds(t_book *record)
 		tmp = tmp->next;
 	}
 	cmds_lstadd_back(&record->cmds, cmds_lstnew(cmd_begin));
-	clean_quote(record);
+	quote_handler(record);
 }
 
 // t_cmdl	*(commands_processing)(t_book *record)
@@ -92,6 +92,6 @@ void	ms_cmds(t_book *record)
 // 		tmp = tmp->next;
 // 	}
 // 	cmds_lstadd_back(&record->cmds, cmds_lstnew(cmd_begin));
-// 	clean_quote(record);
+// 	quote_handler(record);
 // 	return (record->cmds);
 // }

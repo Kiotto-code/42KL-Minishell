@@ -17,6 +17,7 @@
 		"string_view": "c",
 		"unordered_map": "c",
 		"vector": "c",
-		"chrono": "c"
+		"chrono": "c",
+		"__locale": "c"
 	}
 }

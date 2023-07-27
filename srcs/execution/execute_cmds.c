@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:54:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 20:35:01 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/27 15:02:17 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	executing(t_book *record, t_cmdl *cmds)
 {
 	char	**env_arr;
 	char	*file;
-	int		err;
+	// int		err;
 
 	reset_termios(&record->termios_current);
 	if (builtin_checker(cmds->command[0]))
@@ -60,15 +60,24 @@ void	executing(t_book *record, t_cmdl *cmds)
 	else
 	{
 		env_arr = env_to_array(record->env);
-		file = path_processing(record, cmds->command[0]);
+		file = cmd_path_get(record, cmds->command[0]);
 		signal(SIGQUIT, sig_non_interactive_quit);
+		// if (access(cmds->command[0], F_OK|X_OK) != 0)
+		// 	path_execve(record, cmds, file, env_arr);
 		path_execve(record, cmds, file, env_arr);
-		err = errno;
+		// err = errno;
+		if (access(cmds->command[0], F_OK|X_OK) == 0)
+			errno = 21;
+		// printf("check: strlead %d\n", ft_strlead("asd", "asdqwe"));
+		// printf("check: strlead %d\n", ft_strlead("/", cmds->command[0]));
+		// printf("check: cmds->command[0] |%s|\n", cmds->command[0]);
+		// if (access(cmds->command[0], R_OK) != 0)
+		// 	errno = 13;
 		if (cmds->command[0])
-			no_such_message(cmds->command[0]);
+			no_such_file_or_dir(cmds->command[0]);
 		free(file);
 		array_liberator(env_arr);
-		if (err == 13)
+		if (errno == 21 || errno == 13)
 			exit(126);
 		else
 			exit(127);

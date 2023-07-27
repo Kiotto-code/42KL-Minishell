@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/26 01:14:52 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/27 12:32:39 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,8 +116,8 @@ char	**env_to_array(t_env *env);
 void	heredoc_processing(t_book *record, t_cmdl *cmd, t_env *env);
 int		heredoc_checking(t_cmdl *cmd);
 bool	pre_execv(t_book *record, t_cmdl *cmds);
-//path_processing.c
-char	*path_processing(t_book *mini, char *line);
+//cmd_path_get.c
+char	*cmd_path_get(t_book *mini, char *line);
 //pipex.c
 int		pipe_creator(t_cmdl *cmds);
 // builtin.c
@@ -142,14 +142,8 @@ void	ms_cmds(t_book *record);
 //cmdl_create.c
 void	cmds_lstadd_back(t_cmdl	**list, t_cmdl *new);
 t_cmdl	*cmds_lstnew(t_token *args);
-// postparser.c
-char	*postparser(char *input);
-char	*is_slash(char *input, int *it);
-// quote_processing.c
-char	*is_quote(char *input, int *it);
-char	*is_db_quote(char *input, int *it, t_env *env);
-// dollar_processing.c
-char	*is_dollar(char *input, int *it, t_env *env);
+// ms_quotetrim.c
+char	*ms_quotetrim(char *input);
 // set_redirect.c
 void	set_redirect(t_token *args);
 
@@ -215,7 +209,7 @@ void	print_args(t_token *args);
 void	print_cmds(t_cmdl *cmds);
 void	print_redir(t_cmdl *cmds);
 int		print_msg(int ret_val, char *message, int ext_stat);
-void	no_such_message(char *message);
+void	no_such_file_or_dir(char *message);
 void	error_msg(char *message);
 
 void	sig_non_interactive_quit(int sig);

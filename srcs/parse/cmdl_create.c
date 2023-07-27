@@ -6,13 +6,13 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 20:01:54 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 03:55:36 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/27 12:37:58 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	find_full_command(t_token *args)
+int	cmdblock_counter(t_token *args)
 {
 	int		quantity;
 	t_token	*tmp;
@@ -33,7 +33,7 @@ int	find_full_command(t_token *args)
 	return (quantity);
 }
 
-char	**write_cmd_to_array(t_token *args, int quantity_lists)
+char	**cmdblock_to_array(t_token *args, int quantity_lists)
 {
 	int		it;
 	char	**arg_arr;
@@ -63,8 +63,8 @@ t_cmdl	*cmds_lstnew(t_token *args)
 		return (NULL);
 	element->redir = NULL;
 	element->redir = redirect_processing(&args);
-	quantity_lists = find_full_command(args);
-	element->command = write_cmd_to_array(args, quantity_lists);
+	quantity_lists = cmdblock_counter(args);
+	element->command = cmdblock_to_array(args, quantity_lists);
 	element->in = 0;
 	element->out = 1;
 	element->fork = 0;

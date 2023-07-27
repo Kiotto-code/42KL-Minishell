@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:30:25 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 23:46:49 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/27 14:37:18 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,10 +28,29 @@ void	error_msg(char *message)
 	g_exit_status = 128;
 }
 
-void	no_such_message(char *message)
+// void	no_such_file_or_dir(char *message)
+// {
+// 	if (access(message, F_OK|X_OK) == 0)
+// 	{
+// 		ft_putstr_fd("minishell: ", STDERR_FILENO);
+// 		ft_putstr_fd(message, STDERR_FILENO);
+// 		ft_putstr_fd(": ", STDERR_FILENO);
+// 		ft_putendl_fd(strerror(21), STDERR_FILENO);
+// 	}
+// 	else
+// 	{
+// 		ft_putstr_fd("minishell: ", STDERR_FILENO);
+// 		ft_putstr_fd(message, STDERR_FILENO);
+// 		ft_putstr_fd(": ", STDERR_FILENO);
+// 		ft_putendl_fd(strerror(errno), STDERR_FILENO);
+// 	}
+// }
+// 	// ft_putendl_fd(strerror(g_exit_status), STDERR_FILENO);
+void	no_such_file_or_dir(char *message)
 {
 	ft_putstr_fd("minishell: ", STDERR_FILENO);
 	ft_putstr_fd(message, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putendl_fd(strerror(errno), STDERR_FILENO);
+	// ft_putendl_fd(strerror(g_exit_status), STDERR_FILENO);
 }

@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path_processing.c                                  :+:      :+:    :+:   */
+/*   cmd_path_get.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -38,7 +38,7 @@ char	**get_paths(t_book *mini)
 	return (paths);
 }
 
-char	*path_processing(t_book *mini, char *line)
+char	*cmd_path_get(t_book *mini, char *line)
 {
 	int		it;
 	char	*path;
@@ -64,3 +64,30 @@ char	*path_processing(t_book *mini, char *line)
 	array_liberator(paths);
 	return (NULL);
 }
+
+// char	*cmd_path_get(t_book *mini, char *line)
+// {
+// 	int		it;
+// 	char	*path;
+// 	char	**paths;
+
+// 	it = 0;
+// 	if (executable_path(line))
+// 		return (line);
+// 	paths = get_paths(mini);
+// 	if (!paths)
+// 		return (NULL);
+// 	while (paths[it])
+// 	{
+// 		path = ft_strjoin_con(paths[it], "/", line);
+// 		if (access(path, F_OK | X_OK) == 0)
+// 		{
+// 			array_liberator(paths);
+// 			return (path);
+// 		}
+// 		free(path);
+// 		it++;
+// 	}
+// 	array_liberator(paths);
+// 	return (NULL);
+// }
