@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:03:30 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/25 20:20:36 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/27 13:14:56 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ char	*get_env_name(char *str)
 	i = 0;
 	while (str[i] && str[i] != '=')
 		i++;
-	res = ft_substr(str, 0, i + 1);
+	res = ft_substr(str, 0, i);
 	return (res);
 }
 
@@ -46,7 +46,7 @@ void	change_value(t_env *env, char *tkn)
 		i++;
 	}
 	free(env->var);
-	env->var = ft_substr(tkn, j, i);
+	env->var = ft_strdup(tkn);
 }
 
 /*
@@ -61,7 +61,6 @@ int	update_lst(t_env **lst, char *tkn)
 {
 	t_env	*tmp;
 	char	*var_name;
-	// char	*env_name;
 
 	tmp = *lst;
 	var_name = get_env_name(tkn);
@@ -74,7 +73,7 @@ int	update_lst(t_env **lst, char *tkn)
 		}
 		tmp = tmp->next;
 	}
-	ms_envladd_back(&tmp, (newenvl(tkn)));
+	ms_envladd_back(lst, (newenvlist(tkn)));
 	free(var_name);
 	return (0);
 }
@@ -94,25 +93,27 @@ int	ms_export(t_env **env, t_env **export, char **tkn)
 {
 	int	new_env;
 	int	res;
+	int	i;
 
 	new_env = 0;
+	i = 0;
 	if (!tkn[1])
-	{
 		print_export_env(export);
-		return (0);
-	}
 	else
 	{
-		res = is_iden(tkn[1], 1);
-		if (res == 1)
-			return (1);
-		else if (res == 2)
+		while (tkn[++i])
 		{
-			update_lst(env, tkn[1]);
-			update_lst(export, tkn[1]);
+			res = is_iden(tkn[i], 1);
+			if (res == 1)
+				return (1);
+			if (res == 2)
+			{
+				update_lst(env, tkn[1]);
+				update_lst(export, tkn[1]);
+			}
+			if (res == 3)
+				update_lst(export, tkn[1]);
 		}
-		else if (res == 3)
-			update_lst(export, tkn[1]);
 	}
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:50:29 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/25 20:28:54 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/27 11:20:06 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void	remove_node(t_env **envr, t_env **export, char *str)
 {
 	t_env	*env;
 	t_env	*exp;
-	// t_env	*tmp;
 	char	*key;
 
 	env = *envr;

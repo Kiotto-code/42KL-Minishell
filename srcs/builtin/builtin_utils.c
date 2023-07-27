@@ -6,36 +6,11 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:23:47 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/25 21:28:07 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/27 13:25:45 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// strjoin for env var
-
-char	*var_strjoin(char const *key, char const *val)
-{
-	char	*res;
-	char	*ptr;
-	int		i;
-
-	i = ft_strlen(key);
-	if (!key || !val)
-		return (NULL);
-	res = malloc(sizeof(char) * (ft_strlen(val) + ft_strlen(key) + 2));
-	if (!res)
-		return (NULL);
-	ptr = res;
-	while (*key)
-		*res++ = *key++;
-	res[i] = '=';
-	(*res)++;
-	while (*val)
-		*res++ = *val++;
-	*res = '\0';
-	return (ptr);
-}
 
 /* error message for builtins
    1 = export error
@@ -81,13 +56,15 @@ int	is_iden(char *str, int format)
 	}
 	while (str[++i])
 	{
-		if (!(ft_isalnum(str[i]) || str[i] == '_'))
+		if (!(ft_isalnum(str[i]) || str[i] == '_' || str[i] == '='))
 		{
 			ft_errormessage(str, format);
 			return (1);
 		}
 		if (str[i] == '=')
+		{
 			return (2);
+		}
 	}
 	return (3);
 }
@@ -104,4 +81,24 @@ void	free_2arr(char **arr)
 		free(arr[i]);
 		i++;
 	}
+}
+
+t_env	*newenvlist(char *content)
+{
+	t_env	*node;
+
+	node = ft_calloc(sizeof(t_env));
+	if (!node)
+		return (0);
+	node->var = content;
+	if (ft_strchr(content, '=') == NULL)
+	{
+		node->value = 0;
+		node->key = ft_strdup(content);
+		return (node);
+	}
+	node->value = get_env_val(content);
+	node->key = ft_substr(content, 0, \
+			ft_strlen(content) - ft_strlen(content) - 1);
+	return (node);
 }

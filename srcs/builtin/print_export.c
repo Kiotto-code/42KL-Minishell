@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   print_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:53:04 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/26 00:05:31 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/27 12:27:36 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,11 +110,7 @@ void	print_export_env(t_env **env)
 {
 	int		i;
 	char	**res_env;
-	// char	*str_env;
 
-	// str_env = env_to_str(*env);
-	// res_env = ft_split(str_env, '\n');
-	// free(str_env);
 	res_env = env_to_array(*env);
 	sort_env(res_env);
 	i = 0;

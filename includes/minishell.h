@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/26 01:14:52 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/27 13:26:02 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -170,6 +170,8 @@ int		cursor_plc(int i);
 /**
  * TOKEN:
  */
+//ms_envp.c
+char	*get_env_val(char *env);
 // ms_envp2.c
 void	ms_envladd_back(t_env **lst, t_env *new);
 t_env	*newenvl(char *content);
@@ -222,41 +224,36 @@ void	sig_non_interactive_quit(int sig);
 void	sig_ignore(void);
 void	sig_interrupt(int sig);
 
+/**
+ * BUILTIN:
+ */
 // builtin_utils.c
-char	*var_strjoin(char const *key, char const *val);
 void	ft_errormessage(char *str, int format);
 void	free_2arr(char **arr);
 int		is_iden(char *str, int format);
-
+t_env	*newenvlist(char *content);
 // echo.c
 int		ms_echo(char **av);
-
 // env.c
 int		ms_env(t_env *env);
-
 // export.c
 char	*get_env_name(char *str);
 void	change_value(t_env *env, char *tkn);
 int		update_lst(t_env **lst, char *tkn);
 int		ms_export(t_env **env, t_env **export, char **tkn);
-
 // print_export.c
-// int		len_2arr(char **arr);
 int		str_env_len(t_env *lst);
 char	*env_to_str(t_env *env);
 void	sort_env(char **env);
 void	print_export_env(t_env **env);
-
 // pwd.c
 int		ms_pwd(t_env *env);
 // unset.c
 int		ms_unset(t_env **env, t_env **export, char **tkn);
-
 // cd.c
-int		ms_cd(t_env **env, char *path);
-
+int		ms_cd(t_env **env, t_env **export, char *path);
 //exit.c
-int	ms_exit(t_book *mini, char **argv);
+int		ms_exit(t_book *mini, char **argv);
 
 //builtin
 # define EXPORT		1
@@ -297,7 +294,6 @@ int	ms_exit(t_book *mini, char **argv);
 // // ms_lexer.c
 // int		ms_lexer(t_book *record, t_token *token);
 
-char	*var_strjoin(char const *val, char const *key);
 void	ft_errormessage(char *str, int format);
 
 #endif
