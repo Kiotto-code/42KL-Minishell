@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:53:04 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/26 00:05:31 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/28 14:55:20 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ void	sort_env(char **env)
 	char	*tmp;
 	int		env_len;
 
-	env_len = ft_arrind(env);
+	env_len = ft_arrlen(env);
 	sorted = 0;
 	while (env && sorted == 0)
 	{
@@ -110,18 +110,15 @@ void	print_export_env(t_env **env)
 {
 	int		i;
 	char	**res_env;
-	// char	*str_env;
 
-	// str_env = env_to_str(*env);
-	// res_env = ft_split(str_env, '\n');
-	// free(str_env);
 	res_env = env_to_array(*env);
 	sort_env(res_env);
 	i = 0;
 	while (res_env[i])
 	{
 		ft_putstr_fd("declare -x ", 1);
-		ft_putendl_fd(res_env[i], 1);
+		printf("%s\n", res_env[i]);
+		// printf("\"%s\"\n", res_env[i]);
 		i++;
 	}
 	free_2arr(res_env);

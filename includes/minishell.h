@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/27 12:32:39 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/28 14:51:20 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,8 +174,10 @@ t_token	*ft_tokenllast(t_token *lst);
 int		check_quote(int c);
 //ms_token.c
 void	ms_token(t_book *record);
+//ms_envp.c
 int		ms_inputloop(t_book *record);
 void	record_init(t_book *record, char **envp);
+char	*get_env_val(char *env);
 //ms_expandenv.c
 char	*expandenv(t_book *record, char **str);
 char	*here_xpnd(t_book *record, char **str);
@@ -221,6 +223,7 @@ char	*var_strjoin(char const *key, char const *val);
 void	ft_errormessage(char *str, int format);
 void	free_2arr(char **arr);
 int		is_iden(char *str, int format);
+t_env	*newenvlist(char *content);
 
 // echo.c
 int		ms_echo(char **av);
@@ -247,14 +250,14 @@ int		ms_pwd(t_env *env);
 int		ms_unset(t_env **env, t_env **export, char **tkn);
 
 // cd.c
-int		ms_cd(t_env **env, char *path);
+int		ms_cd(t_env **env, t_env **export, char *path);
 
 //exit.c
 int	ms_exit(t_book *mini, char **argv);
 
-//builtin
-# define EXPORT		1
-# define CD			2
+// //builtin
+// # define EXPORT		1
+// # define CD			2
 
 // typedef struct s_env
 // {
@@ -291,7 +294,7 @@ int	ms_exit(t_book *mini, char **argv);
 // // ms_lexer.c
 // int		ms_lexer(t_book *record, t_token *token);
 
-char	*var_strjoin(char const *val, char const *key);
-void	ft_errormessage(char *str, int format);
+// char	*var_strjoin(char const *val, char const *key);
+// void	ft_errormessage(char *str, int format);
 
 #endif

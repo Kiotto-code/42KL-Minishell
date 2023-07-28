@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/07/04 11:42:47 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 23:42:18 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/28 13:54:18 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ char	*get_next_line(int fd);
 char	*ft_strend(char *str, int n);
 char	*ft_strjoinf(char *s1, char const*s2);
 char	*ft_strjoin_con(char const *s1, char *connector, char const *s2);
-int		ft_arrind(char **arr);
+int		ft_arrlen(char **arr);
 char	**ft_duparr(char **env);
 int		ft_arr2lst(t_list **lst, char **arr, \
 			void (*add_back)(t_list **lst, t_list *new));

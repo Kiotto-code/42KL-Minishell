@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:21:34 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/25 20:46:15 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/27 13:24:47 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,14 @@ static void	update_pwd(t_env **env, char *path)
 			free((*env)->value);
 			free((*env)->var);
 			(*env)->value = ft_strdup(buf);
-			(*env)->var = var_strjoin((*env)->key, (*env)->value);
+			(*env)->var = ft_strjoin_con((*env)->key, "=", (*env)->value);
 		}
 		if (ft_strcmp((*env)->key, "OLDPWD") == 0)
 		{
 			free((*env)->value);
 			free((*env)->var);
 			(*env)->value = ft_strdup(oldpwd);
-			(*env)->var = var_strjoin((*env)->key, (*env)->value);
+			(*env)->var = ft_strjoin_con((*env)->key, "=", (*env)->value);
 			free(oldpwd);
 		}
 		*env = (*env)->next;
@@ -45,7 +45,7 @@ static void	update_pwd(t_env **env, char *path)
 }
 
 // cd function
-int	ms_cd(t_env **env, char *path)
+int	ms_cd(t_env **env, t_env **export, char *path)
 {
 	int	ret;
 
@@ -53,6 +53,7 @@ int	ms_cd(t_env **env, char *path)
 	if (ret == 0)
 	{
 		update_pwd(env, path);
+		update_pwd(export, path);
 		return (0);
 	}
 	ft_errormessage(path, 2);

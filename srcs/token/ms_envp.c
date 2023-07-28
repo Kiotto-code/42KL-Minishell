@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:40:48 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/27 00:55:54 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/28 13:54:18 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	ft_arr2envl(t_env **lst, char **arr)
 	if (!lst || !arr)
 		return (0);
 	i = -1;
-	arr_len = ft_arrind(arr);
+	arr_len = ft_arrlen(arr);
 	while (++i < arr_len)
 	{
 		ms_envladd_back(lst, (newenvl(arr[i])));
@@ -77,6 +77,7 @@ int	env_rec(t_env **lst, char **arr)
 void	record_init(t_book *record, char **envp)
 {
 	record->env = 0;
+	record->export = 0;
 	record->cmds = 0;
 	record->args = 0;
 	record->env_arr = 0;

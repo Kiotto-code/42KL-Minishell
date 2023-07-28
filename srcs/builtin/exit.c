@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 23:45:27 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/27 00:51:27 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/28 14:50:33 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	ms_exit(t_book *mini, char **argv)
 {
 	int	len;
 
-	len = ft_arrind(argv);
+	len = ft_arrlen(argv);
 	if (len == 1)
 	{
 		shlvl_down(mini);

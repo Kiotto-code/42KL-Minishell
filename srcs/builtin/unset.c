@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:50:29 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/25 20:28:54 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/28 00:31:20 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,12 @@ static void	free_node(t_env *lst)
 {
 	t_env	*tmp;
 
-	tmp = lst->next->next;
+	tmp = 0;
+	if (lst->next)
+		tmp = lst->next->next;
 	free(lst->next->var);
 	free(lst->next->key);
 	free(lst->next->value);
-	free(lst->next->next);
-	free(lst->next->prev);
 	free(lst->next);
 	lst->next = tmp;
 }
@@ -36,7 +36,6 @@ static void	remove_node(t_env **envr, t_env **export, char *str)
 {
 	t_env	*env;
 	t_env	*exp;
-	// t_env	*tmp;
 	char	*key;
 
 	env = *envr;
@@ -44,7 +43,7 @@ static void	remove_node(t_env **envr, t_env **export, char *str)
 	key = get_env_name(str);
 	while (env)
 	{
-		if (ft_strcmp(key, env->next->key) == 0)
+		if (env->next && ft_strcmp(key, env->next->key) == 0)
 		{
 			free_node(env);
 		}
@@ -52,7 +51,7 @@ static void	remove_node(t_env **envr, t_env **export, char *str)
 	}
 	while (exp)
 	{
-		if (ft_strcmp(key, exp->next->key) == 0)
+		if (exp->next && ft_strcmp(key, exp->next->key) == 0)
 		{
 			free_node(exp);
 		}

@@ -6,13 +6,13 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:30:50 by yichan            #+#    #+#             */
-/*   Updated: 2023/03/14 00:45:11 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/28 14:50:33 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int	ft_arrind(char **arr)
+int	ft_arrlen(char **arr)
 {
 	int	i;
 
