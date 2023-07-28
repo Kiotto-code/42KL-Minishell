@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:03:30 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/28 00:24:55 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/28 18:31:16 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,11 +40,11 @@ void	change_value(t_env *env, char *tkn)
 	}
 	env->key = ft_substr(tkn, 0, i);
 	j = i;
-	while (tkn[i])
+	while (tkn[j])
 	{
-		i++;
+		j++;
 	}
-	env->value = ft_strdup(tkn);
+	env->value = ft_substr(tkn, i + 1, j - i);
 	// if (env && env->var)
 	// 	free(env->var);
 	env->var = ft_strdup(tkn);
