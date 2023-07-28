@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:29:45 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 09:47:13 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/29 03:24:37 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ char	*check_envvar(t_env *env, char *key)
 {
 	if (!env || !key)
 		return (NULL);
+	// if (ft_strcmp(key, "") == 0)
+	// 	return ("$");
 	while (env)
 	{
 		if (!ft_strcmp(env->key, key))

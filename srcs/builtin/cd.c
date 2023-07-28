@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:21:34 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/27 13:24:47 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/29 05:42:35 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,15 @@ static void	update_pwd(t_env **env, char *path)
 // cd function
 int	ms_cd(t_env **env, t_env **export, char *path)
 {
-	int	ret;
+	int		ret;
+	char	tmp[100];
 
+	ft_strlcpy(tmp, path, ft_strlen(path) +1);
+	if (ft_strcmp(tmp, "-") == 0)
+	{
+		path = check_envvar(*env, "OLDPWD");
+		// printf("%s\n", path);
+	}
 	ret = chdir(path);
 	if (ret == 0)
 	{

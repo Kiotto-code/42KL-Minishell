@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/28 14:51:20 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/29 06:10:52 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -168,6 +168,8 @@ int		cursor_plc(int i);
 void	ms_envladd_back(t_env **lst, t_env *new);
 t_env	*newenvl(char *content);
 t_env	*ft_envllast(t_env *lst);
+t_env	*ms_getenv_vkey(t_env *lst, char *key);
+t_env	*ms_getenv_vvar(t_env *lst, char *var);
 // ms_token2.c
 void	ms_tokenladd_back(t_token **lst, t_token *new);
 t_token	*ft_tokenllast(t_token *lst);

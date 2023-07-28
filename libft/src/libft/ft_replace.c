@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:50:01 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/27 14:53:05 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/29 03:14:52 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,8 @@ void	ft_replace(char **s, char *old, char *new)
 
 	i = 0;
 	str = *s;
+	if (old == NULL || new == NULL)
+		return ;
 	while (str[i] && !ft_strlead(str + i, old))
 		i++;
 	first = ft_substr(str, 0, i);

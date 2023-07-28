@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 19:02:29 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/27 23:02:35 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/29 06:11:39 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,34 @@ t_env	*newenvl(char *content)
 	node->var = ft_strdup(content);
 	node->next = NULL;
 	return (node);
+}
+
+t_env	*ms_getenv_vkey(t_env *lst, char *key)
+{
+	if (!lst)
+		return (lst);
+	while (lst->next)
+	{
+		if (ft_strcmp(lst->key, key) == 0)
+		{
+			break ;
+		}
+		lst = lst->next;
+	}
+	return (lst);
+}
+
+t_env	*ms_getenv_vvar(t_env *lst, char *var)
+{
+	if (!lst)
+		return (lst);
+	while (lst->next)
+	{
+		if (ft_strcmp(lst->var, var) == 0)
+		{
+			break ;
+		}
+		lst = lst->next;
+	}
+	return (lst);
 }

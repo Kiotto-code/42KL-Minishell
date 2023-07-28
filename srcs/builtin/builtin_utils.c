@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:23:47 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/28 00:30:15 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/29 05:55:07 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,19 +22,21 @@ void	ft_errormessage(char *str, int format)
 {
 	if (format == 1)
 	{
-		ft_putstr_fd("bash: export: '", 2);
+		ft_putstr_fd("bash: export: `", 2);
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd("': not a valid identifier\n", 2);
 	}
 	if (format == 2)
 	{
-		ft_putstr_fd("bash: cd: '", 2);
+		ft_putstr_fd("bash: cd: ", 2);
 		ft_putstr_fd(str, 2);
-		ft_putstr_fd("': No such directory is found\n", 2);
+		if (ft_strcmp(str, "OLDPWD not set") != 0)
+			ft_putstr_fd(": No such file or directory", 2);
+		ft_putstr_fd("\n", 2);
 	}
 	if (format == 3)
 	{
-		ft_putstr_fd("bash: unset: '", 2);
+		ft_putstr_fd("bash: unset: `", 2);
 		ft_putstr_fd(str, 2);
 		ft_putstr_fd("': not a valid identifier\n", 2);
 	}

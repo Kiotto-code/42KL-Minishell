@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:34:24 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 11:05:17 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/29 05:41:02 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,22 +19,40 @@ void	check_dollar(t_book *record, char **str, int i)
 	char	*newval;
 
 	start = i;
-	while (str[i++])
+	// if (ft_isdigit(str[0][i+1]) || str[0][i+1] == '?')
+	// 	i += 2;
+	if (ft_isalpha(str[0][i +1]) == 0)
+		i += 2;
+	else
 	{
-		if (ft_isdigit(str[0][i]) || str[0][i] == '?')
+		while (str[0][i++])
 		{
-			i ++;
-			break ;
+			if (!ft_isalnum(str[0][i]))
+				break ;
 		}
-		if (!ft_isalpha(str[0][i]))
-			break ;
 	}
 	mainkey = ft_substr(*str, start, i - start);
 	if (mainkey[1] == '?')
 		newval = ft_itoa(g_exit_status);
+	else if (mainkey[1] == '$')
+		newval = ft_itoa(21225);
+	else if (ft_strchr("-", mainkey[1]))
+		newval = ft_strdup("himBH");
 	else
 		newval = ft_strdup(check_envvar(record->env, mainkey +1));
+	// printf("check: str: |%s|\n", *str);
+	// printf("check: mainkey: |%s|\n", mainkey);
+	// printf("check: newval: |%s|\n", newval);
+	
+	// pause();
+	// if (ft_strcmp(mainkey, "$") == 0)
+	// {
+	// 	free(*str);
+	// 	*str = ft_strdup("$");
+	// 	return ;
+	// }
 	ft_replace(str, mainkey, newval);
+	// printf("check: %s\n", str[0]);
 }
 
 char	*expandenv(t_book *record, char **str)
@@ -52,8 +70,16 @@ char	*expandenv(t_book *record, char **str)
 			status ^= SQUOTE;
 		if (av[i] == '\"' && status != SQUOTE)
 			status ^= DQUOTE;
-		if (av[i] == '$' && status != SQUOTE)
+		if (av[i] == '$' && status != SQUOTE && av[i+1] != ' ')
+		{
 			check_dollar(record, str, i);
+			// printf("check: str: |%s|\n", *str);
+			// pause();
+			// if (ft_strcmp(*str, "$ ") != 0)
+			expandenv(record, str);
+			// expandenv(record, str);
+			break ;
+		}
 	}
 	return (*str);
 }
@@ -67,8 +93,12 @@ char	*here_xpnd(t_book *record, char **str)
 	i = -1;
 	while (av[++i])
 	{
-		if (av[i] == '$')
+		if (av[i] == '$' && av[i+1] != '\0')
+		{
 			check_dollar(record, str, i);
+			here_xpnd(record, str);
+			break ;
+		}
 	}
 	return (*str);
 }

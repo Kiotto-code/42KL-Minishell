@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 23:45:27 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/28 18:44:03 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/28 21:16:35 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ int	ms_exit(t_book *mini, char **argv)
 	if (len == 1)
 	{
 		shlvl_down(mini);
+		printf("exit\n");
 		exit(g_exit_status);
 	}
 	if (isdigit_str(argv[1]))
@@ -123,6 +124,7 @@ int	ms_exit(t_book *mini, char **argv)
 	{
 		g_exit_status = exit_numeric(mini, argv[1]);
 		shlvl_down(mini);
+		printf("exit\n");
 		exit(g_exit_status);
 	}
 	return (0);

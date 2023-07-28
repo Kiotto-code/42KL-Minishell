@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:40:48 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/28 13:54:18 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/29 06:12:03 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,10 @@ void	record_init(t_book *record, char **envp)
 	record->anchor = NEUTRAL;
 	ft_arr2envl(&(record->env), envp);
 	env_rec(&(record->env), envp);
+	ft_strswitch(&ms_getenv_vkey(record->env, "OLDPWD")->value,
+		ft_strdup("OLDPWD not set"));
 	ft_arr2envl(&(record->export), envp);
 	env_rec(&(record->export), envp);
+	ft_strswitch(&ms_getenv_vkey(record->export, "OLDPWD")->value,
+		ft_strdup("OLDPWD not set"));
 }

@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:53:04 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/28 18:44:03 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/29 06:08:44 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,35 +106,41 @@ void	sort_env(char **env)
 
 // prints out the export env
 
-// void	print_export_env(t_env **env)
-// {
-// 	int		i;
-// 	char	**res_env;
-
-// 	res_env = env_to_array(*env);
-// 	sort_env(res_env);
-// 	i = 0;
-// 	while (res_env[i])
-// 	{
-// 		ft_putstr_fd("declare -x ", 1);
-// 		ft_putendl_fd(res_env[i], 1);
-// 		i++;
-// 	}
-// 	free_2arr(res_env);
-// }
-
 void	print_export_env(t_env **env)
 {
+	int		i;
+	char	**res_env;
 	t_env	*tmp;
 
-	tmp = *env;
-	while (tmp)
+	res_env = env_to_array(*env);
+	sort_env(res_env);
+	i = 0;
+	while (res_env[i])
 	{
+		tmp = ms_getenv_vvar(*env, res_env[i]);
 		ft_putstr_fd("declare -x ", 1);
 		if (ft_strchr(tmp->var, '='))
 			printf("%s=\"%s\"\n", tmp->key, tmp->value);
 		else
 			printf("%s\n", tmp->key);
-		tmp = tmp->next;
+		i++;
 	}
+	free_2arr(res_env);
 }
+
+// void	print_export_env(t_env **env)
+// {
+// 	t_env	*tmp;
+
+// 	tmp = *env;
+// 	sort_env(env);
+// 	while (tmp)
+// 	{
+// 		ft_putstr_fd("declare -x ", 1);
+// 		if (ft_strchr(tmp->var, '='))
+// 			printf("%s=\"%s\"\n", tmp->key, tmp->value);
+// 		else
+// 			printf("%s\n", tmp->key);
+// 		tmp = tmp->next;
+// 	}
+// }

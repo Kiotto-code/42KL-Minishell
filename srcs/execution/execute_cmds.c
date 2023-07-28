@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:54:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/27 15:02:17 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/29 04:04:32 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,8 @@ void	executing(t_book *record, t_cmdl *cmds)
 		path_execve(record, cmds, file, env_arr);
 		// err = errno;
 		if (access(cmds->command[0], F_OK|X_OK) == 0)
+			errno = 21;
+		if (access(cmds->command[0], F_OK) == 0 && cmds->command[0][0] == '/')
 			errno = 21;
 		// printf("check: strlead %d\n", ft_strlead("asd", "asdqwe"));
 		// printf("check: strlead %d\n", ft_strlead("/", cmds->command[0]));
