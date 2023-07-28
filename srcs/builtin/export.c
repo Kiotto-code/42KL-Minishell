@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:03:30 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/27 13:14:56 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/28 00:24:55 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,8 +34,7 @@ void	change_value(t_env *env, char *tkn)
 
 	i = 0;
 	free(env->value);
-	env->value = ft_strdup(tkn);
-	while (tkn[i] != '=')
+	while (tkn[i] && tkn[i] != '=')
 	{
 		i++;
 	}
@@ -45,7 +44,9 @@ void	change_value(t_env *env, char *tkn)
 	{
 		i++;
 	}
-	free(env->var);
+	env->value = ft_strdup(tkn);
+	// if (env && env->var)
+	// 	free(env->var);
 	env->var = ft_strdup(tkn);
 }
 
@@ -59,18 +60,20 @@ void	change_value(t_env *env, char *tkn)
 */
 int	update_lst(t_env **lst, char *tkn)
 {
-	t_env	*tmp;
-	char	*var_name;
+	t_env			*tmp;
+	char			*var_name;
 
 	tmp = *lst;
 	var_name = get_env_name(tkn);
 	while (tmp)
 	{
-		if (ft_strcmp(var_name, tmp->key) == 0)
+		if (ft_strchr(tkn, '=') && (ft_strcmp(var_name, tmp->key) == 0))
 		{
 			change_value(tmp, tkn);
 			return (0);
 		}
+		if (ft_strcmp(var_name, tmp->key) == 0)
+			return (0);
 		tmp = tmp->next;
 	}
 	ms_envladd_back(lst, (newenvlist(tkn)));
@@ -108,11 +111,11 @@ int	ms_export(t_env **env, t_env **export, char **tkn)
 				return (1);
 			if (res == 2)
 			{
-				update_lst(env, tkn[1]);
-				update_lst(export, tkn[1]);
+				update_lst(env, tkn[i]);
+				update_lst(export, tkn[i]);
 			}
 			if (res == 3)
-				update_lst(export, tkn[1]);
+				update_lst(export, tkn[i]);
 		}
 	}
 	return (0);

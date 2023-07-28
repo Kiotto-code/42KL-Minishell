@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_envp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:40:48 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/27 00:55:54 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/27 23:27:16 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,7 @@ int	env_rec(t_env **lst, char **arr)
 void	record_init(t_book *record, char **envp)
 {
 	record->env = 0;
+	record->export = 0;
 	record->cmds = 0;
 	record->args = 0;
 	record->env_arr = 0;

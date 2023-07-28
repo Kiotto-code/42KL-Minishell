@@ -28,7 +28,7 @@ $(NAME):	$(OBJS)
 			$(AR) $(ARFLAGS) $@ $^
 
 $(OBJ_PATH)/%.o:	$(SRC_PATH)/*/%.c* ./Makefile | $(OBJ_PATH)
-					$(CC) $(CFLAGS) -I$(INCLUDES) -c $< -o $@
+					$(CC) -I$(INCLUDES) -c $< -o $@
 
 $(OBJ_PATH):
 				mkdir -p $(OBJ_PATH)

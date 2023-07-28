@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:23:47 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/27 13:25:45 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/28 00:30:15 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,15 +90,16 @@ t_env	*newenvlist(char *content)
 	node = ft_calloc(sizeof(t_env));
 	if (!node)
 		return (0);
-	node->var = content;
+	node->var = ft_strdup(content);
 	if (ft_strchr(content, '=') == NULL)
 	{
 		node->value = 0;
 		node->key = ft_strdup(content);
+		node->var = ft_strdup(content);
 		return (node);
 	}
 	node->value = get_env_val(content);
 	node->key = ft_substr(content, 0, \
-			ft_strlen(content) - ft_strlen(content) - 1);
+			ft_strlen(content) - ft_strlen(node->value) - 1);
 	return (node);
 }

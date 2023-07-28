@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: yichan <yichan@student.42.fr>              +#+  +:+       +#+         #
+#    By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/05 18:29:34 by yichan            #+#    #+#              #
-#    Updated: 2023/07/24 11:34:57 by yichan           ###   ########.fr        #
+#    Updated: 2023/07/27 22:55:07 by etlaw            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ CC      	=   cc
 RM      	=   rm -rf
 CFLAGS  	=   -Wall -Werror -Wextra -g
 CFLAGS		+=	-I/usr/local/opt/readline/include
-# CSAN  		= 	-fsanitize=address -g3
+CSAN  		= 	-fsanitize=address -g3
 READLINE	=	-lreadline
 READLINE	+=	-lncurses -L/usr/local/opt/readline/lib
 INCLUDES    =	./includes
@@ -52,7 +52,7 @@ $(NAME)			:	$(OBJS)
 
 
 $(OBJ_PATH)/%.o	:	$(SRC_PATH)/%.c* ./includes/*.h ./Makefile | $(OBJ_PATH) 
-					$(CC) $(CFLAGS) -c -I$(INCLUDES) $< -o $@
+					$(CC) $(CFLAGS) $(CSAN) -c -I$(INCLUDES) $< -o $@
 
 # $(OBJ_PATH)/%.o	:	$(SRC_PATH)/%.c* ./includes/*.h ./Makefile | $(OBJ_PATH) 
 # 					$(CC) $(CFLAGS) -c -I$(INCLUDES) $< -o $@
