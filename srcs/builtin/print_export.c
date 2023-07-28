@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:53:04 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/27 12:27:36 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/28 18:27:07 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,19 +106,35 @@ void	sort_env(char **env)
 
 // prints out the export env
 
+// void	print_export_env(t_env **env)
+// {
+// 	int		i;
+// 	char	**res_env;
+
+// 	res_env = env_to_array(*env);
+// 	sort_env(res_env);
+// 	i = 0;
+// 	while (res_env[i])
+// 	{
+// 		ft_putstr_fd("declare -x ", 1);
+// 		ft_putendl_fd(res_env[i], 1);
+// 		i++;
+// 	}
+// 	free_2arr(res_env);
+// }
+
 void	print_export_env(t_env **env)
 {
-	int		i;
-	char	**res_env;
+	t_env	*tmp;
 
-	res_env = env_to_array(*env);
-	sort_env(res_env);
-	i = 0;
-	while (res_env[i])
+	tmp = *env;
+	while (tmp)
 	{
 		ft_putstr_fd("declare -x ", 1);
-		ft_putendl_fd(res_env[i], 1);
-		i++;
+		if (ft_strchr(tmp->var, '='))
+			printf("%s=\"%s\"\n", tmp->key, tmp->value);
+		else
+			printf("%s\n", tmp->key);
+		tmp = tmp->next;
 	}
-	free_2arr(res_env);
 }
