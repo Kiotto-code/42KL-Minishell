@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:21:34 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/31 18:02:14 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 18:50:28 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,9 +35,9 @@ static void	update_pwd(t_env **env, char *path)
 		{
 			free((*env)->value);
 			free((*env)->var);
-			(*env)->value = ft_strdup(oldpwd);
+			// (*env)->value = ft_strdup(oldpwd);
+			(*env)->value = oldpwd;
 			(*env)->var = ft_strjoin_con((*env)->key, "=", (*env)->value);
-			free(oldpwd);
 		}
 		*env = (*env)->next;
 	}
@@ -58,26 +58,20 @@ int	ms_cd(t_env **env, t_env **export, char *path)
 		path = check_envvar(*env, "OLDPWD");
 		if (*path == 0)
 		{
-			ft_putstr_fd("minishell: ", 2);
-			ft_putstr_fd("cd", 2);
-			ft_putstr_fd(": OLDPWD not set\n", 2);
-			g_exit_status = 127;
-			return (g_exit_status);
+			ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
+			return (1);
 		}
 		printf("%s\n", path);
 	}
 	ret = chdir(path);
 	if (ret == 0)
 	{
-		update_lst(env, "OLDPWD");
-		update_lst(export, "OLDPWD");
-		// update_lst
-		// update_lst
-		// ms_export(env, export, {"export", "OLDPWD"});
+		// update_lst(env, "OLDPWD");
+		// update_lst(export, "OLDPWD");
 		update_pwd(env, path);
 		update_pwd(export, path);
 		return (0);
 	}
-	ft_errormessage(path, 2);
-	return (1);
+	// ft_errormessage(path, 2);
+	return (ft_errormessage(path, 2), 1);
 }
