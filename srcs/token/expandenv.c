@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:34:24 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/29 05:41:02 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void	check_dollar(t_book *record, char **str, int i)
 	// pause();
 	// if (ft_strcmp(mainkey, "$") == 0)
 	// {
-	// 	free(*str);
+	// 	ft_free(*str);
 	// 	*str = ft_strdup("$");
 	// 	return ;
 	// }

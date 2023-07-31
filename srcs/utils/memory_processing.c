@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:30:19 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 23:38:57 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,10 +46,10 @@ void	cleaner(t_book *mini)
 // 	it = 0;
 // 	while (array[it])
 // 	{
-// 		free(array[it]);
+// 		ft_free(array[it]);
 // 		array[it] = NULL;
 // 		it++;
 // 	}
-// 	free(array);
+// 	ft_free(array);
 // 	array = NULL;
 // }

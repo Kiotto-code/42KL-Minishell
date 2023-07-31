@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:23:10 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 03:58:59 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,12 @@
 // 	tmp_1 = ft_substr(input, 0, begin);
 // 	tmp_2 = ft_substr(input, begin + 1, end - begin - 1);
 // 	tmp_3 = ft_strdup(input + end);
-// 	free(input);
+// 	ft_free(input);
 // 	input = NULL;
 // 	input = ft_strjoin_con(tmp_1, tmp_2, tmp_3);
-// 	free(tmp_1);
-// 	free(tmp_2);
-// 	free(tmp_3);
+// 	ft_free(tmp_1);
+// 	ft_free(tmp_2);
+// 	ft_free(tmp_3);
 // 	return (input);
 // }
 

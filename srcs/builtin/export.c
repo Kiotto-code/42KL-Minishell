@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:03:30 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/31 20:46:24 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 21:04:02 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	change_value(t_env *env, char *tkn)
 	int		j;
 
 	i = 0;
-	// free(env->value);
+	ft_free(env->value);
 	while (tkn[i] && tkn[i] != '=')
 	{
 		i++;
@@ -46,7 +46,7 @@ void	change_value(t_env *env, char *tkn)
 	}
 	env->value = ft_substr(tkn, i + 1, j - i);
 	// if (env && env->var)
-	// 	free(env->var);
+	// 	ft_free(env->var);
 	env->var = ft_strdup(tkn);
 }
 
@@ -77,7 +77,7 @@ int	update_lst(t_env **lst, char *tkn)
 		tmp = tmp->next;
 	}
 	ms_envladd_back(lst, (newenvlist(tkn)));
-	free(var_name);
+	ft_free(var_name);
 	return (0);
 }
 

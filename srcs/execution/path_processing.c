@@ -58,7 +58,7 @@ char	*cmd_path_get(t_book *mini, char *line)
 			array_liberator(paths);
 			return (path);
 		}
-		free(path);
+		ft_free(path);
 		it++;
 	}
 	array_liberator(paths);
@@ -85,7 +85,7 @@ char	*cmd_path_get(t_book *mini, char *line)
 // 			array_liberator(paths);
 // 			return (path);
 // 		}
-// 		free(path);
+// 		ft_free(path);
 // 		it++;
 // 	}
 // 	array_liberator(paths);

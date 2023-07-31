@@ -19,11 +19,11 @@
 
 // 	tmp_1 = ft_substr(input, 0, *it);
 // 	tmp_2 = ft_strdup(input + *it + 1);
-// 	free(input);
+// 	ft_free(input);
 // 	input = NULL;
 // 	input = ft_strjoin(tmp_1, tmp_2);
-// 	free(tmp_1);
-// 	free(tmp_2);
+// 	ft_free(tmp_1);
+// 	ft_free(tmp_2);
 // 	(*it)++;
 // 	return (input);
 // }
@@ -60,7 +60,7 @@ char	*ms_quotetrim(char *input)
 		else if (input[i] && !ft_strchr("\'\"", input[i]))
 			ret[j++] = input[i++];
 	}
-	free(input);
+	ft_free(input);
 	return (ret);
 }
 
@@ -93,6 +93,6 @@ char	*ms_quotetrim(char *input)
 // 		else if (input[i] && !ft_strchr("\'\"", input[i]))
 // 			ret[j++] = input[i++];
 // 	}
-// 	free(input);
+// 	ft_free(input);
 // 	return (ret);
 // }

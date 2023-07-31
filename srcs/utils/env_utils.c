@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:29:45 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/31 17:52:40 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@
 // {
 // 	if (!lst)
 // 		return ;
-// 	free(lst->var);
+// 	ft_free(lst->var);
 // 	lst->var = NULL;
-// 	free(lst->key);
+// 	ft_free(lst->key);
 // 	lst->key = NULL;
-// 	free(lst->value);
+// 	ft_free(lst->value);
 // 	lst->value = NULL;
-// 	free(lst);
+// 	ft_free(lst);
 // 	lst = NULL;
 // }
 
@@ -89,10 +89,10 @@ void	chg_shlvl(t_env *env, char *key, char *value)
 		if (!ft_strcmp(env->key, key))
 		{
 			if (env->var)
-				free(env->var);
+				ft_free(env->var);
 			env->var = ft_strjoin_con(key, "=", value);
 			if (env->value)
-				free(env->value);
+				ft_free(env->value);
 			env->value = ft_strdup(value);
 			return ;
 		}

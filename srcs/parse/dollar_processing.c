@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:23:00 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/27 12:42:45 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,16 +46,16 @@
 // 	tmp_1 = ft_substr(input, 0, begin);
 // 	tmp_3 = ft_strdup(input + end);
 // 	tmp_2 = ft_strdup(check_envvar(env, key));
-// 	free(input);
+// 	ft_free(input);
 // 	input = NULL;
 // 	if (tmp_2 == NULL)
 // 		input = ft_strjoin(tmp_1, tmp_3);
 // 	else
 // 		input = ft_strjoin_con(tmp_1, tmp_2, tmp_3);
-// 	free(key);
-// 	free(tmp_1);
-// 	free(tmp_2);
-// 	free(tmp_3);
+// 	ft_free(key);
+// 	ft_free(tmp_1);
+// 	ft_free(tmp_2);
+// 	ft_free(tmp_3);
 // 	expnd_cmd_symbol_check(input);
 // 	return (input);
 // }
@@ -81,11 +81,11 @@
 // 	tmp_2 = ft_strjoin(tmp_1, nbr_val);
 // 	tail = ft_strdup(&input[*it]);
 // 	line_new = ft_strjoin(tmp_2, tail);
-// 	free(nbr_val);
-// 	free(tmp_1);
-// 	free(tmp_2);
-// 	free(tail);
-// 	free(input);
+// 	ft_free(nbr_val);
+// 	ft_free(tmp_1);
+// 	ft_free(tmp_2);
+// 	ft_free(tail);
+// 	ft_free(input);
 // 	g_exit_status = 0;
 // 	return (line_new);
 // }

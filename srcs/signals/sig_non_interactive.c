@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 15:58:54 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 09:41:24 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	sig_non_interactive_quit(int sig)
 	ft_putstr_fd("Quit: \n", STDERR_FILENO);
 	nbr = ft_itoa(sig);
 	ft_putendl_fd(nbr, STDERR_FILENO);
-	free(nbr);
+	ft_free(nbr);
 	g_exit_status = 131;
 }
 

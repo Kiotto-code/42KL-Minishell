@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:29:29 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 02:38:45 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // 	element->entity = ft_strdup(arg_str);
 // 	element->redirect = 0;
 // 	element->next = NULL;
-// 	free(arg_str);
+// 	ft_free(arg_str);
 // 	return (element);
 // }
 
@@ -57,9 +57,9 @@ void	args_lstdelnode(t_token **args)
 	if (!args || !(*args))
 		return ;
 	next = (*args)->next;
-	free((*args)->entity);
+	ft_free((*args)->entity);
 	(*args)->entity = NULL;
-	free((*args));
+	ft_free((*args));
 	*args = next;
 }
 
@@ -72,9 +72,9 @@ void	args_lstdelone(t_token *lst)
 {
 	if (!lst)
 		return ;
-	free(lst->entity);
+	ft_free(lst->entity);
 	lst->entity = NULL;
-	free(lst);
+	ft_free(lst);
 	lst = NULL;
 }
 

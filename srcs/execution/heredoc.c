@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:12:59 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/29 03:53:49 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	execute_heredoc(t_book *record, t_cmdl *cmd, char *stop, t_env *env)
 			break ;
 		here_xpnd(record, &input);
 		ft_putendl_fd(input, cmd->out);
-		free(input);
+		ft_free(input);
 	}
 	close(cmd->out);
 	exit(g_exit_status);

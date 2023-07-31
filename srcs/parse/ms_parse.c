@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:11:18 by yichan            #+#    #+#             */
-/*   Updated: 2023/06/16 19:31:13 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,6 @@
 // 		mini->args = arguments_processing(mini);
 // 		mini->cmds = commands_processing(mini);
 // 	}
-// 	free(mini->input);
+// 	ft_free(mini->input);
 // 	mini->input = NULL;
 // }

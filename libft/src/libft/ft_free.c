@@ -1,32 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   env.c                                              :+:      :+:    :+:   */
+/*   ft_free.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/03/12 20:29:21 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/31 21:28:01 by yichan           ###   ########.fr       */
+/*   Created: 2023/07/31 20:58:55 by yichan            #+#    #+#             */
+/*   Updated: 2023/07/31 21:01:15 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft.h"
 
-// env function
-int	ms_env(t_env *env)
+int	ft_free(void *memory)
 {
-	if (*check_envvar(env, "PATH") == 0)
-	{
-		ft_putstr_fd("minishell: ", 2);
-		ft_putstr_fd("env", 2);
-		ft_putstr_fd(": No such file or directory\n", 2);
-		g_exit_status = 127;
-		return (g_exit_status);
-	}
-	while (env)
-	{
-		printf("%s\n", env->var);
-		env = env->next;
-	}
+	if (!memory)
+		return (1);
+	free(memory);
+	memory = NULL;
 	return (0);
 }

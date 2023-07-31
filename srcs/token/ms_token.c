@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:19:09 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/29 03:55:50 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -133,7 +133,7 @@ void	ms_quotesplit(t_book *record)
 		}
 		ms_tokenrec(av, &start, &end, record);
 	}
-	free(av);
+	ft_free(av);
 }
 
 /**
@@ -150,7 +150,7 @@ void	ms_token(t_book *record)
 	set_redirect(record->args);
 	if (record->args == NULL)
 	{
-		free(record->input);
+		ft_free(record->input);
 		record->input = NULL;
 	}
 }

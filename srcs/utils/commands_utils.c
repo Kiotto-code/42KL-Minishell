@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:29:38 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 03:51:43 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,11 +31,11 @@ void	redir_lstdelone(t_redir *lst)
 {
 	if (!lst)
 		return ;
-	free(lst->type);
+	ft_free(lst->type);
 	lst->type = NULL;
-	free(lst->name);
+	ft_free(lst->name);
 	lst->name = NULL;
-	free(lst);
+	ft_free(lst);
 	lst = NULL;
 }
 
@@ -66,15 +66,15 @@ void	cmds_lstdelone(t_cmdl *lst)
 	{
 		if (lst->command == NULL)
 			break ;
-		free(lst->command[it]);
+		ft_free(lst->command[it]);
 		lst->command[it] = NULL;
 		it++;
 	}
-	free(lst->command);
+	ft_free(lst->command);
 	lst->command = NULL;
 	tmp = (t_redir *) lst->redir;
 	redir_destroy(&tmp);
-	free(lst);
+	ft_free(lst);
 	lst = NULL;
 }
 

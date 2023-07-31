@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:54:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/31 17:17:02 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ void	executing(t_book *record, t_cmdl *cmds)
 		// 	errno = 13;
 		if (cmds->command[0])
 			no_such_file_or_dir(cmds->command[0]);
-		free(file);
+		ft_free(file);
 		array_liberator(env_arr);
 		if (errno == 21 || errno == 13)
 			exit(126);

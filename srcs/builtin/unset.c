@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:50:29 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/31 17:50:42 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,17 @@ static void	free_node(t_env *lst)
 	tmp = 0;
 	if (lst->next)
 		tmp = lst->next->next;
-	free(lst->next->var);
-	free(lst->next->key);
-	free(lst->next->value);
-	free(lst->next);
+	ft_free(lst->next->var);
+	ft_free(lst->next->key);
+	ft_free(lst->next->value);
+	ft_free(lst->next);
 	lst->next = tmp;
 }
 
 /* 
 	loops through the list and compares the values with the str
 
-	if found, it will free the node
+	if found, it will ft_free the node
 */
 static void	remove_node(t_env **envr, t_env **export, char *str)
 {
