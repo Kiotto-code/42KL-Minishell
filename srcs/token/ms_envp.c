@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:40:48 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/29 06:12:03 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 18:00:02 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ int	env_rec(t_env **lst, char **arr)
  */
 void	record_init(t_book *record, char **envp)
 {
+	char *unset[2] = {"unset", "OLDPWD"};
+	
 	record->env = 0;
 	record->export = 0;
 	record->cmds = 0;
@@ -85,10 +87,11 @@ void	record_init(t_book *record, char **envp)
 	record->anchor = NEUTRAL;
 	ft_arr2envl(&(record->env), envp);
 	env_rec(&(record->env), envp);
-	ft_strswitch(&ms_getenv_vkey(record->env, "OLDPWD")->value,
-		ft_strdup("OLDPWD not set"));
+	// ft_strswitch(&ms_getenv_vkey(record->env, "OLDPWD")->value,
+	// 	ft_strdup("OLDPWD not set"));
 	ft_arr2envl(&(record->export), envp);
 	env_rec(&(record->export), envp);
-	ft_strswitch(&ms_getenv_vkey(record->export, "OLDPWD")->value,
-		ft_strdup("OLDPWD not set"));
+	// ft_strswitch(&ms_getenv_vkey(record->export, "OLDPWD")->value,
+	// 	ft_strdup("OLDPWD not set"));
+	ms_unset(&record->env, &record->export, unset);
 }

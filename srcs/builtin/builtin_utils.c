@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:23:47 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/29 05:55:07 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 17:49:21 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	ft_errormessage(char *str, int format)
 	{
 		ft_putstr_fd("bash: cd: ", 2);
 		ft_putstr_fd(str, 2);
-		if (ft_strcmp(str, "OLDPWD not set") != 0)
+		if (str)
 			ft_putstr_fd(": No such file or directory", 2);
 		ft_putstr_fd("\n", 2);
 	}

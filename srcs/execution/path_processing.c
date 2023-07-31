@@ -32,7 +32,7 @@ char	**get_paths(t_book *mini)
 	char	**paths;
 
 	path_value = check_envvar(mini->env, "PATH");
-	if (!path_value)
+	if (!path_value || ft_strcmp(path_value, "") == 0)
 		return (NULL);
 	paths = ft_split(path_value, ':');
 	return (paths);

@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:54:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/29 04:04:32 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 17:17:02 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,8 @@ void	executing(t_book *record, t_cmdl *cmds)
 		signal(SIGQUIT, sig_non_interactive_quit);
 		// if (access(cmds->command[0], F_OK|X_OK) != 0)
 		// 	path_execve(record, cmds, file, env_arr);
-		path_execve(record, cmds, file, env_arr);
+		if (file)
+			path_execve(record, cmds, file, env_arr);
 		// err = errno;
 		if (access(cmds->command[0], F_OK|X_OK) == 0)
 			errno = 21;

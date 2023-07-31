@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:29:45 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/29 03:24:37 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 17:52:40 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ char	*check_envvar(t_env *env, char *key)
 		env = env->next;
 	}
 	return ("");
+	// return (ft_strdup(""));
+	// return (NULL);
 }
 
 void	chg_shlvl(t_env *env, char *key, char *value)
