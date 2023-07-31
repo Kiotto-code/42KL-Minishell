@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:03:30 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/28 18:31:16 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/07/31 20:46:24 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	change_value(t_env *env, char *tkn)
 	int		j;
 
 	i = 0;
-	free(env->value);
+	// free(env->value);
 	while (tkn[i] && tkn[i] != '=')
 	{
 		i++;

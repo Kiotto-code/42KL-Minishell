@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:21:34 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/31 18:50:28 by yichan           ###   ########.fr       */
+/*   Updated: 2023/07/31 20:49:14 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,8 +66,10 @@ int	ms_cd(t_env **env, t_env **export, char *path)
 	ret = chdir(path);
 	if (ret == 0)
 	{
-		// update_lst(env, "OLDPWD");
-		// update_lst(export, "OLDPWD");
+		update_lst(env, "PWD");
+		update_lst(export, "PWD");
+		update_lst(env, "OLDPWD");
+		update_lst(export, "OLDPWD");
 		update_pwd(env, path);
 		update_pwd(export, path);
 		return (0);
