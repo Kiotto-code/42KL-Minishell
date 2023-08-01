@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:12:59 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/01 18:22:57 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,7 @@ int	heredoc_checking(t_cmdl *cmd)
 	return (0);
 }
 
+//not other cmd block
 bool	pre_execv(t_book *record, t_cmdl *cmds)
 {
 	if (!cmds->next && builtin_checker(cmds->command[0]) && !cmds->redir)

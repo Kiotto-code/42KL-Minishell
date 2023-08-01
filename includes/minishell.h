@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/29 06:10:52 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/01 18:41:40 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ typedef struct s_env
 	struct s_env	*next;
 }	t_env;
 
-//argl
+//argl //set_redirect
 typedef struct s_token
 {
 	char			*entity;
