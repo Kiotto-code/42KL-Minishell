@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_main.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:16:14 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/04 02:30:34 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int ac, char **av, char **env)
 
 	(void) ac;
 	(void) av;
-	g_exit_status = 1;
+	g_exit_status = 0;
 	if (ac != 1)
 	{
 		ft_putstr_fd("Minishell Initiate cannot have argument \n", 1);

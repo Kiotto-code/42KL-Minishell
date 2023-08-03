@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:54:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/01 18:18:34 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/04 01:54:47 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,8 @@ void	executing(t_book *record, t_cmdl *cmds)
 		signal(SIGQUIT, sig_non_interactive_quit);
 		// if (access(cmds->command[0], F_OK|X_OK) != 0)
 		// 	path_execve(record, cmds, file, env_arr);
-		if (file)
-			path_execve(record, cmds, file, env_arr);
+		// if (file)
+		path_execve(record, cmds, file, env_arr);
 		// err = errno;
 		if (access(cmds->command[0], F_OK|X_OK) == 0)
 			errno = 21;

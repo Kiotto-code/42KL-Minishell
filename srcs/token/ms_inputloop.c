@@ -3,14 +3,25 @@
 /*                                                        :::      ::::::::   */
 /*   ms_inputloop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:03:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/04 02:38:50 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	ms_history(t_book *record)
+{
+	if (*record->input)
+	{
+		add_history(record->input);
+		ft_strcpy(record->history, record->input);
+		return (1);
+	}
+	return (0);
+}
 
 int	ms_inputloop(t_book *record)
 {

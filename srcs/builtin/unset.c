@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:50:29 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/04 01:37:18 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,21 +62,27 @@ static void	remove_node(t_env **envr, t_env **export, char *str)
 // unset function
 int	ms_unset(t_env **env, t_env **export, char **tkn)
 {
+	int	i;
 	int	res;
 
-	if (!tkn[1])
-		return (0);
-	res = is_iden(tkn[1], 3);
-	if (res == 1)
-		return (1);
-	else if (res == 2)
+	i = 0;
+	while (tkn[i])
 	{
-		ft_errormessage(tkn[1], 3);
-		return (1);
-	}
-	else if (res == 3)
-	{
-		remove_node(env, export, tkn[1]);
+		if (!tkn[i])
+			return (0);
+		res = is_iden(tkn[i], 3);
+		if (res == 1)
+			return (1);
+		else if (res == 2)
+		{
+			ft_errormessage(tkn[i], 3);
+			return (1);
+		}
+		else if (res == 3)
+		{
+			remove_node(env, export, tkn[i]);
+		}
+		i++;
 	}
 	return (0);
 }

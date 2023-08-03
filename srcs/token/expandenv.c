@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expandenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:34:24 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/04 02:47:17 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,13 +73,14 @@ char	*expandenv(t_book *record, char **str)
 		if (av[i] == '$' && status != SQUOTE && av[i+1] != ' ')
 		{
 			check_dollar(record, str, i);
-			// printf("check: str: |%s|\n", *str);
-			// pause();
-			// if (ft_strcmp(*str, "$ ") != 0)
 			expandenv(record, str);
-			// expandenv(record, str);
 			break ;
 		}
+		// if (av[i] == '!' && status != SQUOTE && av[i+1] != ' ')
+		// {
+		// 	check_xclm(record, str, i);
+		// 	break ;
+		// }
 	}
 	return (*str);
 }
