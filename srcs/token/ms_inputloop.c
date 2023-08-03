@@ -3,14 +3,44 @@
 /*                                                        :::      ::::::::   */
 /*   ms_inputloop.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:03:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/04 02:38:50 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/04 03:34:59 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	check_xclm(t_book *record, char **str)
+{
+	char	*av;
+	int		status;
+	char	*mainkey;
+	int		i;
+	// int		attack;
+
+	av = ft_strdup(*str);
+	i = -1;
+	status = NEUTRAL;
+	while (av[++i])
+	{
+		if (av[i] == '\'' && status != DQUOTE)
+			status ^= SQUOTE;
+		if (av[i] == '\"' && status != SQUOTE)
+			status ^= DQUOTE;
+		if (av[i] == '!' && status != SQUOTE && av[i+1] != ' ')
+		{
+			mainkey = ft_substr(*str, i, 2);
+			if (mainkey[1] == '!')
+				ft_replace(str, mainkey, record->history, i);
+			check_xclm(record, str);
+			break ;
+		}
+	}
+	printf("%s\n", *str);
+	ft_free(av);
+}
 
 int	ms_history(t_book *record)
 {
@@ -31,8 +61,10 @@ int	ms_inputloop(t_book *record)
 		record->input = readline("minishell>$ ");
 		if (record->input == NULL)
 			exit(g_exit_status);
-		if (*record->input)
-			add_history(record->input);
+		// if (*record->input)
+		// 	add_history(record->input);
+		check_xclm(record, &record->input);
+		ms_history(record);
 		if (validator(record->input) == 0)
 		{
 			ms_token(record);

@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/24 21:50:01 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/31 21:26:22 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/04 03:35:28 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,13 +30,13 @@
 // 	third = ft_substr(str, ft_strlen(old)+i, \
 // 		ft_strlen(str) - i - ft_strlen(old));
 // 	temp = ft_strjoin(first, new);
-// 	free(*s);
+// 	ft_free(*s);
 // 	*s = ft_strjoin(temp, third);
-// 	free(temp);
-// 	free(third);
+// 	ft_free(temp);
+// 	ft_free(third);
 // }
 
-void	ft_replace(char **s, const char *old, const char *new)
+void	ft_replace(char **s, const char *old, const char *new, int start)
 {
 	int		i;
 	char	*str;
@@ -44,9 +44,9 @@ void	ft_replace(char **s, const char *old, const char *new)
 	char	*first;
 	char	*third;
 
-	if (old == NULL || new == NULL || s == NULL)
+	if (old == NULL || new == NULL || s == NULL || ft_strlen(*s) < (size_t)start)
 		return ;
-	i = 0;
+	i = start;
 	str = *s;
 	while (str[i] && !ft_strlead(str + i, old))
 		i++;
@@ -54,8 +54,8 @@ void	ft_replace(char **s, const char *old, const char *new)
 	third = ft_substr(str, ft_strlen(old)+i, \
 		ft_strlen(str) - i - ft_strlen(old));
 	temp = ft_strjoin(first, new);
-	free(*s);
+	ft_free(*s);
 	*s = ft_strjoin(temp, third);
-	free(temp);
-	free(third);
+	ft_free(temp);
+	ft_free(third);
 }

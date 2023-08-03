@@ -3,14 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   expandenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:34:24 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/04 02:47:17 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/04 03:34:26 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// void	check_xclm(t_book *record, char **str, int i)
+// {
+// 	char	*mainkey;
+
+// 	mainkey = ft_substr(*str, i, 2);
+// 	if (mainkey[1] == '!')
+// 		ft_replace(str, mainkey, record->history);
+// }
 
 void	check_dollar(t_book *record, char **str, int i)
 {
@@ -51,7 +60,7 @@ void	check_dollar(t_book *record, char **str, int i)
 	// 	*str = ft_strdup("$");
 	// 	return ;
 	// }
-	ft_replace(str, mainkey, newval);
+	ft_replace(str, mainkey, newval, start);
 	// printf("check: %s\n", str[0]);
 }
 
