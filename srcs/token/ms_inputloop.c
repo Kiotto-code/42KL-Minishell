@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:03:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/04 03:34:59 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/04 19:07:24 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,9 @@ void	check_xclm(t_book *record, char **str)
 	int		status;
 	char	*mainkey;
 	int		i;
-	// int		attack;
+	int		print;
 
+	print = 0;
 	av = ft_strdup(*str);
 	i = -1;
 	status = NEUTRAL;
@@ -35,10 +36,15 @@ void	check_xclm(t_book *record, char **str)
 			if (mainkey[1] == '!')
 				ft_replace(str, mainkey, record->history, i);
 			check_xclm(record, str);
+			print = 1;
 			break ;
 		}
 	}
-	printf("%s\n", *str);
+	if(print == 1)
+	{
+		printf("%s\n", *str);
+		print = 0;
+	}
 	ft_free(av);
 }
 
