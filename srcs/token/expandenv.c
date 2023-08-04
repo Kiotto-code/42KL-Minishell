@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:34:24 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/04 03:34:26 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/04 22:10:36 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,6 @@ void	check_dollar(t_book *record, char **str, int i)
 	char	*newval;
 
 	start = i;
-	// if (ft_isdigit(str[0][i+1]) || str[0][i+1] == '?')
-	// 	i += 2;
 	if (ft_isalpha(str[0][i +1]) == 0)
 		i += 2;
 	else
@@ -49,19 +47,7 @@ void	check_dollar(t_book *record, char **str, int i)
 		newval = ft_strdup("himBH");
 	else
 		newval = ft_strdup(check_envvar(record->env, mainkey +1));
-	// printf("check: str: |%s|\n", *str);
-	// printf("check: mainkey: |%s|\n", mainkey);
-	// printf("check: newval: |%s|\n", newval);
-	
-	// pause();
-	// if (ft_strcmp(mainkey, "$") == 0)
-	// {
-	// 	ft_free(*str);
-	// 	*str = ft_strdup("$");
-	// 	return ;
-	// }
 	ft_replace(str, mainkey, newval, start);
-	// printf("check: %s\n", str[0]);
 }
 
 char	*expandenv(t_book *record, char **str)
@@ -85,11 +71,6 @@ char	*expandenv(t_book *record, char **str)
 			expandenv(record, str);
 			break ;
 		}
-		// if (av[i] == '!' && status != SQUOTE && av[i+1] != ' ')
-		// {
-		// 	check_xclm(record, str, i);
-		// 	break ;
-		// }
 	}
 	return (*str);
 }

@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:03:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/04 19:07:24 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/04 22:06:45 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ int	ms_inputloop(t_book *record)
 		record->input = readline("minishell>$ ");
 		if (record->input == NULL)
 			exit(g_exit_status);
-		// if (*record->input)
-		// 	add_history(record->input);
 		check_xclm(record, &record->input);
 		ms_history(record);
 		if (validator(record->input) == 0)
@@ -84,7 +82,6 @@ int	ms_inputloop(t_book *record)
 		ft_free(record->input);
 		record->input = 0;
 		cleaner(record);
-		rl_replace_line("", 0);
 	}
 	cleaner(record);
 	return (0);
