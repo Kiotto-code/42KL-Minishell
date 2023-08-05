@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/05 16:34:11 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/05 16:40:45 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@
 # include <unistd.h>
 # include <curses.h>
 # include <term.h>
+# include <string.h>
 
 # define DEFAULT	"\033[0m"
 # define CYAN		"\033[0;36m"
