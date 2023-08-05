@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:03:30 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/31 21:04:02 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/05 18:17:51 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,6 @@ void	change_value(t_env *env, char *tkn)
 		j++;
 	}
 	env->value = ft_substr(tkn, i + 1, j - i);
-	// if (env && env->var)
-	// 	ft_free(env->var);
 	env->var = ft_strdup(tkn);
 }
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 23:45:27 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/28 21:16:35 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/05 18:16:28 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,12 @@
 int	exit_error(t_book *mini, char *argv1, char *str)
 {
 	ft_putstr_fd("minishell: exit: ", STDERR_FILENO);
-	// ft_putstr_fd("exit: ", STDERR_FILENO);
 	if (argv1 != NULL)
 	{
 		ft_putstr_fd(argv1, STDERR_FILENO);
 		ft_putstr_fd(": ", STDERR_FILENO);
 	}
 	ft_putendl_fd(str, STDERR_FILENO);
-	// ft_putstr_fd("\n", STDERR_FILENO);
 	if (argv1 != NULL)
 	{
 		shlvl_down(mini);

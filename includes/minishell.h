@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/05 16:40:45 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/05 18:15:15 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -255,6 +255,9 @@ int		ms_unset(t_env **env, t_env **export, char **tkn);
 
 // cd.c
 int		ms_cd(t_env **env, t_env **export, char *path);
+
+// cd_utils.c
+char	*go_root(t_env *env);
 
 //exit.c
 int	ms_exit(t_book *mini, char **argv);

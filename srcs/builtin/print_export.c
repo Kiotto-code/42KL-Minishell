@@ -3,14 +3,71 @@
 /*                                                        :::      ::::::::   */
 /*   print_export.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/25 17:53:04 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/29 06:08:44 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/05 17:57:49 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+// sorts the env by ascii order
+
+void	sort_env(char **env)
+{
+	int		sorted;
+	int		i;
+	char	*tmp;
+	int		env_len;
+
+	env_len = ft_arrlen(env);
+	sorted = 0;
+	while (env && sorted == 0)
+	{
+		sorted = 1;
+		i = 0;
+		while (i < env_len - 1)
+		{
+			if (ft_strcmp(env[i], env[i + 1]) > 0)
+			{
+				tmp = env[i];
+				env[i] = env[i + 1];
+				env[i + 1] = tmp;
+				sorted = 0;
+			}
+			i++;
+		}
+	}
+}
+
+// prints out the export env
+
+void	print_export_env(t_env **env)
+{
+	int		i;
+	char	**res_env;
+	t_env	*tmp;
+
+	res_env = env_to_array(*env);
+	sort_env(res_env);
+	i = 0;
+	while (res_env[i])
+	{
+		tmp = ms_getenv_vvar(*env, res_env[i]);
+		ft_putstr_fd("declare -x ", 1);
+		if (ft_strchr(tmp->var, '='))
+			printf("%s=\"%s\"\n", tmp->key, tmp->value);
+		else
+			printf("%s\n", tmp->key);
+		i++;
+	}
+	free_2arr(res_env);
+}
+
+/*
+ useless but helpful functions
+*/
 
 // counts the length of the double array
 
@@ -73,74 +130,4 @@
 // 	}
 // 	res[i] = '\0';
 // 	return (env);
-// }
-
-// sorts the env by ascii order
-
-void	sort_env(char **env)
-{
-	int		sorted;
-	int		i;
-	char	*tmp;
-	int		env_len;
-
-	env_len = ft_arrlen(env);
-	sorted = 0;
-	while (env && sorted == 0)
-	{
-		sorted = 1;
-		i = 0;
-		while (i < env_len - 1)
-		{
-			if (ft_strcmp(env[i], env[i + 1]) > 0)
-			{
-				tmp = env[i];
-				env[i] = env[i + 1];
-				env[i + 1] = tmp;
-				sorted = 0;
-			}
-			i++;
-		}
-	}
-}
-
-// prints out the export env
-
-void	print_export_env(t_env **env)
-{
-	int		i;
-	char	**res_env;
-	t_env	*tmp;
-
-	res_env = env_to_array(*env);
-	sort_env(res_env);
-	i = 0;
-	while (res_env[i])
-	{
-		tmp = ms_getenv_vvar(*env, res_env[i]);
-		ft_putstr_fd("declare -x ", 1);
-		if (ft_strchr(tmp->var, '='))
-			printf("%s=\"%s\"\n", tmp->key, tmp->value);
-		else
-			printf("%s\n", tmp->key);
-		i++;
-	}
-	free_2arr(res_env);
-}
-
-// void	print_export_env(t_env **env)
-// {
-// 	t_env	*tmp;
-
-// 	tmp = *env;
-// 	sort_env(env);
-// 	while (tmp)
-// 	{
-// 		ft_putstr_fd("declare -x ", 1);
-// 		if (ft_strchr(tmp->var, '='))
-// 			printf("%s=\"%s\"\n", tmp->key, tmp->value);
-// 		else
-// 			printf("%s\n", tmp->key);
-// 		tmp = tmp->next;
-// 	}
 // }

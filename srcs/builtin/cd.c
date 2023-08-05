@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:21:34 by etlaw             #+#    #+#             */
-/*   Updated: 2023/08/05 16:29:51 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/05 18:14:33 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,9 @@ static void	update_cd(t_env **env, t_env **export, char *path)
 	update_pwd(export, path);
 }
 
-// cd function
-int	ms_cd(t_env **env, t_env **export, char *path)
+// checks if path is "-"
+static char	*prev_dir(t_env *env, char *path)
 {
-	int		ret;
 	char	tmp[100];
 
 	if (path == NULL)
@@ -71,13 +70,30 @@ int	ms_cd(t_env **env, t_env **export, char *path)
 	ft_strlcpy(tmp, path, ft_strlen(path) +1);
 	if (ft_strcmp(tmp, "-") == 0)
 	{
-		path = check_envvar(*env, "OLDPWD");
+		path = check_envvar(env, "OLDPWD");
 		if (*path == 0)
 		{
 			ft_putstr_fd("minishell: cd: OLDPWD not set\n", 2);
-			return (1);
+			return (0);
 		}
 		printf("%s\n", path);
+	}
+	return (path);
+}
+
+// cd function
+int	ms_cd(t_env **env, t_env **export, char *path)
+{
+	int		ret;
+
+	path = prev_dir(*env, path);
+	if (path == NULL)
+		return (0);
+	if (ft_strcmp(path, "~") == 0)
+	{
+		path = go_root(*env);
+		if (path == NULL)
+			return (0);
 	}
 	ret = chdir(path);
 	if (ret == 0)
