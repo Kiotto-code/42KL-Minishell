@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   sig_interactive.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/05 23:30:47 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/04 02:07:22 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/06 00:22:50 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,12 +60,12 @@ void	sig_interrupt_here(int sig)
 // 	signal(SIGTERM, SIG_IGN);
 // }
 
-void	sig_ignore(void)
-{
-	signal(SIGINT, SIG_IGN);
-	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTERM, SIG_IGN);
-}
+// void	sig_ignore(void)
+// {
+// 	signal(SIGINT, SIG_IGN);
+// 	signal(SIGQUIT, SIG_IGN);
+// 	signal(SIGTERM, SIG_IGN);
+// }
 
 void	sigs_interactive_shell(struct termios *termios_current)
 {
@@ -82,7 +82,7 @@ void	sigs_interactive_shell(struct termios *termios_current)
 	}
 	signal(SIGINT, &sig_interrupt);
 	signal(SIGQUIT, SIG_IGN);
-	signal(SIGTERM, SIG_IGN);
+	signal(SIGTSTP, SIG_IGN);
 }
 
 void	reset_termios(struct termios *termios_current)

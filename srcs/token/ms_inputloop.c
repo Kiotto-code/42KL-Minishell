@@ -6,46 +6,39 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:03:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/04 22:06:45 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/06 00:23:31 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	check_xclm(t_book *record, char **str)
+int	check_xclm(t_book *record, char **str)
 {
-	char	*av;
-	int		status;
-	char	*mainkey;
-	int		i;
-	int		print;
+	const char	*av = ft_strdup(*str);
+	int			status;
+	char		*mainkey;
+	int			i;
+	int			print;
 
 	print = 0;
-	av = ft_strdup(*str);
 	i = -1;
 	status = NEUTRAL;
+	mainkey = NULL;
 	while (av[++i])
 	{
 		if (av[i] == '\'' && status != DQUOTE)
 			status ^= SQUOTE;
 		if (av[i] == '\"' && status != SQUOTE)
 			status ^= DQUOTE;
-		if (av[i] == '!' && status != SQUOTE && av[i+1] != ' ')
+		if (av[i] == '!' && status != SQUOTE && av[i +1] != ' ')
 		{
 			mainkey = ft_substr(*str, i, 2);
 			if (mainkey[1] == '!')
 				ft_replace(str, mainkey, record->history, i);
-			check_xclm(record, str);
 			print = 1;
-			break ;
 		}
 	}
-	if(print == 1)
-	{
-		printf("%s\n", *str);
-		print = 0;
-	}
-	ft_free(av);
+	return (ft_free((char *)av), ft_free(mainkey), print);
 }
 
 int	ms_history(t_book *record)
@@ -67,7 +60,8 @@ int	ms_inputloop(t_book *record)
 		record->input = readline("minishell>$ ");
 		if (record->input == NULL)
 			exit(g_exit_status);
-		check_xclm(record, &record->input);
+		if (check_xclm(record, &record->input))
+			printf("%s\n", record->input);
 		ms_history(record);
 		if (validator(record->input) == 0)
 		{

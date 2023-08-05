@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/03 12:48:04 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/26 01:17:13 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/05 21:10:15 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,8 +27,7 @@ int	cursor_plc(int times)
 	if (cm == NULL)
 		return (printf("cm capability not found.\n"), 1);
 	tputs(cm, 1, putchar);
-	// while (here_num --)
-	// 	printf("> ");
+	rl_redisplay();
 	(void)times;
 	return (0);
 }

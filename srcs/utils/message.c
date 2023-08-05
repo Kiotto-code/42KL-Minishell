@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:30:25 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/27 14:37:18 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/06 00:27:45 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,5 +52,4 @@ void	no_such_file_or_dir(char *message)
 	ft_putstr_fd(message, STDERR_FILENO);
 	ft_putstr_fd(": ", STDERR_FILENO);
 	ft_putendl_fd(strerror(errno), STDERR_FILENO);
-	// ft_putendl_fd(strerror(g_exit_status), STDERR_FILENO);
 }

@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:29:45 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/06 00:27:25 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,8 +67,6 @@ char	*check_envvar(t_env *env, char *key)
 {
 	if (!env || !key)
 		return (NULL);
-	// if (ft_strcmp(key, "") == 0)
-	// 	return ("$");
 	while (env)
 	{
 		if (!ft_strcmp(env->key, key))
@@ -76,8 +74,6 @@ char	*check_envvar(t_env *env, char *key)
 		env = env->next;
 	}
 	return ("");
-	// return (ft_strdup(""));
-	// return (NULL);
 }
 
 void	chg_shlvl(t_env *env, char *key, char *value)
@@ -98,4 +94,28 @@ void	chg_shlvl(t_env *env, char *key, char *value)
 		}
 		env = env->next;
 	}
+}
+
+char	**env_to_array(t_env *env)
+{
+	int		row_count;
+	int		i;
+	char	**env_arr;
+
+	if (env == NULL)
+		return (NULL);
+	row_count = env_lstsize(env);
+	env_arr = (char **)malloc(sizeof(char *) * (row_count + 1));
+	if (!env_arr)
+		return (NULL);
+	i = 0;
+	while (env && (row_count != 0))
+	{
+		env_arr[i] = ft_strdup(env->var);
+		i++;
+		row_count--;
+		env = env->next;
+	}
+	env_arr[i] = NULL;
+	return (env_arr);
 }

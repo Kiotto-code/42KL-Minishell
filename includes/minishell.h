@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/05 18:15:15 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/06 00:20:30 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,9 +113,8 @@ typedef struct s_redir
 // execute_cmds.c
 void	execute_cmds(t_book *mini, t_cmdl *cmds);
 void	executing(t_book *record, t_cmdl *cmds);
-char	**env_to_array(t_env *env);
 //here_doc.c
-void	heredoc_processing(t_book *record, t_cmdl *cmd, t_env *env);
+void	heredoc_processing(t_book *record, t_cmdl *cmd);
 int		heredoc_checking(t_cmdl *cmd);
 bool	pre_execv(t_book *record, t_cmdl *cmds);
 //cmd_path_get.c
@@ -159,6 +158,7 @@ void	sig_interrupt_here(int sig);
 
 // sig_non_interactive.c
 void	sigs_non_interactive_shell(void);
+void	sig_tstp(int sig);
 
 // tgetstr.c
 int		cursor_plc(int i);
@@ -196,6 +196,7 @@ void	args_destroy(t_token **lst);
 int		env_lstsize(t_env *env);
 char	*check_envvar(t_env *env, char *key);
 void	chg_shlvl(t_env *env, char *key, char *value);
+char	**env_to_array(t_env *env);
 //execute_utils.c
 int		execute_dup2(t_cmdl *cmds);
 // memory_processing.c
@@ -260,7 +261,7 @@ int		ms_cd(t_env **env, t_env **export, char *path);
 char	*go_root(t_env *env);
 
 //exit.c
-int	ms_exit(t_book *mini, char **argv);
+int		ms_exit(t_book *mini, char **argv);
 
 // //builtin
 // # define EXPORT		1

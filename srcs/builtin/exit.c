@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 23:45:27 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/05 18:16:28 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/05 23:50:46 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,8 @@ static unsigned char	exit_numeric(t_book *mini, char *str)
 	negative = 1;
 	i = 0;
 	convert = 0;
+	if (str == NULL)
+		str = "0";
 	while ((str[i] >= 9 && str[i] <= 13) || str[i] == 32)
 		i++;
 	if (str[i] == '-' || str[i] == '+')
@@ -56,9 +58,7 @@ static unsigned char	exit_numeric(t_book *mini, char *str)
 		i++;
 	}
 	while (str[i] >= '0' && str[i] <= '9')
-	{
 		convert = convert * 10 + (str[i++] - '0');
-	}
 	if ((uint64_t)convert > LLONG_MAX && negative == 1)
 		exit_error(mini, str, "numeric argument required");
 	if ((uint64_t)convert -1 > LLONG_MAX && negative == -1)
@@ -108,21 +108,16 @@ int	ms_exit(t_book *mini, char **argv)
 	int	len;
 
 	len = ft_arrlen(argv);
-	if (len == 1)
-	{
-		shlvl_down(mini);
-		printf("exit\n");
-		exit(g_exit_status);
-	}
-	if (isdigit_str(argv[1]))
+	if (argv[1] && isdigit_str(argv[1]))
 		return (exit_error(mini, argv[1], "numeric argument required"));
 	if (len > 2)
 		return (exit_error(mini, NULL, "too many arguments"));
-	if (len == 2)
+	if (len == 2 || len == 1)
 	{
 		g_exit_status = exit_numeric(mini, argv[1]);
 		shlvl_down(mini);
-		printf("exit\n");
+		if (mini->cmds->fork == 0)
+			printf("exit\n");
 		exit(g_exit_status);
 	}
 	return (0);

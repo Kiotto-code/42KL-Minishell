@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:34:24 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/04 22:10:36 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/05 22:55:36 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ char	*expandenv(t_book *record, char **str)
 			status ^= SQUOTE;
 		if (av[i] == '\"' && status != SQUOTE)
 			status ^= DQUOTE;
-		if (av[i] == '$' && status != SQUOTE && av[i+1] != ' ')
+		if (av[i] == '$' && status != SQUOTE && av[i +1] != ' ')
 		{
 			check_dollar(record, str, i);
 			expandenv(record, str);
@@ -84,7 +84,7 @@ char	*here_xpnd(t_book *record, char **str)
 	i = -1;
 	while (av[++i])
 	{
-		if (av[i] == '$' && av[i+1] != '\0')
+		if (av[i] == '$' && av[i +1] != '\0')
 		{
 			check_dollar(record, str, i);
 			here_xpnd(record, str);

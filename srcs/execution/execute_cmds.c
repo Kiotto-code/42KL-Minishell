@@ -3,38 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   execute_cmds.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/07 19:54:15 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/04 01:54:47 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/05 23:31:04 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-char	**env_to_array(t_env *env)
-{
-	int		row_count;
-	int		i;
-	char	**env_arr;
-
-	if (env == NULL)
-		return (NULL);
-	row_count = env_lstsize(env);
-	env_arr = (char **)malloc(sizeof(char *) * (row_count + 1));
-	if (!env_arr)
-		return (NULL);
-	i = 0;
-	while (env && (row_count != 0))
-	{
-		env_arr[i] = ft_strdup(env->var);
-		i++;
-		row_count--;
-		env = env->next;
-	}
-	env_arr[i] = NULL;
-	return (env_arr);
-}
 
 /**
  * @brief auto exit the the pipe child fork if builtin in child process.
@@ -47,35 +23,19 @@ void	executing(t_book *record, t_cmdl *cmds)
 {
 	char	**env_arr;
 	char	*file;
-	// int		err;
 
 	reset_termios(&record->termios_current);
 	if (builtin_checker(cmds->command[0]))
-	{
 		builtin_executing(record, cmds);
-		if (cmds->fork)
-			exit (g_exit_status);
-		return ;
-	}
 	else
 	{
 		env_arr = env_to_array(record->env);
 		file = cmd_path_get(record, cmds->command[0]);
-		signal(SIGQUIT, sig_non_interactive_quit);
-		// if (access(cmds->command[0], F_OK|X_OK) != 0)
-		// 	path_execve(record, cmds, file, env_arr);
-		// if (file)
 		path_execve(record, cmds, file, env_arr);
-		// err = errno;
-		if (access(cmds->command[0], F_OK|X_OK) == 0)
+		if (access(cmds->command[0], F_OK | X_OK) == 0)
 			errno = 21;
 		if (access(cmds->command[0], F_OK) == 0 && cmds->command[0][0] == '/')
 			errno = 21;
-		// printf("check: strlead %d\n", ft_strlead("asd", "asdqwe"));
-		// printf("check: strlead %d\n", ft_strlead("/", cmds->command[0]));
-		// printf("check: cmds->command[0] |%s|\n", cmds->command[0]);
-		// if (access(cmds->command[0], R_OK) != 0)
-		// 	errno = 13;
 		if (cmds->command[0])
 			no_such_file_or_dir(cmds->command[0]);
 		ft_free(file);
@@ -138,6 +98,7 @@ void	execute_cmds(t_book *record, t_cmdl *cmds)
 	begin = cmds;
 	if (pre_execv(record, cmds) == 1)
 		return ;
+	signal(SIGQUIT, sig_non_interactive_quit);
 	while (cmds)
 	{
 		cmds->pid = fork();
@@ -149,6 +110,4 @@ void	execute_cmds(t_book *record, t_cmdl *cmds)
 		cmds = cmds->next;
 	}
 	wait_child_processes(begin);
-	if (g_exit_status == 131)
-		ft_putstr_fd("Quit: 3\n", STDERR_FILENO);
 }
