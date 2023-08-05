@@ -3,14 +3,26 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:21:34 by etlaw             #+#    #+#             */
-/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/05 16:29:51 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+static char	*replace_pwd(t_env *env, char *buf)
+{
+	char	*oldpwd;
+
+	oldpwd = ft_strdup(env->value);
+	ft_free(env->value);
+	ft_free(env->var);
+	env->value = ft_strdup(buf);
+	env->var = ft_strjoin_con(env->key, "=", env->value);
+	return (oldpwd);
+}
 
 static void	update_pwd(t_env **env, char *path)
 {
@@ -24,24 +36,28 @@ static void	update_pwd(t_env **env, char *path)
 	while (*env)
 	{
 		if (ft_strcmp((*env)->key, "PWD") == 0)
-		{
-			oldpwd = ft_strdup((*env)->value);
-			ft_free((*env)->value);
-			ft_free((*env)->var);
-			(*env)->value = ft_strdup(buf);
-			(*env)->var = ft_strjoin_con((*env)->key, "=", (*env)->value);
-		}
+			oldpwd = replace_pwd(*env, buf);
 		if (ft_strcmp((*env)->key, "OLDPWD") == 0)
 		{
 			ft_free((*env)->value);
 			ft_free((*env)->var);
-			// (*env)->value = ft_strdup(oldpwd);
 			(*env)->value = oldpwd;
 			(*env)->var = ft_strjoin_con((*env)->key, "=", (*env)->value);
 		}
 		*env = (*env)->next;
 	}
 	*env = tmp;
+}
+
+// updates the env and export list
+static void	update_cd(t_env **env, t_env **export, char *path)
+{
+	update_lst(env, "PWD");
+	update_lst(export, "PWD");
+	update_lst(env, "OLDPWD");
+	update_lst(export, "OLDPWD");
+	update_pwd(env, path);
+	update_pwd(export, path);
 }
 
 // cd function
@@ -66,14 +82,8 @@ int	ms_cd(t_env **env, t_env **export, char *path)
 	ret = chdir(path);
 	if (ret == 0)
 	{
-		update_lst(env, "PWD");
-		update_lst(export, "PWD");
-		update_lst(env, "OLDPWD");
-		update_lst(export, "OLDPWD");
-		update_pwd(env, path);
-		update_pwd(export, path);
+		update_cd(env, export, path);
 		return (0);
 	}
-	// ft_errormessage(path, 2);
 	return (ft_errormessage(path, 2), 1);
 }
