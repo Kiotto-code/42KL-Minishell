@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:23:47 by etlaw             #+#    #+#             */
-/*   Updated: 2023/08/04 01:52:04 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/07 00:17:57 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_errormessage(char *str, int format)
 		ft_putstr_fd("bash: cd: ", 2);
 		ft_putstr_fd(str, 2);
 		if (str)
-			ft_putstr_fd(": No such file or directory", 2);
+			ft_putstr_fd(": No such file or directoryy", 2);
 		ft_putstr_fd("\n", 2);
 	}
 	if (format == 3)

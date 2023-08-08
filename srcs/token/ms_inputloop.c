@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:03:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/06 00:23:31 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/08 20:18:13 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	check_xclm(t_book *record, char **str)
 		if (av[i] == '!' && status != SQUOTE && av[i +1] != ' ')
 		{
 			mainkey = ft_substr(*str, i, 2);
-			if (mainkey[1] == '!')
+			if (mainkey[0] && mainkey[1] == '!')
 				ft_replace(str, mainkey, record->history, i);
 			print = 1;
 		}
