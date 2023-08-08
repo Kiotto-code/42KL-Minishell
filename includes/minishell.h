@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/06 00:20:30 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/08 21:51:36 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -178,6 +178,8 @@ t_token	*ft_tokenllast(t_token *lst);
 int		check_quote(int c);
 //ms_token.c
 void	ms_token(t_book *record);
+void	ms_record(char *av, int *start, int *end, t_book *record);
+void	ms_quotesplit(t_book *record, int start, int end, char *av);
 //ms_envp.c
 int		ms_inputloop(t_book *record);
 void	record_init(t_book *record, char **envp);

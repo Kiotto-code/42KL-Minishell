@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:19:09 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/06 00:30:15 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/08 21:50:15 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,30 +69,9 @@ void	ms_tokenrec(char *av, int *start, int *end, t_book *record)
 		(*end) = (*start);
 		if (av[*start] && ft_strchr(" <|>", av[*start]))
 		{
-			if (ft_strchr("<>", av[*end]) && \
-				check_dredirection(record, av, start))
-			{
-				(*end) = (*start);
-				return ;
-			}
-			if (ft_strchr(("|"), av[*start]))
-			{
-				ms_tokenladd_back(&record->args,
-					(ms_newtoken(av, *start, (*start) + 1)));
-				(*start) += 1;
-				(*end) = (*start);
-				return ;
-			}
-			if (av[*end] == '\0')
-			{
-				ms_tokenladd_back(&record->args,
-					(ms_newtoken(av, *start, *end)));
-				*start = *end;
-				return ;
-			}
+			ms_record(av, start, end, record);
 		}
 	}
-	return ;
 }
 
 /**
@@ -102,12 +81,9 @@ void	ms_tokenrec(char *av, int *start, int *end, t_book *record)
  * @param record	The t_book struct which contain the
  * 					token t_list and anchor required.
  */
-void	ms_quotesplit(t_book *record)
+void	ms_quotesplit(t_book *record, int start, int end, char *av)
 {
-	int		start;
-	int		end;
-	char	*av;
-	char	status;
+	int	status;
 
 	av = ft_strjoin(record->input, " ");
 	expandenv(record, &av);
@@ -134,21 +110,49 @@ void	ms_quotesplit(t_book *record)
 	ft_free(av);
 }
 
-/**
- * @brief Split the input into 
- * 
- * @param record 
- * @return int 
- */
-void	ms_token(t_book *record)
+// /**
+//  * @brief Split the input into 
+//  * 
+//  * @param record 
+//  * @return int 
+//  */
+// void	ms_token(t_book *record)
+// {
+// 	if (*record->input == '#')
+// 		return ;
+// 	ms_quotesplit(record, 0, 0, NULL);
+// 	set_redirect(record->args);
+// 	if (record->args == NULL)
+// 	{
+// 		ft_free(record->input);
+// 		record->input = NULL;
+// 	}
+// }
+
+void	ms_record(char *av, int *start, int *end, t_book *record)
 {
-	if (*record->input == '#')
-		return ;
-	ms_quotesplit(record);
-	set_redirect(record->args);
-	if (record->args == NULL)
+	if (av[*start] && ft_strchr(" <|>", av[*start]))
 	{
-		ft_free(record->input);
-		record->input = NULL;
+		if (ft_strchr("<>", av[*end]) && \
+			check_dredirection(record, av, start))
+		{
+			(*end) = (*start);
+			return ;
+		}
+		if (ft_strchr(("|"), av[*start]))
+		{
+			ms_tokenladd_back(&record->args,
+				(ms_newtoken(av, *start, (*start) + 1)));
+			(*start) += 1;
+			(*end) = (*start);
+			return ;
+		}
+		if (av[*end] == '\0')
+		{
+			ms_tokenladd_back(&record->args,
+				(ms_newtoken(av, *start, *end)));
+			*start = *end;
+			return ;
+		}
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 21:40:52 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/25 03:51:34 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/08 21:52:23 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,4 +39,23 @@ void	ms_tokenladd_back(t_token **lst, t_token *new)
 	}
 	else
 		*lst = new;
+}
+
+/**
+ * @brief Split the input into 
+ * 
+ * @param record 
+ * @return int 
+ */
+void	ms_token(t_book *record)
+{
+	if (*record->input == '#')
+		return ;
+	ms_quotesplit(record, 0, 0, NULL);
+	set_redirect(record->args);
+	if (record->args == NULL)
+	{
+		ft_free(record->input);
+		record->input = NULL;
+	}
 }
