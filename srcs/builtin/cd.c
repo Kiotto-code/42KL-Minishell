@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:21:34 by etlaw             #+#    #+#             */
-/*   Updated: 2023/08/05 18:14:33 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/12 22:49:36 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	ms_cd(t_env **env, t_env **export, char *path)
 		return (0);
 	if (ft_strcmp(path, "~") == 0)
 	{
-		path = go_root(*env);
+		path = getenv("HOME");
 		if (path == NULL)
 			return (0);
 	}

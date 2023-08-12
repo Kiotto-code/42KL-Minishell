@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   memory_processing.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:30:19 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/12 22:13:06 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	cleaner(t_book *mini)
+{
+	args_destroy(&mini->args);
+	cmds_destroy(&mini->cmds);
+}
 
 // void	*allocator(size_t size)
 // {
@@ -33,11 +39,6 @@
 // 	mini->args = NULL;
 // }
 
-void	cleaner(t_book *mini)
-{
-	args_destroy(&mini->args);
-	cmds_destroy(&mini->cmds);
-}
 
 // void	array_liberator(char **array)
 // {
