@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_envp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:40:48 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/08 20:19:43 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/12 23:22:42 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,16 +22,6 @@ char	*get_env_val(char *env)
 	return (ret);
 }
 
-// t_env	*newenvl(char *content)
-// {
-// 	t_env	*node;
-
-// 	node = ft_calloc(sizeof(t_env));
-// 	if (!node)
-// 		return (0);
-// 	node->var = content;
-// 	return (node);
-// }
 
 int	ft_arr2envl(t_env **lst, char **arr)
 {
@@ -92,3 +82,14 @@ void	record_init(t_book *record, char **envp)
 	env_rec(&(record->export), envp);
 	ms_unset(&record->env, &record->export, (char **)unsetpwd);
 }
+
+// t_env	*newenvl(char *content)
+// {
+// 	t_env	*node;
+
+// 	node = ft_calloc(sizeof(t_env));
+// 	if (!node)
+// 		return (0);
+// 	node->var = content;
+// 	return (node);
+// }
