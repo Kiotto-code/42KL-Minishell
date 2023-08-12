@@ -3,29 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   commands_utils.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:29:38 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/31 21:01:55 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/12 23:20:41 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-// int	cmds_lstsize(t_cmdl *cmds)
-// {
-// 	int	count;
-
-// 	if (!cmds)
-// 		return (0);
-// 	count = 0;
-// 	while (cmds)
-// 	{
-// 		cmds = cmds->next;
-// 		count++;
-// 	}
-// 	return (count);
-// }
 
 void	redir_lstdelone(t_redir *lst)
 {
@@ -92,3 +77,18 @@ void	cmds_destroy(t_cmdl **lst)
 	}
 	*lst = NULL;
 }
+
+// int	cmds_lstsize(t_cmdl *cmds)
+// {
+// 	int	count;
+
+// 	if (!cmds)
+// 		return (0);
+// 	count = 0;
+// 	while (cmds)
+// 	{
+// 		cmds = cmds->next;
+// 		count++;
+// 	}
+// 	return (count);
+// }

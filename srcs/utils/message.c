@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   message.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:30:25 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/06 00:27:45 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/12 23:20:18 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,14 @@ void	error_msg(char *message)
 	g_exit_status = 128;
 }
 
+void	no_such_file_or_dir(char *message)
+{
+	ft_putstr_fd("minishell: ", STDERR_FILENO);
+	ft_putstr_fd(message, STDERR_FILENO);
+	ft_putstr_fd(": ", STDERR_FILENO);
+	ft_putendl_fd(strerror(errno), STDERR_FILENO);
+}
+
 // void	no_such_file_or_dir(char *message)
 // {
 // 	if (access(message, F_OK|X_OK) == 0)
@@ -46,10 +54,3 @@ void	error_msg(char *message)
 // 	}
 // }
 // 	// ft_putendl_fd(strerror(g_exit_status), STDERR_FILENO);
-void	no_such_file_or_dir(char *message)
-{
-	ft_putstr_fd("minishell: ", STDERR_FILENO);
-	ft_putstr_fd(message, STDERR_FILENO);
-	ft_putstr_fd(": ", STDERR_FILENO);
-	ft_putendl_fd(strerror(errno), STDERR_FILENO);
-}
