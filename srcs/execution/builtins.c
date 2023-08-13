@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:12:45 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/13 22:08:59 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/14 00:36:18 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@ void	builtin_executing(t_book *mini, t_cmdl *cmds)
 {
 	if (!ft_strcmp(cmds->command[0], "cd"))
 		g_exit_status = ms_cd(&mini->env, &mini->export, cmds->command[1]);
-	else if (!ft_strcmp(cmds->command[0], "echo"))
+	else if (!ft_strcmp(cmds->command[0], "echo") || \
+		!ft_strcmp(cmds->command[0], "ECHO"))
 		g_exit_status = ms_echo(cmds->command);
 	else if (!ft_strcmp(cmds->command[0], "env"))
 		g_exit_status = ms_env(mini->env);
@@ -41,7 +42,7 @@ int	builtin_checker(char *command)
 		return (0);
 	if (!ft_strcmp(command, "cd"))
 		return (1);
-	if (!ft_strcmp(command, "echo"))
+	if (!ft_strcmp(command, "echo") || !ft_strcmp(command, "ECHO"))
 		return (1);
 	if (!ft_strcmp(command, "env"))
 		return (1);

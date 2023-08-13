@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 23:45:27 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/14 00:27:21 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/14 00:38:08 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int	ms_exit(t_book *mini, char **argv)
 		shlvl_down(mini);
 		if (mini->cmds->fork == 0)
 			printf("exit\n");
+		system("leaks -q minishell");
 		exit(g_exit_status);
 	}
 	return (0);
