@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:17:57 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/08 21:51:36 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/13 22:31:31 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@
 # include <string.h>
 
 # define DEFAULT	"\033[0m"
-# define CYAN		"\033[0;36m"
 # define RED		"\033[0;31m"
+# define GREEN		"\x1b[32m"
+# define CYAN 		"\x1b[36m"
+# define MAGENTA 	"\x1b[35m"
 
 # define CLOSE		"\001\033[0m\002"
 # define BOLD		"\001\033[1m\002"
@@ -106,6 +108,10 @@ typedef struct s_redir
 	char			*name;
 	struct s_redir	*next;
 }				t_redir;
+
+// credit
+int		credit(void);
+void	shell(void);
 
 /**
 * EXECUTION:

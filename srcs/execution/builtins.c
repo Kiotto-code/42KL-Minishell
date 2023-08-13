@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtins.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 16:12:45 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/05 23:30:55 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/13 22:08:59 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,8 @@ void	builtin_executing(t_book *mini, t_cmdl *cmds)
 		g_exit_status = ms_pwd(mini->env);
 	else if (!ft_strcmp(cmds->command[0], "exit"))
 		g_exit_status = ms_exit(mini, cmds->command);
+	else if (!ft_strcmp(cmds->command[0], "credits"))
+		g_exit_status = credit();
 	if (cmds->fork)
 		exit (g_exit_status);
 	return ;
@@ -50,6 +52,8 @@ int	builtin_checker(char *command)
 	if (!ft_strcmp(command, "pwd"))
 		return (1);
 	if (!ft_strcmp(command, "unset"))
+		return (1);
+	if (!ft_strcmp(command, "credits"))
 		return (1);
 	else
 		return (0);
