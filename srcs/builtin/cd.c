@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:21:34 by etlaw             #+#    #+#             */
-/*   Updated: 2023/08/12 22:49:36 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/13 23:37:59 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,13 +85,18 @@ static char	*prev_dir(t_env *env, char *path)
 int	ms_cd(t_env **env, t_env **export, char *path)
 {
 	int		ret;
+	t_env	*tmp;
 
 	path = prev_dir(*env, path);
 	if (path == NULL)
 		return (0);
 	if (ft_strcmp(path, "~") == 0)
 	{
-		path = getenv("HOME");
+		tmp = ms_getenv_vkey(*env, "HOME");
+		if (!tmp)
+			path = getenv("HOME");
+		else
+			path = tmp->value;
 		if (path == NULL)
 			return (0);
 	}

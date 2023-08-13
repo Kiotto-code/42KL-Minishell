@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:16:14 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/13 21:14:57 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/13 23:29:21 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	main(int ac, char **av, char **env)
 	record_init(&record, env);
 	shlvl_up(&record);
 	ms_inputloop(&record);
-	system("leaks -q minishell");
 	return (g_exit_status);
 }
 
