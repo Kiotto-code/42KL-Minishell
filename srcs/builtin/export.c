@@ -6,7 +6,7 @@
 /*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:03:30 by etlaw             #+#    #+#             */
-/*   Updated: 2023/08/13 23:27:07 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/14 00:25:48 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	change_value(t_env *env, char *tkn)
 
 	i = 0;
 	ft_free(env->value);
+	ft_free(env->key);
+	ft_free(env->var);
 	while (tkn[i] && tkn[i] != '=')
 	{
 		i++;

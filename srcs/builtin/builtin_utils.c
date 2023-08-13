@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   builtin_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:23:47 by etlaw             #+#    #+#             */
-/*   Updated: 2023/08/13 21:08:55 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/14 00:23:38 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,7 +93,7 @@ t_env	*newenvlist(char *content)
 	node = ft_calloc(sizeof(t_env));
 	if (!node)
 		return (0);
-	node->var = content;
+	node->var = ft_strdup(content);
 	if (ft_strchr(content, '=') == NULL)
 	{
 		node->value = 0;
