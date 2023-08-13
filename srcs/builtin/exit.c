@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   exit.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/25 23:45:27 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/05 23:50:46 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/13 21:15:30 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,6 +118,7 @@ int	ms_exit(t_book *mini, char **argv)
 		shlvl_down(mini);
 		if (mini->cmds->fork == 0)
 			printf("exit\n");
+		system("leaks -q minishell");
 		exit(g_exit_status);
 	}
 	return (0);

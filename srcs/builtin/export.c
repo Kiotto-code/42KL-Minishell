@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/21 18:03:30 by etlaw             #+#    #+#             */
-/*   Updated: 2023/08/13 15:49:05 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/13 21:16:58 by etlaw            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,6 +34,8 @@ void	change_value(t_env *env, char *tkn)
 
 	i = 0;
 	ft_free(env->value);
+	ft_free(env->key);
+	ft_free(env->var);
 	while (tkn[i] && tkn[i] != '=')
 	{
 		i++;
@@ -68,10 +70,14 @@ int	update_lst(t_env **lst, char *tkn)
 		if (ft_strchr(tkn, '=') && (ft_strcmp(var_name, tmp->key) == 0))
 		{
 			change_value(tmp, tkn);
+			ft_free(var_name);
 			return (0);
 		}
 		if (ft_strcmp(var_name, tmp->key) == 0)
+		{
+			ft_free(var_name);
 			return (0);
+		}
 		tmp = tmp->next;
 	}
 	ms_envladd_back(lst, (newenvlist(tkn)));
