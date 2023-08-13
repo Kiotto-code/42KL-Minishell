@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   memory_processing.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/08 22:30:19 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/12 22:13:06 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/13 15:50:41 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ void	cleaner(t_book *mini)
 // 	mini->cmds = NULL;
 // 	mini->args = NULL;
 // }
-
 
 // void	array_liberator(char **array)
 // {

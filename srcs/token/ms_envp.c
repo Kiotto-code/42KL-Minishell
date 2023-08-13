@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ms_envp.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/24 00:40:48 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/12 23:22:42 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/13 15:50:23 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,6 @@ char	*get_env_val(char *env)
 	ret = ft_substr(str, 1, ft_strlen(str));
 	return (ret);
 }
-
 
 int	ft_arr2envl(t_env **lst, char **arr)
 {

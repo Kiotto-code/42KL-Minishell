@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   unset.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/22 17:50:29 by etlaw             #+#    #+#             */
-/*   Updated: 2023/08/04 01:37:18 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/13 15:49:45 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ static void	remove_node(t_env **envr, t_env **export, char *str)
 		}
 		exp = exp->next;
 	}
+	ft_free(key);
 }
 
 // unset function

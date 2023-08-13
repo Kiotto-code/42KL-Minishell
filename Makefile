@@ -6,17 +6,17 @@
 #    By: yichan <yichan@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/02/05 18:29:34 by yichan            #+#    #+#              #
-#    Updated: 2023/08/05 22:29:47 by yichan           ###   ########.fr        #
+#    Updated: 2023/08/13 15:45:27 by yichan           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		=	minishell
 CC      	=   cc
 RM      	=   rm -rf
-CFLAGS  	=   -Wall -Werror -Wextra -g
-CFLAGS		+=	-fsanitize=address -g3
+CFLAGS  	=   -Wall -Werror -Wextra -g3
+# CFLAGS		+=	-fsanitize=address -g3
 CFLAGS		+=	-I/usr/local/opt/readline/include
-CSAN  		= 	-fsanitize=address -g3
+# CSAN  		= 	-fsanitize=address -g3
 READLINE	=	-lreadline
 READLINE	+=	-lncurses -L/usr/local/opt/readline/lib
 INCLUDES    =	./includes

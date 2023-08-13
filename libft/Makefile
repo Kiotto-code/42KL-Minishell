@@ -2,7 +2,7 @@ NAME	= libft.a
 CC		= gcc
 AR		= ar
 CFLAGS	= -Wall -Werror -Wextra
-CFLAGS	+= -fsanitize=address -g3
+# CFLAGS	+= -fsanitize=address -g3
 ARFLAGS	= rcs
 RM		= rm -rf
 DEBUG	= $(ARGS)

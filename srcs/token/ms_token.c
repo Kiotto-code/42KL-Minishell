@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/03 19:19:09 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/08 21:50:15 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/13 15:54:20 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ t_token	*ms_newtoken(char *av, int start, int end)
 {
 	t_token	*new;
 
-	new = ft_calloc(sizeof(t_token));
 	if (end <= start)
 		return (NULL);
+	new = ft_calloc(sizeof(t_token));
 	if (!new)
 		return (0);
 	new->entity = ft_substr(av, start, end - start);

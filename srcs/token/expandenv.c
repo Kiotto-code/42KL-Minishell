@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   expandenv.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/14 19:34:24 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/12 23:23:07 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/13 15:50:14 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
 
 void	check_dollar(t_book *record, char **str, int i)
 {
