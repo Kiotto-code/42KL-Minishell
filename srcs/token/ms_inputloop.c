@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/04 23:03:16 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/13 15:58:57 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/13 18:27:48 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int	ms_inputloop(t_book *record)
 		sigs_interactive_shell(&record->termios_current);
 		record->input = readline("minishell>$ ");
 		if (record->input == NULL)
-			exit(g_exit_status);
+			break ;
 		if (check_xclm(record, &record->input))
 			printf("%s\n", record->input);
 		ms_history(record);

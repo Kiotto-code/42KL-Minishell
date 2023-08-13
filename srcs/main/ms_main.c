@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/02/22 18:16:14 by yichan            #+#    #+#             */
-/*   Updated: 2023/08/13 15:43:13 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/13 18:35:17 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main(int ac, char **av, char **env)
 	shlvl_up(&record);
 	ms_inputloop(&record);
 	system("leaks -q minishell");
-	return (0);
+	return (g_exit_status);
 }
 
 // int	main(void)
