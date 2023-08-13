@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/06 16:23:47 by etlaw             #+#    #+#             */
-/*   Updated: 2023/08/07 00:17:57 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/13 21:08:55 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,7 @@ void	free_2arr(char **arr)
 		ft_free(arr[i]);
 		i++;
 	}
+	ft_free(arr);
 }
 
 t_env	*newenvlist(char *content)
@@ -92,7 +93,7 @@ t_env	*newenvlist(char *content)
 	node = ft_calloc(sizeof(t_env));
 	if (!node)
 		return (0);
-	node->var = ft_strdup(content);
+	node->var = content;
 	if (ft_strchr(content, '=') == NULL)
 	{
 		node->value = 0;
