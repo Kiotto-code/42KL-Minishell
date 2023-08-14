@@ -6,7 +6,7 @@
 /*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/09 17:22:28 by yichan            #+#    #+#             */
-/*   Updated: 2023/07/23 02:36:04 by yichan           ###   ########.fr       */
+/*   Updated: 2023/08/15 01:14:37 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,15 +45,24 @@ void	fd_opening(t_cmdl *cmds)
 {
 	t_redir	*tmp;
 	int		it;
+	char	*in_file;
+	char	*out_file;
 
 	if (cmds == NULL)
 		return ;
+	in_file = NULL;
+	out_file = NULL;
 	it = 0;
 	tmp = cmds->redir;
 	while (tmp)
 	{
 		if (ft_strcmp("<", tmp->type) == 0)
+		{
 			cmds->in = opener(tmp->name, 'I');
+			in_file = tmp->name;
+		}
+		else
+			out_file = tmp->name;
 		if (ft_strcmp(">", tmp->type) == 0)
 			cmds->out = opener(tmp->name, 'O');
 		if (ft_strcmp(">>", tmp->type) == 0)

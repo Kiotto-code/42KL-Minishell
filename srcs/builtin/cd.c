@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   cd.c                                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: etlaw <ethanlxz@gmail.com>                 +#+  +:+       +#+        */
+/*   By: yichan <yichan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/03/29 18:21:34 by etlaw             #+#    #+#             */
-/*   Updated: 2023/08/13 23:37:59 by etlaw            ###   ########.fr       */
+/*   Updated: 2023/08/15 00:47:32 by yichan           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,9 +88,7 @@ int	ms_cd(t_env **env, t_env **export, char *path)
 	t_env	*tmp;
 
 	path = prev_dir(*env, path);
-	if (path == NULL)
-		return (0);
-	if (ft_strcmp(path, "~") == 0)
+	if (path == NULL || ft_strcmp(path, "~") == 0)
 	{
 		tmp = ms_getenv_vkey(*env, "HOME");
 		if (!tmp)

@@ -17,7 +17,8 @@ int	executable_path(char *line)
 	int	it;
 
 	it = 0;
-	while (line != NULL && line[it] && !ft_isalnum(line[it]))
+	while (line != NULL && line[it] && \
+		(ft_isalnum(line[it]) || line[it] == '/'))
 	{
 		if (line[it] == '/')
 			return (1);
