@@ -27,7 +27,6 @@ int	main(int ac, char **av, char **env)
 	record_init(&record, env);
 	shlvl_up(&record);
 	ms_inputloop(&record);
-	system("leaks -q minishell");
 	exit(g_exit_status);
 	return (g_exit_status);
 }
